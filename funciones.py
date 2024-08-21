@@ -3,4 +3,4 @@ def mayor(x,y):
         return x
     else:
         return y
-print (mayor(10, 100))
+cd
