@@ -21,7 +21,7 @@ def leer(matriz):
     seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para publicaciones\n3. Para post publicación\n"))
     while seleccion<=0 or seleccion>3:    
         print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
-        seleccion=input()
+        seleccion=int(input())
     if seleccion==1:
         print()
     elif seleccion==2:
