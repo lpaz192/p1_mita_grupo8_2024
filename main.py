@@ -25,4 +25,6 @@ while menu!=-1:
         print(usuario)
     elif menu==2:
         crud.leer(usuario)
+    elif menu==3:
+        crud.actualizar
 
