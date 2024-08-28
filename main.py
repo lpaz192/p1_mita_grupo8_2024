@@ -4,7 +4,7 @@
 import crud
 import metricas
 
-usuario = []
+usuario = ["Nombre", "Apellido", "Seguidores", "Seguidos"]
 posteo = []
 post_publicacion = []
 
