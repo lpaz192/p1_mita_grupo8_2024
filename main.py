@@ -1,5 +1,12 @@
-from crud import suma
+""" Notas: 
+
+"""
+import crud
 import metricas
 
+usuario = []
+posteo = []
+post_publicacion = []
 
-print(suma())
+usuario = crud.agregar(usuario)
+print(usuario)
