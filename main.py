@@ -10,3 +10,5 @@ post_publicacion = []
 
 usuario = crud.agregar(usuario)
 print(usuario)
+
+print("hola mundo")
