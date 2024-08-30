@@ -13,25 +13,31 @@ def agregar(x):
         lista.append(y)
     return lista
         
-        
-
-
  
 def leer(matriz):
     seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para publicaciones\n3. Para post publicación\n"))
     while seleccion<=0 or seleccion>3:    
         print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
         seleccion=int(input())
+    cont=0
     if seleccion==1:
+        for fil in range(len(matriz)):
+            print()
+            for col in range(len(matriz[0])):
+                print(f"|{matriz[fil][col]:^10}|",end="")
         print()
     elif seleccion==2:
         print()
     else:
         print()
     return 0
-"""  
-def actualizar():
+  
+def actualizar(matriz):
 
+
+    return
+
+"""
 def eliminar():
 
 """

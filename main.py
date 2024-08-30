@@ -4,7 +4,8 @@
 import crud
 import metricas
 
-usuario = [["Nombre", "Apellido", "Seguidores", "Seguidos"]]
+usuario = [["Nombre", "Apellido", "Seguidores", "Seguidos"],
+           ["Diego", "Lopez", "200", "340"]]
 posteo = [[]]
 post_publicacion = [[]]
 
@@ -26,5 +27,10 @@ while menu!=-1:
     elif menu==2:
         crud.leer(usuario)
     elif menu==3:
-        crud.actualizar
+        print("que matriz deseas modificar\n1. Usuarios\n2. Posteo")
+        lista=int(input("Seleccione: "))
+        if lista ==1:
+            print("Que elemento deseas modificar\n1. Nombre\n2.Apellido\n3. Seguidores")
+            modif=int(input("Seleccione: "))
+            crud.actualizar(usuario)
 
