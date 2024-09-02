@@ -1,5 +1,20 @@
 """  Notas  """
+#Funciones secundarias
 
+def seleccionar_usuario(matriz):
+    aux=0
+    while aux!=-1:
+        print("¿Que usuario deseas modificar?\nIngrese el numero de la fila: ",end="")
+        aux=int(input())       #Se soliicita que usuario se quiere modificar comenzando desde 0
+        if aux<0 or aux>len(matriz):     
+            print("Usuario no encontrado")
+        else:
+            return aux
+"""
+def seleccionar_elemento():
+"""      
+
+# Funciones principales del CRUD
 def agregar(x):
     lista=[]
     if x==4:
@@ -32,12 +47,17 @@ def leer(matriz):
         print()
     return 0
   
-def actualizar(matriz):
+def actualizar(matriz,usuario,modif):
+    if modif == 0:
+        x=input("Ingrese el nuevo nombre: ")
+    elif modif ==1:
+        x=input("Ingrese el nuevo apellido: ")
+    elif modif==2:
+        x=input("Ingrese la nueva cantidad de seguidores: ")
+    else:
+        x=input("Ingrese la nueva cantidad de seguidos: ")
+    return x
 
 
-    return
-
-"""
-def eliminar():
-
-"""
+def eliminar(matriz):
+    print()
