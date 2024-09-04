@@ -3,41 +3,51 @@
 """
 import crud
 import metricas
+
 #Funciones
 def eleccion():
     matriz_elegida=0
     while matriz_elegida!=1 and matriz_elegida!=2:
-        print("En que matriz deseas realizar esta operación\n1. Usuarios\n2. Posteo")
-        matriz_elegida=int(input("Seleccione: "))   #1 matriz de usuario   2. matriz de posteo
+        print("En que matriz deseas realizar esta operación\n1. Usuarios\n2. Hashtags")
+        matriz_elegida=int(input("Seleccione: "))                          #1 matriz de usuario   2. matriz de posteo
         if matriz_elegida !=1 and matriz_elegida !=2:
             print("Por favor ingrese un numero dentro de los solicitados")
     return matriz_elegida
 
-usuario = [["Nombre", "Apellido", "Seguidores", "Seguidos"],
-           ["Diego", "Lopez", "200", "340"],
-           ["Carla","Aguilar","3000","800"]
-           ]
-posteo = [[]]
-post_publicacion = [[]]
+def ordenamiento(matriz):
+    matriz.sort()
+    return matriz
+
+#Matrices
+usuario = [["Usuario", "Seguidores", "Seguidos", "Likes","Correo"],
+           ["Diego.lopez", "2000", "800", "1000","diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
+           ["carlitaa","5000","500","8000","carlaguilar@gmail.com"]]
+
+hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
+            ["#UADELabs","2000","10000","50000"]]                          #Estos son ejemplos aleatorios  
+
+posteos = [[]]
 
 
 
-# menu 
+#Menu 
 menu=0
 while menu!=-1:
     print("1. Para agregar")
     print("2. Para leer ")
     print("3. Para actualizar")
     print("4. Para eliminar ")
+    print("5. Para ordenar")
     print("-1. Para cancelar")
     menu=int(input("Ingrese un numero: "))
 
         
     if menu==1:                   #agregar
-        if eleccion()==1:
-             usuario.append(crud.agregar(len(usuario[0])))  
+        x = eleccion()
+        if x == 1:
+            usuario.append(crud.agregar(x))  
         else:
-            posteo.append(crud.agregar(len(posteo[0])))
+            hashtags.append(crud.agregar(x))
 
     elif menu==2:                 #Leer
         crud.leer(usuario)  
@@ -49,7 +59,7 @@ while menu!=-1:
             usuario_modif=crud.seleccionar_usuario(usuario)
             while contador!=1:
                 if contador==0:
-                    print("Que elemento deseas modificar\n0. Nombre\n1.Apellido\n2. Seguidores")
+                    print("Que elemento deseas modificar\n0. Usuario\n1.Seguidores\n2. Seguidos\n3. Likes\n4. Correo")
                     modif=int(input("Seleccione: "))  #Se Solicita que elemento se quiere modificar comenzando desde 0
                     if modif<0 or modif>2:
                         print("Por favor ingrese un valor dentro del rango solicitado")
@@ -58,7 +68,7 @@ while menu!=-1:
             usuario[usuario_modif].pop(modif)         #Se elimina el elemento a modificar
             usuario[usuario_modif].insert(modif,crud.actualizar(usuario,usuario,modif))  #Se inserta el elemento modificado
         else:
-            crud.actualizar(posteo)
+            crud.actualizar(hashtags)
 
     elif menu==4:                 #Eliminar
         if eleccion()==1:
@@ -69,4 +79,4 @@ while menu!=-1:
             """
             usuario.pop(usuario_eliminar)
         else:
-            crud.eliminar(posteo)
+            crud.eliminar(hashtags)

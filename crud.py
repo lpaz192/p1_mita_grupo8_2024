@@ -10,27 +10,39 @@ def seleccionar_usuario(matriz):
             print("Usuario no encontrado")
         else:
             return aux
+
 """
 def seleccionar_elemento():
 """      
 
 # Funciones principales del CRUD
-def agregar(x):
+def agregar(eleccion):
     lista=[]
-    if x==4:
+    if eleccion==5:
         y = input("Ingrese el nombre del usuario: ")
         lista.append(y)
-        y= input("Ingrese el apellido del usuario: ")
+        y= input("Ingrese los seguidores del usuario: ")
         lista.append(y)
-        y=int(input("Ingrese los seguidores del usuario: "))
+        y=(input("Ingrese los seguidos del usuario: "))
         lista.append(y)
-        y=int(input("Ingrese los seguidos del usuario: "))
+        y=(input("Ingrese los likes del usuario: "))
         lista.append(y)
+        y=input("Ingrese el correo del usuario")
+        lista.append(y)
+    else:
+        x =["nombre","cantidad","s","2","s"]
+        for col in range(eleccion):
+            lista.append(input("Ingrese ",x[col]))
+        y= input("Ingrese ek nombre del hashtag: ")
+        lista.append(y)
+        y=input("Ingrese la cantidad de posteos hechos: ")
+        lista.append(y)
+        y=input("Ingrese ")
     return lista
         
  
 def leer(matriz):
-    seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para publicaciones\n3. Para post publicación\n"))
+    seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
     while seleccion<=0 or seleccion>3:    
         print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
         seleccion=int(input())
@@ -39,7 +51,7 @@ def leer(matriz):
         for fil in range(len(matriz)):
             print()
             for col in range(len(matriz[0])):
-                print(f"|{matriz[fil][col]:^10}|",end="")
+                print(f"|{matriz[fil][col]:^12}|",end="")
         print()
     elif seleccion==2:
         print()
@@ -49,15 +61,14 @@ def leer(matriz):
   
 def actualizar(matriz,usuario,modif):
     if modif == 0:
-        x=input("Ingrese el nuevo nombre: ")
+        x=input("Ingrese el nuevo usuario: ")
     elif modif ==1:
-        x=input("Ingrese el nuevo apellido: ")
+        x=input("Ingrese el nueva cantidad seguidores: ")
     elif modif==2:
-        x=input("Ingrese la nueva cantidad de seguidores: ")
-    else:
         x=input("Ingrese la nueva cantidad de seguidos: ")
+    else:
+        x=input("Ingrese la nueva cantidad de likes: ")
     return x
-
 
 def eliminar(matriz):
     print()
