@@ -19,35 +19,19 @@ def seleccionar_elemento():
 # Funciones principales del CRUD
 def agregar(eleccion):
     lista=[]
-    if eleccion==5:
-        y = input("Ingrese el nombre del usuario: ")
-        lista.append(y)
-        y= input("Ingrese los seguidores del usuario: ")
-        lista.append(y)
-        y=(input("Ingrese los seguidos del usuario: "))
-        lista.append(y)
-        y=(input("Ingrese los likes del usuario: "))
-        lista.append(y)
-        y=input("Ingrese el correo del usuario")
-        lista.append(y)
+    if eleccion==1:
+        x =["Usuario: ","Seguidores: ","Seguidos: ","Likes: ","Correo: "]
+        for col in range(5):
+            lista.append(input(f"Ingrese {x[col]}"))
     else:
-        x =["nombre","cantidad","s","2","s"]
-        for col in range(eleccion):
-            lista.append(input("Ingrese ",x[col]))
-        y= input("Ingrese ek nombre del hashtag: ")
-        lista.append(y)
-        y=input("Ingrese la cantidad de posteos hechos: ")
-        lista.append(y)
-        y=input("Ingrese ")
+        x =["Hashtags: ","Cantidad de posteos: ","Veces compartidos: ","Likes: "]
+        for col in range(4):
+            lista.append(input(f"Ingrese {x[col]}"))
+            
     return lista
 
 
-def leer(matriz):
-    seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
-    while seleccion<=0 or seleccion>3:    
-        print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
-        seleccion=int(input())
-    cont=0
+def leer(seleccion,matriz):
     if seleccion==1:
         for fil in range(len(matriz)):
             print()
@@ -55,8 +39,16 @@ def leer(matriz):
                 print(f"|{matriz[fil][col]:^12}|",end="")
         print()
     elif seleccion==2:
+        for fil in range(len(matriz)):
+            print()
+            for col in range(len(matriz[0])):
+                print(f"|{matriz[fil][col]:^12}|",end="")
         print()
     else:
+        for fil in range(len(matriz)):
+            print()
+            for col in range(len(matriz[0])):
+                print(f"|{matriz[fil][col]:^12}|",end="")
         print()
     return 0
 

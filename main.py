@@ -80,10 +80,16 @@ while menu!=-1:
             hashtags.append(crud.agregar(matriz_elegida))
 
     elif menu==2:                 #Leer
-        if eleccion()==1:
-            crud.leer(usuario) 
+        seleccion = int(input("Que matriz deseas visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
+        while seleccion<=0 or seleccion>3:    
+            print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
+            seleccion=int(input())
+        if seleccion==1:
+            crud.leer(seleccion,usuario) 
+        elif seleccion==2:
+            crud.leer(seleccion,hashtags) 
         else:
-            crud.leer(hashtags) 
+            crud.leer(seleccion,posteos)
 
     elif menu==3:                 #Actualizar
         contador=0
