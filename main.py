@@ -19,9 +19,9 @@ def ordenamiento(matriz):
     return matriz
 
 #Matrices
-usuario = [["Usuario", "Seguidores", "Seguidos", "Likes","Correo"],
-           ["Diego.lopez", "2000", "800", "1000","diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
-           ["carlitaa","5000","500","8000","carlaguilar@gmail.com"]]
+usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
+           ["Diego.lopez", 2000,       800,       1000,  "diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
+           ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"]]
 
 hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
             ["#UADELabs","2000","10000","50000"]]                          #Estos son ejemplos aleatorios  
@@ -43,14 +43,17 @@ while menu!=-1:
 
         
     if menu==1:                   #agregar
-        x = eleccion()
-        if x == 1:
-            usuario.append(crud.agregar(x))  
+        matriz_elegida = eleccion()
+        if matriz_elegida == 1:
+            usuario.append(crud.agregar(matriz_elegida))  
         else:
-            hashtags.append(crud.agregar(x))
+            hashtags.append(crud.agregar(matriz_elegida))
 
     elif menu==2:                 #Leer
-        crud.leer(usuario)  
+        if eleccion()==1:
+            crud.leer(usuario) 
+        else:
+            crud.leer(hashtags) 
 
     elif menu==3:                 #Actualizar
         contador=0

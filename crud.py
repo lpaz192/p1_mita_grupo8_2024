@@ -18,47 +18,31 @@ def seleccionar_elemento():
 # Funciones principales del CRUD
 def agregar(eleccion):
     lista=[]
-    if eleccion==5:
-        y = input("Ingrese el nombre del usuario: ")
-        lista.append(y)
-        y= input("Ingrese los seguidores del usuario: ")
-        lista.append(y)
-        y=(input("Ingrese los seguidos del usuario: "))
-        lista.append(y)
-        y=(input("Ingrese los likes del usuario: "))
-        lista.append(y)
-        y=input("Ingrese el correo del usuario")
-        lista.append(y)
+    if eleccion==1:
+        x=["Usuario: ","Seguidores: ","Seguidos: ","Likes: ","Correo: "]
+        for col in range(5):
+            if col==0 or col==4:
+                y=input(f"Ingrese {x[col]}")
+                lista.append(y)
+            else:
+                y=int(input(f"Ingrese {x[col]}"))
+                list.append
     else:
-        x =["nombre","cantidad","s","2","s"]
-        for col in range(eleccion):
-            lista.append(input("Ingrese ",x[col]))
-        y= input("Ingrese ek nombre del hashtag: ")
-        lista.append(y)
-        y=input("Ingrese la cantidad de posteos hechos: ")
-        lista.append(y)
-        y=input("Ingrese ")
+        x =["Hashtag: ","Cantidad de posteos: ","Veces compartido: ","Likes: ","s"]
+        for col in range(4):
+            y=input(f"Ingrese {x[col]}")
+            lista.append(y)
     return lista
-        
- 
+
+
 def leer(matriz):
-    seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
-    while seleccion<=0 or seleccion>3:    
-        print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
-        seleccion=int(input())
-    cont=0
-    if seleccion==1:
-        for fil in range(len(matriz)):
-            print()
-            for col in range(len(matriz[0])):
-                print(f"|{matriz[fil][col]:^12}|",end="")
+    for fil in range(len(matriz)):
         print()
-    elif seleccion==2:
-        print()
-    else:
-        print()
+        for col in range(len(matriz[0])):
+            print(f"|{matriz[fil][col]:^12}|",end="")
+    print()
     return 0
-  
+
 def actualizar(matriz,usuario,modif):
     if modif == 0:
         x=input("Ingrese el nuevo usuario: ")
@@ -72,3 +56,31 @@ def actualizar(matriz,usuario,modif):
 
 def eliminar(matriz):
     print()
+
+
+
+
+
+"""
+def leer(matriz):
+    seleccion = int(input("Que matriz deseas visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
+    while seleccion<=0 or seleccion>3:    
+        print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
+        seleccion=int(input())
+    cont=0
+    if seleccion==1:
+        for fil in range(len(matriz)):
+            print()
+            for col in range(len(matriz[0])):
+                print(f"|{matriz[fil][col]:^12}|",end="")
+        print()
+    elif seleccion==2:
+        for fil in range(len(matriz)):
+            print()
+            for col in range(len(matriz[0])):
+                print(f"|{matriz[fil][col]:^12}|",end="")
+        print()
+    else:
+        print()
+    return 0
+  """
