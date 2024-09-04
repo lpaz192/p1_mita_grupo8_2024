@@ -3,6 +3,7 @@
 """
 import crud
 import metricas
+import json
 
 #Funciones
 def eleccion():
@@ -28,7 +29,36 @@ hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
 
 posteos = [[]]
 
+""" Validador de email
+import re
 
+def validar_email(email):
+    # Expresión regular para validar un correo electrónico
+    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    if re.match(patron, email):
+        return True
+    else:
+        return False
+
+# Ejemplo de uso
+emails = [
+    "usuario@dominio.com",
+    "usuario@dominio",        # Inválido
+    "usuario@dominio.co.uk",  # Válido
+    "usuario@dominio..com",   # Inválido
+    "usua@rio@dominio.com",   # Inválido
+    "usuario@dominio.c",      # Inválido
+    "usuario@dominio.corporate" # Válido
+]
+
+for email in emails:
+    if validar_email(email):
+        print(f"'{email}' es un correo electrónico válido.")
+    else:
+        print(f"'{email}' no es un correo electrónico válido.")
+
+"""
 
 #Menu 
 menu=0
@@ -80,3 +110,6 @@ while menu!=-1:
             usuario.pop(usuario_eliminar)
         else:
             crud.eliminar(hashtags)
+
+
+

@@ -1,5 +1,6 @@
 """  Notas  """
 #Funciones secundarias
+import json
 
 def seleccionar_usuario(matriz):
     aux=0
@@ -29,11 +30,12 @@ def agregar(eleccion):
         lista.append(y)
         y=input("Ingrese el correo del usuario")
         lista.append(y)
+
     else:
         x =["nombre","cantidad","s","2","s"]
         for col in range(eleccion):
             lista.append(input("Ingrese ",x[col]))
-        y= input("Ingrese ek nombre del hashtag: ")
+        y= input("Ingrese el nombre del hashtag: ")
         lista.append(y)
         y=input("Ingrese la cantidad de posteos hechos: ")
         lista.append(y)
@@ -42,7 +44,7 @@ def agregar(eleccion):
         
  
 def leer(matriz):
-    seleccion = int(input("Que matriz queres visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
+    seleccion = int(input("Que matriz queres visualizar\n1. Matriz de usuarios\n2. Matriz de hashtags\n3. Matriz de publicaciones\n"))
     while seleccion<=0 or seleccion>3:    
         print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
         seleccion=int(input())
@@ -72,3 +74,14 @@ def actualizar(matriz,usuario,modif):
 
 def eliminar(matriz):
     print()
+
+
+def recUsuariosJson (lista):
+    with open('usuario.json', 'w') as archivo_json:
+            json.dump(usuario, archivo_json)
+    
+
+with open('usuario.json', 'r') as archivo_json:
+    matriz_cargada = json.load(archivo_json)
+
+print("Matriz de usuarios cargada:", matriz_cargada)
