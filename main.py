@@ -96,16 +96,8 @@ while menu!=-1:
  
         if eleccion() == 1:        #Modificacion de usuarios
             usuario_modif=crud.seleccionar_usuario(usuario)
-            while contador!=1:
-                if contador==0:
-                    print("Que elemento deseas modificar\n0. Usuario\n1.Seguidores\n2. Seguidos\n3. Likes\n4. Correo")
-                    modif=int(input("Seleccione: "))  #Se Solicita que elemento se quiere modificar comenzando desde 0
-                    if modif<0 or modif>2:
-                        print("Por favor ingrese un valor dentro del rango solicitado")
-                    else:
-                        contador+=1
-            usuario[usuario_modif].pop(modif)         #Se elimina el elemento a modificar
-            usuario[usuario_modif].insert(modif,crud.actualizar(usuario,usuario,modif))  #Se inserta el elemento modificado
+            usuario_elemnto_modif=crud.seleccionar_elemento_usuario()        #Se elimina el elemento a modificar
+            usuario[usuario_modif][usuario_elemnto_modif]=crud.actualizar(usuario,usuario_modif,usuario_elemnto_modif)  #Se inserta el elemento modificado
         else:
             crud.actualizar(hashtags)
 

@@ -12,6 +12,14 @@ def seleccionar_usuario(matriz):
         else:
             return aux
 
+def seleccionar_elemento_usuario():
+    modif=-1
+    while modif<0 or modif>2:
+        print("Que elemento deseas modificar\n0. Usuario\n1.Seguidores\n2. Seguidos\n3. Likes\n4. Correo")
+        modif=int(input("Seleccione: "))  #Se Solicita que elemento se quiere modificar comenzando desde 0
+        if modif<0 or modif>2:
+           print("Por favor ingrese un valor dentro del rango solicitado")
+        return modif
 """
 def seleccionar_elemento():
 """      
