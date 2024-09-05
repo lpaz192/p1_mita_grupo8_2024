@@ -22,7 +22,8 @@ def ordenamiento(matriz):
 #Matrices
 usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["Diego.lopez", 2000,       800,       1000,  "diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
-           ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"]]
+           ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
+           ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
 
 hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
             ["#UADELabs","2000","10000","50000"]]                          #Estos son ejemplos aleatorios  
