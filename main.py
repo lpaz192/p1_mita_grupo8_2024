@@ -1,10 +1,7 @@
 """ Notas: 
 
 """
-import crud
-import metricas
-import json
-
+import crud, metricas, json, validez
 #Funciones
 def eleccion():
     matriz_elegida=0
@@ -26,7 +23,7 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
 
 hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
-            ["#UADELabs","2000","10000","50000"]]                          #Estos son ejemplos aleatorios  
+            ["#UADELabs",2000,10000,50000]]                          #Estos son ejemplos aleatorios  
 
 posteos = [[]]
 
@@ -93,12 +90,10 @@ while menu!=-1:
             crud.leer(seleccion,posteos)
 
     elif menu==3:                 #Actualizar
-        contador=0
- 
         if eleccion() == 1:        #Modificacion de usuarios
-            usuario_modif=crud.seleccionar_usuario(usuario)
-            usuario_elemnto_modif=crud.seleccionar_elemento_usuario()        #Se elimina el elemento a modificar
-            usuario[usuario_modif][usuario_elemnto_modif]=crud.actualizar(usuario,usuario_modif,usuario_elemnto_modif)  #Se inserta el elemento modificado
+            usuario_modif = crud.seleccionar_usuario(usuario)
+            usuario_elemnto_modif = crud.seleccionar_elemento_usuario()        #Se solicita el elemento a modificar
+            usuario[usuario_modif][usuario_elemnto_modif]=crud.actualizar(usuario_elemnto_modif)  #Se inserta el elemento modificado
         else:
             crud.actualizar(hashtags)
 
@@ -112,6 +107,3 @@ while menu!=-1:
             usuario.pop(usuario_eliminar)
         else:
             crud.eliminar(hashtags)
-
-
-
