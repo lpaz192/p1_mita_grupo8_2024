@@ -156,26 +156,37 @@ def seleccion():
         else:
             crud.eliminar(hashtags)
 """
-opcion=0
-while opcion!=-1:
-    opcion = __menu__()
+menu=0
+while menu!=-1:
+    menu = __menu__()
 
-    if opcion==1:
-        opcion_usuario=crud_usuarios()
-        while opcion_usuario!=-1:
-            opcion_usuario_elemento = crud_usuarios()
-            
+    if menu==1:                 #Usuario
+        opcion=crud_usuarios()   
+        
+        if opcion==1:                 #Agregar
+            usuario.append(crud.agregar(opcion))
+        
+        elif opcion==2:               #Eliminar
+            print()
+        
+        elif opcion==3:               #Actualizar
+            opcion_usuario = crud.seleccionar_usuario(usuario)
+            opcion_usuario_elemento = crud.seleccionar_usuario_elemento(opcion_usuario,usuario)
+            usuario[opcion_usuario][opcion_usuario_elemento]=crud.actualizar(menu,opcion_usuario_elemento)
+        
+        elif opcion==4:               #Leer
+            crud.leer(opcion,usuario)
 
-    elif opcion==2:
+    elif menu==2:               #Hashtag
         opcion=crud_hashtags()
     
-    elif opcion==3:
+    elif menu==3:
         opcion=crud_publicacion()
     
-    elif opcion==4:
+    elif menu==4:
         ordenamiento()
     
-    elif opcion==5:
+    elif menu==5:
         estadisticas()
     
     else:

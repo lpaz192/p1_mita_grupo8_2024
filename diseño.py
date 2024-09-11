@@ -1,3 +1,4 @@
+import crud
 # Diseño menu principal
 def __menu__():
     print("\n---Menu Principal---")
@@ -11,18 +12,21 @@ def __menu__():
 
 #Diseño CRUD Usuarios
 def crud_usuarios():
-    while x==1:
-        print("\n---CRUD Usuarios---")
-        print("1. Agregar usuario")
-        print("2. Eliminar usuario")
-        print("3. Actualizar usuario")
-        print("4. Leer usuario")
-        print("-1. Volver al menu principal")
-    return int(input("Seleccione una opcción: "))
+    aux=0
+    while aux==0 or aux>4:
+        if aux==0 or aux>4:
+            print("\n---CRUD Usuarios---")
+            print("1. Agregar usuario")
+            print("2. Eliminar usuario")
+            print("3. Actualizar usuario")
+            print("4. Leer usuario")
+            print("-1. Volver al menu principal")
+            aux = int(input("Seleccione una opcción: "))
+        else: 
+            print("Opcion no valida")
+    return aux
 
-def seleccionar_usuario():
-    print("\n---Usuarios---")
-    return int(input("Seleccione un usuario: "))
+
     
 #Diseño CRUD Hashtags
 def crud_hashtags():
