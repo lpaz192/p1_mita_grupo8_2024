@@ -2,6 +2,7 @@
 
 """
 import crud, metricas, json, validez
+from diseño import __menu__, crud_hashtags, crud_usuarios, estadisticas, crud_publicacion
 #Funciones
 def eleccion():
     matriz_elegida=0
@@ -27,50 +28,11 @@ hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
 
 posteos = [[]]
 
-""" Validador de email
-import re
-
-def validar_email(email):
-    # Expresión regular para validar un correo electrónico
-    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    
-    if re.match(patron, email):
-        return True
-    else:
-        return False
-
-# Ejemplo de uso
-emails = [
-    "usuario@dominio.com",
-    "usuario@dominio",        # Inválido
-    "usuario@dominio.co.uk",  # Válido
-    "usuario@dominio..com",   # Inválido
-    "usua@rio@dominio.com",   # Inválido
-    "usuario@dominio.c",      # Inválido
-    "usuario@dominio.corporate" # Válido
-]
-
-for email in emails:
-    if validar_email(email):
-        print(f"'{email}' es un correo electrónico válido.")
-    else:
-        print(f"'{email}' no es un correo electrónico válido.")
-
+#Menu principal
 """
-
-#Menu 
-menu=0
-while menu!=-1:
-    print("1. Para agregar")
-    print("2. Para leer ")
-    print("3. Para actualizar")
-    print("4. Para eliminar ")
-    print("5. Para ordenar")
-    print("-1. Para cancelar")
-    menu=int(input("Ingrese un numero: "))
-
-        
-    if menu==1:                   #agregar
+def seleccion():    
+    opcion=__menu__()
+    if opcion==1:                   #agregar
         matriz_elegida = eleccion()
         if matriz_elegida == 1:
             usuario.append(crud.agregar(matriz_elegida))  
@@ -102,8 +64,35 @@ while menu!=-1:
             
             usuario_eliminar=crud.seleccionar_usuario(usuario)
             """
+"""
             crud.eliminar(usuario,usuario_eliminar)
             """
+"""
             usuario.pop(usuario_eliminar)
         else:
             crud.eliminar(hashtags)
+"""
+opcion=0
+while opcion!=-1:
+    opcion = __menu__()
+
+    if opcion==1:
+        opcion_usuario=crud_usuarios()
+        while opcion_usuario!=-1:
+            opcion_usuario_elemento = crud_usuarios()
+            
+
+    elif opcion==2:
+        opcion=crud_hashtags()
+    
+    elif opcion==3:
+        opcion=crud_publicacion()
+    
+    elif opcion==4:
+        ordenamiento()
+    
+    elif opcion==5:
+        estadisticas()
+    
+    else:
+        print("Opcion no valida")
