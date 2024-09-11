@@ -95,7 +95,10 @@ def eleccion():
         matriz_elegida=int(input("Seleccione: "))                          #1 matriz de usuario   2. matriz de posteo
         if matriz_elegida !=1 and matriz_elegida !=2:
             print("Por favor ingrese un numero dentro de los solicitados")
-    return matriz_elegida
+        else:     
+            return matriz_elegida
+    except ValueError:
+        print("Error: Por favor ingrese un numero valido")
 
 def ordenamiento(matriz):
     matriz.sort()

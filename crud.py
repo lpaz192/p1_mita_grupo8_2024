@@ -138,9 +138,9 @@ def seleccionar_usuario(usuarios):
             print("\n---Usuarios---")
             leer(1,usuarios)
             opcion = int(input("Seleccione un usuario con el numero de id: "))
-        else: 
-            print("Opcion no valida")    
-    return opcion
+            return opcion
+        except ValueError:
+            print("Por favor, ingrese una opcion válida.")
 
 def seleccionar_usuario_elemento(id,usuarios):
     opcion=0
