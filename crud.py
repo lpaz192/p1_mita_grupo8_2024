@@ -16,6 +16,8 @@ def cargar_perfil_instaloader(username):
         perfil = instaloader.Profile.from_username(L.context, username) #se encuentra el perfil real, si perfil real
         #por las dudas busquen un perfil publico con pocos seguidores porque sino tardar mucho en agarrar los queries
         total_likes = 0
+
+        #cantidad_posts = perfil.mediacount
         
         for post in perfil.get_posts():
             total_likes += post.likes
@@ -24,8 +26,9 @@ def cargar_perfil_instaloader(username):
             "Usuario": perfil.username,
             "Seguidores": perfil.followers,
             "Seguidos": perfil.followees,
-            "Likes": total_likes,  # aca agarro todos los likes sumados peroooo estaria bueno que veamos la forma de separarlos para las metricas
-            #con las metricas seria likes por cada publicacion / seguidores y eso se suma y promedio 
+            "Likes": total_likes,  # aca agarro todos los likes sumados peroooo estaria bueno que veamos la forma de separarlos para las metricas. Estoy con eso ahora
+            #"Cantidad_de_posts": cantidad_posts,
+            #con las metricas seria likes likes total / cantidad de posts = media de likes / seguidores * 100 = porcentaje de alcance 
             "Correo": ""  #vacio por lo que dije antes
         }
     except Exception as e:
