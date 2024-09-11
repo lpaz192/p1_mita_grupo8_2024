@@ -81,7 +81,6 @@ while menu != -1:
             pass
 '''
 
-
 """ Notas: 
 
 """
@@ -110,87 +109,57 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
            ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
 
-hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
-            ["#UADELabs",2000,10000,50000]]                          #Estos son ejemplos aleatorios  
+hashtags = [["hashtag","Cant. de posteos","Veces compartido","Likes"],
+            ["#UADELabs",2000,10000,50000]]                                        #Estos son ejemplos aleatorios  
 
 posteos = [[]]
 
 #Menu principal
-"""
-def seleccion():    
-    opcion=__menu__()
-    if opcion==1:                   #agregar
-        matriz_elegida = eleccion()
-        if matriz_elegida == 1:
-            usuario.append(crud.agregar(matriz_elegida))  
-        else:
-            hashtags.append(crud.agregar(matriz_elegida))
-
-    elif menu==2:                 #Leer
-        seleccion = int(input("Que matriz deseas visualizar\n1. Para usuarios\n2. Para hashtags\n3. Para publicaciones\n"))
-        while seleccion<=0 or seleccion>3:    
-            print("el numero ingresado no está dentro de los numeros solicitados\n Por favor ingrese el numero nuevamente: ",end="")
-            seleccion=int(input())
-        if seleccion==1:
-            crud.leer(seleccion,usuario) 
-        elif seleccion==2:
-            crud.leer(seleccion,hashtags) 
-        else:
-            crud.leer(seleccion,posteos)
-
-    elif menu==3:                 #Actualizar
-        if eleccion() == 1:        #Modificacion de usuarios
-            usuario_modif = crud.seleccionar_usuario(usuario)
-            usuario_elemnto_modif = crud.seleccionar_elemento_usuario()        #Se solicita el elemento a modificar
-            usuario[usuario_modif][usuario_elemnto_modif]=crud.actualizar(usuario_elemnto_modif)  #Se inserta el elemento modificado
-        else:
-            crud.actualizar(hashtags)
-
-    elif menu==4:                 #Eliminar
-        if eleccion()==1:
-            
-            usuario_eliminar=crud.seleccionar_usuario(usuario)
-            """
-"""
-            crud.eliminar(usuario,usuario_eliminar)
-            """
-"""
-            usuario.pop(usuario_eliminar)
-        else:
-            crud.eliminar(hashtags)
-"""
 menu=0
 while menu!=-1:
     menu = __menu__()
 
-    if menu==1:                 #Usuario
+    if menu==1:                  #----Usuario     ----
         opcion=crud_usuarios()   
         
         if opcion==1:                 #Agregar
-            usuario.append(crud.agregar(opcion))
+            usuario.append(crud.agregar(menu))
         
         elif opcion==2:               #Eliminar
             print()
         
         elif opcion==3:               #Actualizar
-            opcion_usuario = crud.seleccionar_usuario(usuario)
-            opcion_usuario_elemento = crud.seleccionar_usuario_elemento(opcion_usuario,usuario)
+            opcion_usuario = crud.seleccionar(menu,usuario)
+            opcion_usuario_elemento = crud.seleccionar_elemento(menu,opcion_usuario,usuario)
             usuario[opcion_usuario][opcion_usuario_elemento]=crud.actualizar(menu,opcion_usuario_elemento)
         
-        elif opcion==4:               #Leer
+        else:                         #Leer
             crud.leer(opcion,usuario)
 
-    elif menu==2:               #Hashtag
+    elif menu==2:                #----Hashtag     ----
         opcion=crud_hashtags()
-    
-    elif menu==3:
+        if opcion==1:                #Agregar
+            hashtags.append(crud.agregar(menu))
+
+        elif opcion==2:              #Eliminar
+            print("Falta funcion")
+
+        elif opcion==3:              #Actualizar
+            opcion_hashtag = crud.seleccionar(menu,hashtags)
+            opcion_hashtag_elemento = crud.seleccionar_elemento(menu,opcion_hashtag,hashtags)
+            hashtags[opcion_hashtag][opcion_hashtag_elemento]=crud.actualizar(menu,opcion_hashtag_elemento)
+
+        else:                        #Leer
+            crud.leer(opcion,hashtags)
+        
+    elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
     
-    elif menu==4:
+    elif menu==4:                #----Ordenar     ----
         ordenamiento()
     
-    elif menu==5:
+    elif menu==5:                #----Estadisticas----
         estadisticas()
     
-    else:
+    elif menu!=-1:
         print("Opcion no valida")
