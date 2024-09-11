@@ -108,7 +108,7 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
 
 hashtags = [["hashtag","Cantidad de posteos","Veces compartido","Likes"],
-            ["#UADELabs",2000,10000,50000]]                          #Estos son ejemplos aleatorios  
+            ["#UADELabs",2000,10000,50000]]                                        #Estos son ejemplos aleatorios  
 
 posteos = [[]]
 
@@ -164,14 +164,14 @@ while menu!=-1:
         opcion=crud_usuarios()   
         
         if opcion==1:                 #Agregar
-            usuario.append(crud.agregar(opcion))
+            usuario.append(crud.agregar(menu))
         
         elif opcion==2:               #Eliminar
             print()
         
         elif opcion==3:               #Actualizar
-            opcion_usuario = crud.seleccionar_usuario(usuario)
-            opcion_usuario_elemento = crud.seleccionar_usuario_elemento(opcion_usuario,usuario)
+            opcion_usuario = crud.seleccionar(menu,usuario)
+            opcion_usuario_elemento = crud.seleccionar_elemento(menu,opcion_usuario,usuario)
             usuario[opcion_usuario][opcion_usuario_elemento]=crud.actualizar(menu,opcion_usuario_elemento)
         
         elif opcion==4:               #Leer
@@ -179,7 +179,16 @@ while menu!=-1:
 
     elif menu==2:               #Hashtag
         opcion=crud_hashtags()
-    
+        if opcion==1:
+            hashtags.append(crud.agregar(menu))
+
+        elif opcion==2: 
+            print("Falta funcion")
+
+        elif opcion==3:
+            opcion_hashtag = crud.seleccionar(menu,hashtags)
+            opcion_hashtag_elemento = crud.seleccionar(menu,opcion_hashtag,hashtags)
+            hashtags[opcion_hashtag][opcion_hashtag_elemento]=crud.actualizar(menu,opcion_usuario_elemento)
     elif menu==3:
         opcion=crud_publicacion()
     

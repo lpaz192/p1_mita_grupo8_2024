@@ -131,30 +131,50 @@ def eliminar(matriz):
 #Funciones secundarias
 import json,validez,re
 
-def seleccionar_usuario(usuarios):
-    opcion=0
-    while opcion==0 or opcion>4:
-        if  opcion==0 or opcion>4:
+def seleccionar(opcion,matriz):
+    if opcion==1:
+        while True:
             print("\n---Usuarios---")
-            leer(1,usuarios)
-            opcion = int(input("Seleccione un usuario con el numero de id: "))
-        else: 
-            print("Opcion no valida")    
-    return opcion
+            leer(opcion,matriz)
+            aux = int(input("Seleccione un usuario con el numero de id: "))
+            if  aux>=0 and aux<=len(matriz[0]):
+                return aux
+            input("Dato invalido")
+    elif opcion==2:
+        while True:
+            print("\n---Hashtags---")
+            leer(opcion,matriz)
+            aux  = int(input("Seleccione un usuario con el numero de id: "))
+            if  aux>=0 and aux<=len(matriz[0]):
+                return aux
+            input("Dato invalido")
+        
+    
 
-def seleccionar_usuario_elemento(id,usuarios):
-    opcion=0
-    while opcion==0 or opcion>4:
-        if  opcion==0 or opcion>4:
-            print(f"\n---Usuario  {usuarios[id][0]}---")
-            print(f"1. Seguidores: {usuarios[id][1]}")
-            print(f"2. Seguidos: {usuarios[id][2]}")
-            print(f"3. Likes: {usuarios[id][3]}")
-            print(f"4. Correos: {usuarios[id][4]}")
-            opcion = int(input("Seleccione un elemento: "))
-        else: 
-            print("Opcion no valida")    
-    return opcion
+def seleccionar_elemento(opcion,id,matriz):
+     
+    if  opcion==1:
+        while True:
+            print(f"\n---Usuario  {matriz[id][0]}---")
+            print(f"1. Seguidores: {matriz[id][1]}")
+            print(f"2. Seguidos: {matriz[id][2]}")
+            print(f"3. Likes: {matriz[id][3]}")
+            print(f"4. Correos: {matriz[id][4]}")
+            aux = int(input("Seleccione un elemento: "))
+            if aux >0 and aux<=len(matriz[id]):
+                return aux
+            input("Dato invalido")
+    elif opcion==2: 
+        while True:
+            print(f"\n---Hashtag  {matriz[id][0]}---")
+            print(f"1. Cantidad de posteos: {matriz[id][1]}")
+            print(f"2. Veces compartido: {matriz[id][2]}")
+            print(f"3. Likes: {matriz[id][3]}")
+            aux = int(input("Seleccione un elemento: "))
+            if aux >0 and aux<=len(matriz[id]):
+                return aux
+            input("Dato invalido")    
+
 
 # Funciones principales del CRUD
 def agregar(opcion):
@@ -214,7 +234,7 @@ def leer(opcion,matriz):
 
 def actualizar(tipo_matriz,opcion):
     
-    if tipo_matriz==1:
+    if tipo_matriz==1:                                  #Usuarios
 
         if opcion == 0:
             comparacion= lambda palabra:re.match(r"[a-zA-Z-_.]{3,20}",palabra)
@@ -238,18 +258,19 @@ def actualizar(tipo_matriz,opcion):
                 aux=input("Ingrese un mail valido: ")
             return aux
         
-    elif tipo_matriz == 1:                              # 
-        opcion_hashtag = seleccionar_hashtag(main.hashtags)
-        opcion_hashtag_elemento = seleccionar_hashtag_elemento(opcion_hashtag,main.hashtags)
-        if opcion_hashtag_elemento == 0:
-            main.hashtags[opcion_hashtag][opcion_hashtag_elemento]=input("Ingrese una nueva cantidad de posteos: ")
+    elif tipo_matriz == 2:                              #Hashtags
+
+        if opcion == 1:
+            aux=int(input("Ingrese el nueva cantidad de posteos: "))
+            return aux
+        elif opcion ==2:
+            aux=int(input("Ingrese el nueva cantidad de veces compartido: "))
+            return aux
         
-        elif opcion_hashtag_elemento ==1:
-            main.hashtag[opcion_hashtag][opcion_hashtag_elemento]=int(input("Ingrese el nueva cantidad de veces compartido: "))
-        
-        elif opcion_hashtag_elemento == 2:
-            main.hashtag[opcion_hashtag][opcion_hashtag_elemento]=int(input("Ingrese la nueva cantidad de likes: "))
-        return
+        else:
+            aux=int(input("Ingrese el nueva cantidad de likes: "))
+            return aux
+
     """
     if modif == 0:
         comparacion= lambda palabra:re.match(r"[a-zA-Z-_.]{1,20}",palabra)
