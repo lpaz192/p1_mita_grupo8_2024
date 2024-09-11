@@ -1,3 +1,87 @@
+'''
+import crud, json
+
+# Funciones
+def eleccion():
+    matriz_elegida = 0
+    while matriz_elegida != 1 and matriz_elegida != 2:
+        print("¿En qué matriz deseas realizar esta operación?\n1. Usuarios\n2. Hashtags")
+        matriz_elegida = int(input("Seleccione: "))  # 1 matriz de usuario, 2 matriz de hashtags
+        if matriz_elegida != 1 and matriz_elegida != 2:
+            print("Por favor, ingrese un número dentro de los solicitados")
+    return matriz_elegida
+
+
+#Se abre un json en donde tiene adentro dos secciones que antes eran matrices
+#Ahora las matrices son diccionarios
+def cargar_datos():
+    try:
+        with open('datos.json', 'r') as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        data = {"usuarios": [], "hashtags": []}
+    return data
+
+def guardar_datos(data):
+    with open('datos.json', 'w') as file:
+        json.dump(data, file, indent=4)
+
+data = cargar_datos()
+
+menu = 0
+while menu != -1:
+    print("1. Para agregar")
+    print("2. Para leer")
+    print("3. Para actualizar")
+    print("4. Para eliminar")
+    print("5. Para ordenar")
+    print("-1. Para cancelar")
+    menu = int(input("Ingrese un número: "))
+
+    if menu == 1:  
+        matriz_elegida = eleccion()
+        if matriz_elegida == 1:
+            nuevo_usuario = crud.agregar_con_instaloader()
+            if nuevo_usuario:
+                data["usuarios"].append(nuevo_usuario)
+                guardar_datos(data)
+        else:
+            nuevo_hashtag = crud.agregar(matriz_elegida)
+            data["hashtags"].append(nuevo_hashtag)
+            guardar_datos(data)
+
+    elif menu == 2:  # Leer
+        seleccion = int(input("¿Qué matriz deseas visualizar?\n1. Para usuarios\n2. Para hashtags\n"))
+        while seleccion <= 0 or seleccion > 2:
+            print("El número ingresado no está dentro de los números solicitados\nPor favor, ingrese el número nuevamente: ", end="")
+            seleccion = int(input())
+        if seleccion == 1:
+            crud.leer(data["usuarios"])
+        else:
+            crud.leer(data["hashtags"])
+
+    elif menu == 3:  
+        #aca estaria bueno agregar los mails porque no se pueden tener de instaloader
+        if eleccion() == 1:  
+            usuario_modif = crud.seleccionar_usuario(data["usuarios"])
+            usuario_elemento_modif = crud.seleccionar_elemento_usuario()  #cambia lo que quieras de un usuario
+            data["usuarios"][usuario_modif][usuario_elemento_modif] = crud.actualizar(usuario_elemento_modif)  #se agregan
+            guardar_datos(data)
+        else:
+            #actualizar hashtags????
+            pass
+
+    elif menu == 4:  #eliminar
+        if eleccion() == 1:
+            usuario_eliminar = crud.seleccionar_usuario(data["usuarios"])
+            data["usuarios"].pop(usuario_eliminar)
+            guardar_datos(data)
+        else:
+            #eliminar hashtags?????
+            pass
+'''
+
+
 """ Notas: 
 
 """
