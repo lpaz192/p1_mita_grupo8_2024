@@ -110,6 +110,11 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["Diego.lopez", 2000,       800,       1000,  "diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
            ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
            ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
+'''
+#esto convierte la matriz de usuario en diccionario o lo pueden hacer manual
+keys = usuario[0]
+usuarios_dict = [dict(zip(keys, row)) for row in usuario[1:]]
+'''
 
 hashtags = [["hashtag","Cant. de posteos","Veces compartido","Likes"],
             ["#UADELabs",2000,10000,50000]]                                        #Estos son ejemplos aleatorios  
