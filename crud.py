@@ -201,10 +201,10 @@ def agregar_usuario(usuarios):      #Agregar
     usuarios[len(usuarios)-1].extend(lista)
 
 def leer_usuario(usuarios):         #Leer
-    parte_superior=lambda:print(f"┌{"─"*4}┬{"─"*20}┬{"─"*8}┬{"─"*8}┬{"─"*8}┬{"─"*40}┐")
-    mostrar_usuario=lambda fil:print(f"│{fil[0]:^4}│{fil[1]:^20}│{fil[2]:^8}│{fil[3]:^8}│{fil[4]:^8}│{fil[5]:^40}│")
-    parte_inferior=lambda:print(f"└{"─"*4}┴{"─"*20}┴{"─"*8}┴{"─"*8}┴{"─"*8}┴{"─"*40}┘")
-    parte_conectiva=lambda:print(f"├{"─"*4}┼{"─"*20}┼{"─"*8}┼{"─"*8}┼{"─"*8}┼{"─"*40}┤")
+    parte_superior=lambda: print(f"┌{'─'*4}┬{'─'*20}┬{'─'*8}┬{'─'*8}┬{'─'*8}┬{'─'*40}┐")
+    mostrar_usuario=lambda fil: print(f"│{fil[0]:^4}│{fil[1]:^20}│{fil[2]:^8}│{fil[3]:^8}│{fil[4]:^8}│{fil[5]:^40}│")
+    parte_inferior=lambda: print(f"└{'─'*4}┴{'─'*20}┴{'─'*8}┴{'─'*8}┴{'─'*8}┴{'─'*40}┘")
+    parte_conectiva=lambda: print(f"├{'─'*4}┼{'─'*20}┼{'─'*8}┼{'─'*8}┼{'─'*8}┼{'─'*40}┤")
     for fil in usuarios:
         if usuarios[0]==fil:
             parte_superior()
@@ -216,7 +216,7 @@ def leer_usuario(usuarios):         #Leer
         else:
             mostrar_usuario(fil)
             parte_conectiva()
-    print()
+    input()
 
 
 def actualizar_usuario(opcion_usuario,opcion_elemento,usuarios):    #Actualizar

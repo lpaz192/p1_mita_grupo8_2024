@@ -179,4 +179,4 @@ while menu!=-1:
         estadisticas()
     
     elif menu!=-1:
-        print("Opcion no valida")
+  print("Opcion no valida")
