@@ -112,6 +112,12 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
            ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
 
+'''
+#por si no quieren hacerlo manual esto hace el paso de matriz a diccionario
+keys = usuario[0]
+usuarios_dict = [dict(zip(keys, row)) for row in usuario[1:]]
+'''
+
 
 hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
             ["#UADELabs",  2000,  10000,  50000]
