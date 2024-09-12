@@ -101,13 +101,15 @@ def ordenamiento(matriz):
     return matriz
 
 #Matrices
-usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
-           ["Diego.lopez", 2000,       800,       1000,  "diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
-           ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
-           ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
+usuario = [[129, "Martintin",     234,       200,         100,  "martincho@outlook.com"     ],
+           [324, "Diego.lopez",  2000,       800,        1000,  "diegolopez@gmail.com"      ], 
+           [665, "carlitaa",     5000,       500,        8000,  "carlaguilar@gmail.com"     ],   # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
+           [878, "Marcediaz",     200,       1000,        100,   "marcelodiaz12@hotmail.com"]
+           ]
 
-hashtags = [["hashtag","Cant. de posteos","Veces compartido","Likes"],
-            ["#UADELabs",2000,10000,50000]]                                        #Estos son ejemplos aleatorios  
+hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
+            ["#UADELabs",  2000,  10000,  50000]
+            ]                                      
 
 posteos = [[]]
 
@@ -116,22 +118,23 @@ menu=0
 while menu!=-1:
     menu = __menu__()
 
-    if menu==1:                  #----Usuario     ----
+    if menu==1:                  #----  Usuario     ----
         opcion=crud_usuarios()   
         
-        if opcion==1:                 #Agregar
-            usuario.append(crud.agregar(menu))
+        if opcion==1:                   #Agregar
+            crud.agregar_usuario(usuario)
+
+        elif opcion==2:                 #Eliminar
+            usuario_fila=crud.seleccionar(menu,usuario)
+            crud.eliminar_usuario(usuario_fila,usuario)
         
-        elif opcion==2:               #Eliminar
-            print()
-        
-        elif opcion==3:               #Actualizar
+        elif opcion==3:                 #Actualizar
             opcion_usuario = crud.seleccionar(menu,usuario)
             opcion_usuario_elemento = crud.seleccionar_elemento(menu,opcion_usuario,usuario)
-            usuario[opcion_usuario][opcion_usuario_elemento]=crud.actualizar(menu,opcion_usuario_elemento)
+            crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuario)
         
-        else:                         #Leer
-            crud.leer(opcion,usuario)
+        else:                           #Leer
+            crud.leer_usuario(usuario)
 
     elif menu==2:                #----Hashtag     ----
         opcion=crud_hashtags()

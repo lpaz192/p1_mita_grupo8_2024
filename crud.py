@@ -135,7 +135,7 @@ def seleccionar(opcion,matriz):
     if opcion==1:
         while True:
             print("\n---Usuarios---")
-            leer(opcion,matriz)
+            leer_usuario(matriz)
             aux = int(input("Seleccione un usuario con el numero de id: "))
             if  aux>=0 and aux<=len(matriz[0]):
                 return aux
@@ -143,7 +143,7 @@ def seleccionar(opcion,matriz):
     elif opcion==2:
         while True:
             print("\n---Hashtags---")
-            leer(opcion,matriz)
+            leer_usuario(matriz)
             aux  = int(input("Seleccione un usuario con el numero de id: "))
             if  aux>=0 and aux<=len(matriz[0]):
                 return aux
@@ -155,11 +155,12 @@ def seleccionar_elemento(opcion,id,matriz):
      
     if  opcion==1:
         while True:
-            print(f"\n---Usuario  {matriz[id][0]}---")
-            print(f"1. Seguidores: {matriz[id][1]}")
-            print(f"2. Seguidos: {matriz[id][2]}")
-            print(f"3. Likes: {matriz[id][3]}")
-            print(f"4. Correos: {matriz[id][4]}")
+            print(f"\n---Usuario con ID {matriz[id][0]}---")
+            print(f"1. Usuario  {matriz[id][1]}")
+            print(f"2. Seguidores: {matriz[id][2]}")
+            print(f"3. Seguidos: {matriz[id][3]}")
+            print(f"4. Likes: {matriz[id][4]}")
+            print(f"5. Correos: {matriz[id][5]}")
             aux = int(input("Seleccione un elemento: "))
             if aux >0 and aux<=len(matriz[id]):
                 return aux
@@ -176,123 +177,63 @@ def seleccionar_elemento(opcion,id,matriz):
             input("Dato invalido")    
 
 
-# Funciones principales del CRUD
-def agregar(opcion):
-    lista,aux=[],""
-    if opcion==1:
-        comparacion= lambda nombre:re.match(r"^[a-zA-Z_]{2,20}",nombre)
-        x =["Usuario: ","Seguidores: ","Seguidos: ","Likes: ","Correo: "]
-        for col in range(5):
-            if col == 0:
-                aux=input(f"Ingrese {x[col]}")
-                while comparacion(aux)==None:
-                    aux=input("Ingrese un nombre valido: ")
+#Funciones CRUD Usuarios
+def agregar_usuario(usuarios):      #Agregar
+    lista,col=[],0
+    x =["ID","Usuario: ","Seguidores: ","Seguidos: ","Likes: ","Correo: "]
+    while col<len(usuarios[0]):
+        if col == 1:
+            aux=input(f"Ingrese {x[col]}:")
+            if validez.validar_usuario(aux)==None:
+                aux=input(f"Ingrese un {x[col]} valido: ")
+            else:
                 lista.append(aux)
-            elif col == 4:
-                aux=input(f"Ingrese {x[col]}")
-                while validez.validar_mail(aux)==None:
-                    aux=input("Ingrese un mail valido: ")
-                lista.append(aux)  
-            else:   
-                lista.append(input(f"Ingrese {x[col]}"))
-    else:
-        x =["Hashtag: ","Cantidad de posteos: ","Veces compartidos: ","Likes: "]
-        comparacion= lambda palabra:re.match(r"^#[a-zA-Z0-9-_.]{1,20}",palabra)
-        for col in range(4):  
-            if col == 0:
-                aux=input(f"Ingrese {x[col]}")
-                while comparacion(aux)==None:
-                    aux=input("Ingrese un Hashtag valido: ")
-                lista.append(aux)
-            else: 
-                lista.append(input(f"Ingrese {x[col]}"))
-  
-    return lista
-
-
-def leer(opcion,matriz):
-    if opcion==1:
-        for fil in range(len(matriz)):
-            print()
-            for col in range(len(matriz[0])):
-                print(f"|{matriz[fil][col]:^12}|",end="")
-        print()
-    elif opcion==2:
-        for fil in range(len(matriz)):
-            print()
-            for col in range(len(matriz[0])):
-                print(f"|{matriz[fil][col]:^12}|",end="")
-        print()
-    else:
-        for fil in range(len(matriz)):
-            print()
-            for col in range(len(matriz[0])):
-                print(f"|{matriz[fil][col]:^12}|",end="")
-        input("\n")
-
-    return 0
-
-def actualizar(tipo_matriz,opcion):
-    
-    if tipo_matriz==1:                                  #Usuarios
-
-        if opcion == 0:
-            comparacion= lambda palabra:re.match(r"[a-zA-Z-_.]{3,20}",palabra)
-            aux=input("Ingrese el nuevo usuario (entre 3 y 20 caracteres): ")
-            while comparacion(aux)==None:
-                aux=input("Ingrese un nuevo usuario valido: ")
-            return aux
-        
-        elif opcion ==1:
-            aux=int(input("Ingrese el nueva cantidad seguidores: "))
-            return aux
-        elif opcion == 2:
-            aux=int(input("Ingrese la nueva cantidad de seguidos: "))
-            return aux
-        elif opcion == 3:
-            aux=int(input("Ingrese la nueva cantidad de likes: "))
-            return aux
-        else:
-            aux=input("Ingrese el nuevo correo: ")
+                col+=1
+        elif col == 5:
+            aux=input(f"Ingrese {x[col]}:")
             while validez.validar_mail(aux)==None:
                 aux=input("Ingrese un mail valido: ")
-            return aux
-        
-    elif tipo_matriz == 2:                              #Hashtags
+            lista.append(aux)  
+            col+=1
+        else:   
+            lista.append(input(f"Ingrese {x[col]}: "))
+            col+=1
+    usuarios.extend(lista)
 
-        if opcion == 1:
-            aux=int(input("Ingrese el nueva cantidad de posteos: "))
-            return aux
-        elif opcion ==2:
-            aux=int(input("Ingrese el nueva cantidad de veces compartido: "))
-            return aux
-        
-        else:
-            aux=int(input("Ingrese el nueva cantidad de likes: "))
-            return aux
+def leer_usuario(usuarios):         #Leer
+    for fil in range(len(usuarios)):
+        print()
+        for col in range(len(usuarios[0])):
+            print(f"|{usuarios[fil][col]:^12}|",end="")
+    print()
 
-    """
-    if modif == 0:
-        comparacion= lambda palabra:re.match(r"[a-zA-Z-_.]{1,20}",palabra)
-        aux=input("Ingrese el nuevo usuario: ")
-        while comparacion(aux)==None:
-            aux=input("Ingrese un nuevo nombre valido: ")
-        return aux
-    elif modif ==1:
+
+def actualizar_usuario(opcion_usuario,opcion_elemento,usuarios):    #Actualizar
+    if opcion_elemento == 0:
+        aux=input("Ingrese el nuevo usuario (entre 3 y 20 caracteres): ")
+        while validez.validar_usuario(aux)==None:
+            aux=input("Ingrese un nuevo usuario valido: ")
+    
+    elif opcion_elemento ==1:
         aux=int(input("Ingrese el nueva cantidad seguidores: "))
-        return aux
-    elif modif==2:
+        
+    elif opcion_elemento == 2:
         aux=int(input("Ingrese la nueva cantidad de seguidos: "))
-        return aux
-    elif modif==3:
+        
+    elif opcion_elemento == 3:
         aux=int(input("Ingrese la nueva cantidad de likes: "))
-        return aux 
+       
     else:
         aux=input("Ingrese el nuevo correo: ")
         while validez.validar_mail(aux)==None:
             aux=input("Ingrese un mail valido: ")
-        return aux
-        """
+    usuarios[opcion_usuario][opcion_elemento]=aux
 
-def eliminar(matriz):
-    print()
+def eliminar_usuario(id,usuarios):
+    usuarios.pop(id)
+
+#Funciones CRUD Hashtags
+
+#Funciones CRUD Posteos
+
+
