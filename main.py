@@ -98,9 +98,10 @@ def eleccion():
             print("Por favor ingrese un numero dentro de los solicitados")
         else:     
             return matriz_elegida
+        """
     except ValueError:
         print("Error: Por favor ingrese un numero valido")
-
+"""
 def ordenamiento(matriz):
     matriz.sort()
     return matriz
@@ -110,16 +111,14 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
            ["Diego.lopez", 2000,       800,       1000,  "diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
            ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
            ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
-'''
-#esto convierte la matriz de usuario en diccionario o lo pueden hacer manual
-keys = usuario[0]
-usuarios_dict = [dict(zip(keys, row)) for row in usuario[1:]]
-'''
 
-hashtags = [["hashtag","Cant. de posteos","Veces compartido","Likes"],
-            ["#UADELabs",2000,10000,50000]]                                        #Estos son ejemplos aleatorios  
+
+hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
+            ["#UADELabs",  2000,  10000,  50000]
+            ]                                      
 
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
+"""
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
     while True:
@@ -129,29 +128,30 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     likes = random.randint(0, 1000)
     comentarios = random.randint(0, 1000)
     posteos.append([id_post, fecha_publicacion, likes, comentarios])
-
+"""
 
 #Menu principal
 menu=0
 while menu!=-1:
     menu = __menu__()
 
-    if menu==1:                  #----Usuario     ----
+    if menu==1:                  #----  Usuario     ----
         opcion=crud_usuarios()   
         
-        if opcion==1:                 #Agregar
-            usuario.append(crud.agregar(menu))
+        if opcion==1:                   #Agregar
+            crud.agregar_usuario(usuario)
+
+        elif opcion==2:                 #Eliminar
+            usuario_fila=crud.seleccionar_usuario(usuario)
+            crud.eliminar_usuario(usuario_fila,usuario)
         
-        elif opcion==2:               #Eliminar
-            print()
+        elif opcion==3:                 #Actualizar
+            opcion_usuario = crud.seleccionar_usuario(usuario)
+            opcion_usuario_elemento = crud.seleccionar_elemento_usuairos(opcion_usuario,usuario)
+            crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuario)
         
-        elif opcion==3:               #Actualizar
-            opcion_usuario = crud.seleccionar(menu,usuario)
-            opcion_usuario_elemento = crud.seleccionar_elemento(menu,opcion_usuario,usuario)
-            usuario[opcion_usuario][opcion_usuario_elemento]=crud.actualizar(menu,opcion_usuario_elemento)
-        
-        else:                         #Leer
-            crud.leer(opcion,usuario)
+        else:                           #Leer
+            crud.leer_usuario(usuario)
 
     elif menu==2:                #----Hashtag     ----
         opcion=crud_hashtags()
@@ -162,8 +162,8 @@ while menu!=-1:
             print("Falta funcion")
 
         elif opcion==3:              #Actualizar
-            opcion_hashtag = crud.seleccionar(menu,hashtags)
-            opcion_hashtag_elemento = crud.seleccionar_elemento(menu,opcion_hashtag,hashtags)
+            opcion_hashtag = crud.seleccionar_hashtag(hashtags)
+            opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags)
             hashtags[opcion_hashtag][opcion_hashtag_elemento]=crud.actualizar(menu,opcion_hashtag_elemento)
 
         else:                        #Leer
