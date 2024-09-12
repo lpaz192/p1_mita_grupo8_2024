@@ -84,6 +84,8 @@ while menu != -1:
 """ Notas: 
 
 """
+from datetime import datetime
+import random
 import crud, metricas, json, validez
 from diseño import __menu__, crud_hashtags, crud_usuarios, estadisticas, crud_publicacion
 #Funciones
@@ -94,8 +96,12 @@ def eleccion():
         matriz_elegida=int(input("Seleccione: "))                          #1 matriz de usuario   2. matriz de posteo
         if matriz_elegida !=1 and matriz_elegida !=2:
             print("Por favor ingrese un numero dentro de los solicitados")
-    return matriz_elegida
-
+        else:     
+            return matriz_elegida
+        """
+    except ValueError:
+        print("Error: Por favor ingrese un numero valido")
+"""
 def ordenamiento(matriz):
     matriz.sort()
     return matriz
@@ -111,7 +117,17 @@ hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant
             ["#UADELabs",  2000,  10000,  50000]
             ]                                      
 
-posteos = [[]]
+posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
+for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
+    id_post = str(i).zfill(3)
+    while True:
+        fecha_publicacion = datetime.now().strftime('%Y-%m-%d')
+        if validez.validar_fecha(fecha_publicacion):
+            break
+    likes = random.randint(0, 1000)
+    comentarios = random.randint(0, 1000)
+    posteos.append([id_post, fecha_publicacion, likes, comentarios])
+
 
 #Menu principal
 menu=0

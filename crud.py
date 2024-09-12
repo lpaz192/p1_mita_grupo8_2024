@@ -136,6 +136,14 @@ def seleccionar(opcion,matriz):
         while True:
             print("\n---Usuarios---")
             leer_usuario(matriz)
+<<<<<<< HEAD
+            leer(1,usuarios)
+            opcion = int(input("Seleccione un usuario con el numero de id: "))
+            return opcion
+        except ValueError:
+            print("Por favor, ingrese una opcion válida.")
+=======
+            leer(opcion,matriz)
             aux = int(input("Seleccione un usuario con el numero de id: "))
             if  aux>=0 and aux<=len(matriz[0]):
                 return aux
@@ -175,6 +183,7 @@ def seleccionar_elemento(opcion,id,matriz):
             if aux >0 and aux<=len(matriz[id]):
                 return aux
             input("Dato invalido")    
+>>>>>>> fc1bc17b555f000e29de5cc055e5ac6ea2dd1d49
 
 
 #Funciones CRUD Usuarios
