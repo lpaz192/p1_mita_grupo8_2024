@@ -84,6 +84,8 @@ while menu != -1:
 """ Notas: 
 
 """
+from datetime import datetime
+import random
 import crud, metricas, json, validez
 from diseño import __menu__, crud_hashtags, crud_usuarios, estadisticas, crud_publicacion
 #Funciones
@@ -112,7 +114,17 @@ usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
 hashtags = [["hashtag","Cant. de posteos","Veces compartido","Likes"],
             ["#UADELabs",2000,10000,50000]]                                        #Estos son ejemplos aleatorios  
 
-posteos = [[]]
+posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
+for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
+    id_post = str(i).zfill(3)
+    while True:
+        fecha_publicacion = datetime.now().strftime('%Y-%m-%d')
+        if validez.validar_fecha(fecha_publicacion):
+            break
+    likes = random.randint(0, 1000)
+    comentarios = random.randint(0, 1000)
+    posteos.append([id_post, fecha_publicacion, likes, comentarios])
+
 
 #Menu principal
 menu=0
