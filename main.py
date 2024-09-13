@@ -177,6 +177,7 @@ while menu!=-1:
         
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
+        
     
     elif menu==4:                #----Ordenar     ----
         ordenamiento()

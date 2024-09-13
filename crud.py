@@ -253,5 +253,20 @@ def leer_hashtag(hashtag):         #Leer
             diseño.parte_conectiva_hashtag()
     input()
 #Funciones CRUD Posteos
-
+def agregar_publicacion(posteos):
+    id_post = input("Ingrese el ID de la publicación: ").zfill(3)
+    
+    while True:
+        fecha_publicacion = input("Ingrese la fecha de la publicación (YYYY-MM-DD): ")
+        if validez.validar_fecha(fecha_publicacion):
+            break
+        else:
+            print("Fecha inválida, por favor ingrese una fecha en formato válido (YYYY-MM-DD).")
+    
+    
+    likes = int(input("Ingrese la cantidad de likes: "))
+    comentarios = int(input("Ingrese la cantidad de comentarios: "))
+    
+    posteos.append([id_post, fecha_publicacion, likes, comentarios])
+    print("Publicación agregada exitosamente.")
 
