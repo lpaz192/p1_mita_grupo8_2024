@@ -129,9 +129,9 @@ def eliminar(matriz):
 
 """  Notas  """
 
-import json,validez,re
+import json,validez,re,diseño
 
-#Funciones secundarias
+#Funciones secundarias de usarios
 def seleccionar_usuario(matriz):
     while True:
         print("\n---Usuarios---")
@@ -201,23 +201,18 @@ def agregar_usuario(usuarios):      #Agregar
     usuarios[len(usuarios)-1].extend(lista)
 
 def leer_usuario(usuarios):         #Leer
-    parte_superior=lambda: print(f"┌{'─'*4}┬{'─'*20}┬{'─'*8}┬{'─'*8}┬{'─'*8}┬{'─'*40}┐")
-    mostrar_usuario=lambda fil: print(f"│{fil[0]:^4}│{fil[1]:^20}│{fil[2]:^8}│{fil[3]:^8}│{fil[4]:^8}│{fil[5]:^40}│")
-    parte_inferior=lambda: print(f"└{'─'*4}┴{'─'*20}┴{'─'*8}┴{'─'*8}┴{'─'*8}┴{'─'*40}┘")
-    parte_conectiva=lambda: print(f"├{'─'*4}┼{'─'*20}┼{'─'*8}┼{'─'*8}┼{'─'*8}┼{'─'*40}┤")
     for fil in usuarios:
         if usuarios[0]==fil:
-            parte_superior()
-            mostrar_usuario(fil)
-            parte_conectiva()
+            diseño.parte_superior()
+            diseño.mostrar_usuario(fil)
+            diseño.parte_conectiva()
         elif usuarios[len(usuarios)-1]==fil:
-            mostrar_usuario(fil)
-            parte_inferior()
+            diseño.mostrar_usuario(fil)
+            diseño.parte_inferior()
         else:
-            mostrar_usuario(fil)
-            parte_conectiva()
+            diseño.mostrar_usuario(fil)
+            diseño.parte_conectiva()
     input()
-
 
 def actualizar_usuario(opcion_usuario,opcion_elemento,usuarios):    #Actualizar
     if opcion_elemento == 0:

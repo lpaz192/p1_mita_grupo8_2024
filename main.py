@@ -107,17 +107,17 @@ def ordenamiento(matriz):
     return matriz
 
 #Matrices
-usuario = [["Usuario",     "Seguidores", "Seguidos", "Likes",  "Correo"],
-           ["Diego.lopez", 2000,       800,       1000,  "diegolopez@gmail.com"],  #Estos son ejemplos aleatorios
-           ["carlitaa",    5000,       500,       8000,  "carlaguilar@gmail.com"],
-           ["Marcediaz",   200,        1000,      100,   "marcelodiaz12@hotmail.com"]]
+usuario = [[1, "Martintin",     234,        200,         100,   "martincho@outlook.com"     ],
+           [2, "Diego.lopez",  2000,        800,        1000,   "diegolopez@gmail.com"      ], 
+           [3, "carlitaa",     5000,        500,        8000,   "carlaguilar@gmail.com"     ],   # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
+           [4, "Marcediaz",     200,       1000,         100,   "marcelodiaz12@hotmail.com"]
+           ]
 
 '''
 #por si no quieren hacerlo manual esto hace el paso de matriz a diccionario
 keys = usuario[0]
 usuarios_dict = [dict(zip(keys, row)) for row in usuario[1:]]
 '''
-
 
 hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
             ["#UADELabs",  2000,  10000,  50000]
@@ -185,4 +185,4 @@ while menu!=-1:
         estadisticas()
     
     elif menu!=-1:
-  print("Opcion no valida")
+        print("Opcion no valida")   
