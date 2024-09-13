@@ -239,7 +239,19 @@ def eliminar_usuario(id,usuarios):
     usuarios.pop(id)
 
 #Funciones CRUD Hashtags
-
+def leer_hashtag(hashtag):         #Leer
+    for fil in hashtag:
+        if hashtag[0]==fil:
+            diseño.parte_superior_hashtag()
+            diseño.mostrar_hashtag(fil)
+            diseño.parte_conectiva_hashtag()
+        elif hashtag[len(hashtag)-1]==fil:
+            diseño.mostrar_hashtag(fil)
+            diseño.parte_inferior_hashtag()
+        else:
+            diseño.mostrar_hashtag(fil)
+            diseño.parte_conectiva_hashtag()
+    input()
 #Funciones CRUD Posteos
 
 

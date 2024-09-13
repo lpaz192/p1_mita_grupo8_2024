@@ -25,9 +25,7 @@ def crud_usuarios():
         else: 
             print("Opcion no valida")
     return aux
-
-
-    
+   
 #Diseño CRUD Hashtags
 def crud_hashtags():
     print("\n---CRUD hashtags---")
@@ -61,3 +59,9 @@ parte_superior=lambda: print(f"┌{'─'*4}┬{'─'*20}┬{'─'*8}┬{'─'*8}
 mostrar_usuario=lambda fil: print(f"│{fil[0]:^4}│{fil[1]:^20}│{fil[2]:^8}│{fil[3]:^8}│{fil[4]:^8}│{fil[5]:^40}│")
 parte_inferior=lambda: print(f"└{'─'*4}┴{'─'*20}┴{'─'*8}┴{'─'*8}┴{'─'*8}┴{'─'*40}┘")
 parte_conectiva=lambda: print(f"├{'─'*4}┼{'─'*20}┼{'─'*8}┼{'─'*8}┼{'─'*8}┼{'─'*40}┤")
+
+#Diseño tablas
+parte_superior_hashtag=lambda: print(f"┌{'─'*15}┬{'─'*8}┬{'─'*8}┬{'─'*8}┐")
+mostrar_hashtag=lambda fil: print(f"│{fil[0]:15}│{fil[1]:^8}│{fil[2]:^8}│{fil[3]:^8}│")
+parte_inferior_hashtag=lambda: print(f"└{'─'*15}┴{'─'*8}┴{'─'*8}┴{'─'*8}┘")
+parte_conectiva_hashtag=lambda: print(f"├{'─'*15}┼{'─'*8}┼{'─'*8}┼{'─'*8}┤")

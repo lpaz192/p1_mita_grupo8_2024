@@ -142,16 +142,16 @@ while menu!=-1:
     menu = __menu__()
 
     if menu==1:                  #----  Usuario     ----
-        opcion=crud_usuarios()   
+        opcion_crud=crud_usuarios()   
         
-        if opcion==1:                   #Agregar
+        if opcion_crud==1:                   #Agregar
             crud.agregar_usuario(usuario)
 
-        elif opcion==2:                 #Eliminar
+        elif opcion_crud==2:                 #Eliminar
             usuario_fila=crud.seleccionar_usuario(usuario)
             crud.eliminar_usuario(usuario_fila,usuario)
         
-        elif opcion==3:                 #Actualizar
+        elif opcion_crud==3:                 #Actualizar
             opcion_usuario = crud.seleccionar_usuario(usuario)
             opcion_usuario_elemento = crud.seleccionar_elemento_usuairos(opcion_usuario,usuario)
             crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuario)
@@ -160,20 +160,20 @@ while menu!=-1:
             crud.leer_usuario(usuario)
 
     elif menu==2:                #----Hashtag     ----
-        opcion=crud_hashtags()
-        if opcion==1:                #Agregar
+        opcion_crud=crud_hashtags()
+        if opcion_crud==1:                #Agregar
             hashtags.append(crud.agregar(menu))
 
-        elif opcion==2:              #Eliminar
+        elif opcion_crud==2:              #Eliminar
             print("Falta funcion")
 
-        elif opcion==3:              #Actualizar
+        elif opcion_crud==3:              #Actualizar
             opcion_hashtag = crud.seleccionar_hashtag(hashtags)
             opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags)
             hashtags[opcion_hashtag][opcion_hashtag_elemento]=crud.actualizar(menu,opcion_hashtag_elemento)
 
         else:                        #Leer
-            crud.leer(opcion,hashtags)
+            crud.leer_hashtag(hashtags)
         
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
