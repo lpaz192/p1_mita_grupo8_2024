@@ -255,7 +255,7 @@ def leer_hashtag(hashtag):         #Leer
 #Funciones CRUD Posteos
 def agregar_publicacion(posteos):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)
-    
+
     while True:
         fecha_publicacion = input("Ingrese la fecha de la publicación (YYYY-MM-DD): ")
         if validez.validar_fecha(fecha_publicacion):
@@ -270,3 +270,14 @@ def agregar_publicacion(posteos):
     posteos.append([id_post, fecha_publicacion, likes, comentarios])
     print("Publicación agregada exitosamente.")
 
+def eliminar_publicacion(posteos):
+    id_post = input("Ingrese el ID de la publicación a eliminar: ")
+
+    for i in range(len(posteos)):
+        if posteos[i][0] == id_post:
+            del posteos[i]
+            print("Publicación eliminada exitosamente.")
+            return #aca termina la funcion
+    
+    #pero si no lo encuentra no hace return y tira la alerta
+    print("ID de publicación no encontrado.")
