@@ -252,6 +252,8 @@ def leer_hashtag(hashtag):         #Leer
             diseño.mostrar_hashtag(fil)
             diseño.parte_conectiva_hashtag()
     input()
+
+
 #Funciones CRUD Posteos
 def agregar_publicacion(posteos):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)
@@ -331,3 +333,26 @@ def actualizar_publicacion(posteos):
         return
 
     print("Publicación actualizada exitosamente.")
+
+def leer_publicaciones(posteos):
+    print("1. Ver una publicación específica")
+    print("2. Ver todas las publicaciones")
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        id_post = input("Ingrese el ID de la publicación que desea ver: ")
+        encontrado = False
+        for posteo in posteos:
+            if posteo[0] == id_post:
+                print("ID:", posteo[0], "Fecha:", posteo[1], "Likes:", posteo[2], "Comentarios:", posteo[3])
+                encontrado = True
+                break
+        if not encontrado:
+            print("ID de publicación no encontrado.")
+    
+    elif opcion == "2":
+        print("\n---Lista de Publicaciones---")
+        for posteo in posteos:
+            print("ID:", posteo[0], "Fecha:", posteo[1], "Likes:", posteo[2], "Comentarios:", posteo[3])
+    else:
+        print("Opción no válida.")
