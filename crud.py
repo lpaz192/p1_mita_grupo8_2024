@@ -268,6 +268,8 @@ def leer_hashtag(hashtag):         #Leer
             diseño.mostrar_hashtag(fil)
             diseño.parte_conectiva_hashtag()
     input()
+
+
 #Funciones CRUD Posteos
 def agregar_publicacion(posteos):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)
@@ -297,3 +299,76 @@ def eliminar_publicacion(posteos):
     
     #pero si no lo encuentra no hace return y tira la alerta
     print("ID de publicación no encontrado.")
+
+def actualizar_publicacion(posteos):
+    id_post = input("Ingrese el ID de la publicación a actualizar: ")
+    
+    index = -1
+    for i in range(len(posteos)):
+        if posteos[i][0] == id_post:
+            index = i
+            break
+    if index == -1:
+        print("ID de publicación no encontrado.")
+        return
+
+    print("Seleccione el campo que desea actualizar:")
+    print("1. Fecha de publicación")
+    print("2. Likes")
+    print("3. Comentarios")
+    print("4. Modificar toda la publicación")
+    opcion = int(input("Ingrese su opción: "))
+
+    if opcion == 1:
+        fecha_publicacion = input("Ingrese la nueva fecha de la publicación (YYYY-MM-DD): ")
+        if validez.validar_fecha(fecha_publicacion):
+            posteos[index][1] = fecha_publicacion
+        else:
+            print("Fecha inválida.")
+            return
+
+    elif opcion == 2:
+        posteos[index][2] = int(input("Ingrese la nueva cantidad de likes: "))
+
+    elif opcion == 3:
+        posteos[index][3] = int(input("Ingrese la nueva cantidad de comentarios: "))
+
+    elif opcion == 4:
+        nueva_fecha = input("Ingrese la nueva fecha de la publicación (YYYY-MM-DD): ")
+
+        #si la validacion de la fecha no es True o sea no esta bien
+        if not validez.validar_fecha(nueva_fecha):
+            print("Fecha inválida.")
+            return #para todo y volveria al principio
+        nuevo_likes = int(input("Ingrese la nueva cantidad de likes: "))
+        nuevo_comentarios = int(input("Ingrese la nueva cantidad de comentarios: "))
+        posteos[index] = [id_post, nueva_fecha, nuevo_likes, nuevo_comentarios]
+
+    else:
+        print("Opción no válida.")
+        return
+
+    print("Publicación actualizada exitosamente.")
+
+def leer_publicaciones(posteos):
+    print("1. Ver una publicación específica")
+    print("2. Ver todas las publicaciones")
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        id_post = input("Ingrese el ID de la publicación que desea ver: ")
+        encontrado = False
+        for posteo in posteos:
+            if posteo[0] == id_post:
+                print("ID:", posteo[0], "Fecha:", posteo[1], "Likes:", posteo[2], "Comentarios:", posteo[3])
+                encontrado = True
+                break
+        if not encontrado:
+            print("ID de publicación no encontrado.")
+    
+    elif opcion == "2":
+        print("\n---Lista de Publicaciones---")
+        for posteo in posteos:
+            print("ID:", posteo[0], "Fecha:", posteo[1], "Likes:", posteo[2], "Comentarios:", posteo[3])
+    else:
+        print("Opción no válida.")

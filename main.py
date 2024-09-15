@@ -186,6 +186,16 @@ while menu!=-1:
         
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
+        if opcion == 1:
+            crud.agregar_publicacion()
+        elif opcion == 2:
+            crud.eliminar_publicacion()
+        elif opcion == 3:
+            crud.actualizar_publicacion()
+        elif opcion == 4: 
+            crud.leer_publicaciones()
+        else:
+            print("Opción no válida.")
         
     
     elif menu==4:                #----Ordenar     ----
