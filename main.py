@@ -110,9 +110,18 @@ def ordenamiento(matriz):
 usuario = [[1, "Martintin",     234,        200,         100,   "martincho@outlook.com"     ],
            [2, "Diego.lopez",  2000,        800,        1000,   "diegolopez@gmail.com"      ], 
            [3, "carlitaa",     5000,        500,        8000,   "carlaguilar@gmail.com"     ],   # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
-           [4, "Marcediaz",     200,       1000,         100,   "marcelodiaz12@hotmail.com"]
-           ]
-
+           [4, "Marcediaz",     200,       1000,         100,   "marcelodiaz12@hotmail.com"]]
+  
+usuarios_dict={             #Crear diccionario
+    fil[0]:{
+        'Usuario':fil[1],
+        'Seguidores':fil[2],
+        'Seguidos':fil[3],
+        'Likes':fil[4],
+        'Correo':fil[5]
+    }for fil in usuario
+}
+print(usuarios_dict)
 '''
 #por si no quieren hacerlo manual esto hace el paso de matriz a diccionario
 keys = usuario[0]
@@ -145,7 +154,7 @@ while menu!=-1:
         opcion_crud=crud_usuarios()   
         
         if opcion_crud==1:                   #Agregar
-            crud.agregar_usuario(usuario)
+            crud.agregar_usuario(usuarios_dict)
 
         elif opcion_crud==2:                 #Eliminar
             usuario_fila=crud.seleccionar_usuario(usuario)
@@ -156,8 +165,8 @@ while menu!=-1:
             opcion_usuario_elemento = crud.seleccionar_elemento_usuairos(opcion_usuario,usuario)
             crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuario)
         
-        else:                           #Leer
-            crud.leer_usuario(usuario)
+        elif opcion_crud == 4:                           #Leer
+            crud.leer_usuario(usuarios_dict)
 
     elif menu==2:                #----Hashtag     ----
         opcion_crud=crud_hashtags()
@@ -172,7 +181,7 @@ while menu!=-1:
             opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags)
             hashtags[opcion_hashtag][opcion_hashtag_elemento]=crud.actualizar(menu,opcion_hashtag_elemento)
 
-        else:                        #Leer
+        elif opcion_crud == 4:                        #Leer
             crud.leer_hashtag(hashtags)
         
     elif menu==3:                #----Publicacion ----
