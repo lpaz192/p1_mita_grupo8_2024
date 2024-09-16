@@ -54,14 +54,14 @@ def estadisticas():
     print("-1. Volver al menu principal")
     return int(input("Seleccione una opcción: "))
 
-#Diseño de tablas
+#Diseño de tablas usuario
 parte_superior=lambda: print(f"┌{'─'*4}┬{'─'*20}┬{'─'*8}┬{'─'*8}┬{'─'*8}┬{'─'*40}┐")
-mostrar_usuario=lambda fil: print(f"│{fil[0]:^4}│{fil[1]:^20}│{fil[2]:^8}│{fil[3]:^8}│{fil[4]:^8}│{fil[5]:^40}│")
-parte_inferior=lambda: print(f"└{'─'*4}┴{'─'*20}┴{'─'*8}┴{'─'*8}┴{'─'*8}┴{'─'*40}┘")
+mostrar_usuario=lambda id, datos: print(f"│{id:^4}│{datos['Usuario']:^20}│{datos['Seguidores']:^8}│{datos['Seguidos']:^8}│{datos['Likes']:^8}│{datos['Correo']:^40}│")
 parte_conectiva=lambda: print(f"├{'─'*4}┼{'─'*20}┼{'─'*8}┼{'─'*8}┼{'─'*8}┼{'─'*40}┤")
+parte_inferior=lambda: print(f"└{'─'*4}┴{'─'*20}┴{'─'*8}┴{'─'*8}┴{'─'*8}┴{'─'*40}┘")
 
-#Diseño tablas
+#Diseño de tablas hashtag
 parte_superior_hashtag=lambda: print(f"┌{'─'*15}┬{'─'*8}┬{'─'*8}┬{'─'*8}┐")
 mostrar_hashtag=lambda fil: print(f"│{fil[0]:15}│{fil[1]:^8}│{fil[2]:^8}│{fil[3]:^8}│")
-parte_inferior_hashtag=lambda: print(f"└{'─'*15}┴{'─'*8}┴{'─'*8}┴{'─'*8}┘")
 parte_conectiva_hashtag=lambda: print(f"├{'─'*15}┼{'─'*8}┼{'─'*8}┼{'─'*8}┤")
+parte_inferior_hashtag=lambda: print(f"└{'─'*15}┴{'─'*8}┴{'─'*8}┴{'─'*8}┘")
