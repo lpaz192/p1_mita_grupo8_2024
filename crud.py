@@ -177,7 +177,7 @@ def selccionar_elemento_hashtag(hashtag,matriz):
 
 
 #Funciones CRUD Usuarios
-def agregar_usuario(usuarios_dict):      #Agregar
+def agregar_usuario(usuarios):      #Agregar
     #Solicitar información
     nuevo_id= input()
     nuevo_nombre= input()
@@ -187,7 +187,7 @@ def agregar_usuario(usuarios_dict):      #Agregar
     nuevo_correo= input()
     
     #Agregar usuario
-    usuarios_dict[nuevo_id] = {
+    usuarios[nuevo_id] = {
         'Usuario':nuevo_nombre,
         'Seguidores':nuevo_seguidores,
         'Seguidos':nuevo_seguido,
@@ -216,19 +216,19 @@ def agregar_usuario(usuarios_dict):      #Agregar
     usuarios[len(usuarios)-1].extend(lista)
 """
 def leer_usuario(usuarios):         #Leer
-    for fil in usuarios:
-        if usuarios[0]==fil:
+    for id_usuario, datos_usuario in usuarios.items():
+        if id_usuario==1:
             diseño.parte_superior()
-            diseño.mostrar_usuario(fil)
+            diseño.mostrar_usuario(id_usuario,datos_usuario)
             diseño.parte_conectiva()
+            
         elif usuarios[len(usuarios)-1]==fil:
-            diseño.mostrar_usuario(fil)
+            diseño.mostrar_usuario(id_usuario, datos_usuario)
             diseño.parte_inferior()
         else:
-            diseño.mostrar_usuario(fil)
+            diseño.mostrar_usuario(id_usuario, datos_usuario)
             diseño.parte_conectiva()
     input()
-    
 
 def actualizar_usuario(opcion_usuario,opcion_elemento,usuarios):    #Actualizar
     if opcion_elemento == 0:
