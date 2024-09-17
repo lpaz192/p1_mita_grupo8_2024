@@ -218,13 +218,23 @@ def eliminar_usuario(id,usuarios): #Eliminar
     usuarios.pop(id)
 
 #Funciones CRUD Hashtags
+def agregar_hashtag(hashtag):      #Agregar
+    #Agregar hashtag
+    usuarios[nuevo_id(usuarios)] = {
+        'Usuario':validez.validar_usuario(),
+        'Seguidores':validez.validar_numero('seguidores'),
+        'Seguidos':validez.validar_numero('seguidos'),
+        'Likes':validez.validar_numero('likes'),
+        'Correo':validez.validar_mail()
+    }
+
 def leer_hashtag(hashtag):         #Leer
     for fil in hashtag:
         if hashtag[0]==fil:
             diseño.parte_superior_hashtag()
             diseño.encabezado_hashtags()
             diseño.parte_conectiva_hashtag()
-            
+
             diseño.mostrar_hashtag(fil)
             diseño.parte_conectiva_hashtag()
         elif hashtag[len(hashtag)-1]==fil:

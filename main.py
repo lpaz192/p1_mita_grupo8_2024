@@ -126,9 +126,7 @@ usuarios_dict={             #Crear diccionario
     }for fil in usuario
 }
 
-hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
-            ["#UADELabs",  2000,  10000,  50000]
-            ]                                      
+                                    
 
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
 """
@@ -175,7 +173,7 @@ while menu!=-1:
             crud.leer_usuario(usuarios_dict)
 
     elif menu==2:                #----Hashtag     ----
-        opcion_crud=crud_hashtags()
+        opcion_crud = crud_hashtags()
         if opcion_crud==1:                #Agregar
             hashtags.append(crud.agregar(menu))
 
