@@ -226,8 +226,6 @@ while menu!=-1:
             print("ordenar hashtags")
         elif opcion == 3:
             crud.ordenar_publicaciones(posteos) 
-        elif opcion == -1:
-            continue  # vuelve al menu principal
         else:
             print("Opción no válida.")
 
