@@ -150,25 +150,17 @@ def seleccionar_elemento_usuairos(id,usuario):
             elemento = input("Elemento invalido, por favor ingrese un elemento valido: ")
 
 #Funciones secundarias de Hashtags
-def seleccionar_hashtag(matriz):
+def selccionar_elemento_hashtag(hashtagh_opcion,hashtags_dict): 
+    print(f"\n---Hashtag {hashtagh_opcion}---")
+    print(f"1. Cantidad de posteos: {hashtags_dict[hashtagh_opcion]['Cant. posteos']}")
+    print(f"2. Veces compartido:    {hashtags_dict[hashtagh_opcion]['Veces compartido']}")
+    print(f"3. Likes:               {hashtags_dict[hashtagh_opcion]['Likes']}")
+    elemento = input("Seleccione un elemento: ")
     while True:
-            print("\n---Hashtags---")
-            leer_usuario(matriz)
-            aux  = int(input("Seleccione un usuario con el numero de id: "))
-            if  aux>=0 and aux<=len(matriz[0]):
-                return aux
-            input("Dato invalido")
-
-def selccionar_elemento_hashtag(hashtag,matriz): 
-    while True:
-        print(f"\n---Hashtag  {matriz[hashtag][0]}---")
-        print(f"1. Cantidad de posteos: {matriz[hashtag][1]}")
-        print(f"2. Veces compartido: {matriz[hashtag][2]}")
-        print(f"3. Likes: {matriz[hashtag][3]}")
-        aux = int(input("Seleccione un elemento: "))
-        if aux >0 and aux<=len(matriz[hashtag]):
-            return aux
-        input("Dato invalido")    
+        if elemento.isdigit() and int(elemento) >= 1 and int(elemento) <= 3:
+            return int(elemento)
+        else:
+            elemento= input("elemento invalido, por favor seleccione un elemento valido: ")    
 
 
 #Funciones CRUD Usuarios
@@ -183,24 +175,23 @@ def agregar_usuario(usuarios):      #Agregar
     }
    
 def leer_usuario(usuarios):         #Leer
+    diseño.parte_superior()
+    diseño.encabezado_usuarios()
     for id_usuario, datos_usuario in usuarios.items():
-        if id_usuario==1:
-            diseño.parte_superior()
-            diseño.encabezado_usuarios()
+        if id_usuario==min(usuarios.keys()):
             diseño.parte_conectiva()
             diseño.mostrar_usuario(id_usuario,datos_usuario)
-            diseño.parte_conectiva()
-            
         elif max(usuarios.keys())==id_usuario:
-            diseño.mostrar_usuario(id_usuario, datos_usuario)
-            diseño.parte_inferior()
-        else:
-            diseño.mostrar_usuario(id_usuario, datos_usuario)
             diseño.parte_conectiva()
+            diseño.mostrar_usuario(id_usuario, datos_usuario)
+        else:
+            diseño.parte_conectiva()
+            diseño.mostrar_usuario(id_usuario, datos_usuario)
+    diseño.parte_inferior()
     input('Oprima enter para continuar ')
 
 def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    #Actualizar
-    if elemento_elegido == 1:
+    if elemento_elegido == 1: 
         usuarios[opcion_usuario]['Usuario']=validez.validar_usuario()
 
     elif elemento_elegido == 2:
@@ -218,34 +209,46 @@ def eliminar_usuario(id,usuarios): #Eliminar
     usuarios.pop(id)
 
 #Funciones CRUD Hashtags
-def agregar_hashtag(hashtag):      #Agregar
+def agregar_hashtag(hashtag_dict):      #Agregar
     #Agregar hashtag
-    usuarios[nuevo_id(usuarios)] = {
-        'Usuario':validez.validar_usuario(),
-        'Seguidores':validez.validar_numero('seguidores'),
-        'Seguidos':validez.validar_numero('seguidos'),
-        'Likes':validez.validar_numero('likes'),
-        'Correo':validez.validar_mail()
+    nuevo_hashtag= validez.hashtag_no_repetido(hashtag_dict)
+    hashtag_dict[nuevo_hashtag] = {
+        'Cant. posteos':validez.validar_numero('cantidad de posteos',1,10),
+        'Veces compartido':validez.validar_numero('veces compartido',1,10),
+        'Likes':validez.validar_numero('likes',1,10),
     }
 
-def leer_hashtag(hashtag):         #Leer
-    for fil in hashtag:
-        if hashtag[0]==fil:
-            diseño.parte_superior_hashtag()
-            diseño.encabezado_hashtags()
+def leer_hashtag(hashtags_dict):
+    hashtag = list(hashtags_dict.keys())
+    diseño.parte_superior_hashtag()
+    diseño.encabezado_hashtags()
+    for i in range(len(hashtag)):
+        if i == 0:
             diseño.parte_conectiva_hashtag()
-
-            diseño.mostrar_hashtag(fil)
+            diseño.mostrar_hashtag(hashtag[i], hashtags_dict[hashtag[i]])
+        elif i == len(hashtag)-1:
             diseño.parte_conectiva_hashtag()
-        elif hashtag[len(hashtag)-1]==fil:
-            diseño.mostrar_hashtag(fil)
-            diseño.parte_inferior_hashtag()
+            diseño.mostrar_hashtag(hashtag[i], hashtags_dict[hashtag[i]])
         else:
-            diseño.mostrar_hashtag(fil)
             diseño.parte_conectiva_hashtag()
-    input()
+            diseño.mostrar_hashtag(hashtag[i], hashtags_dict[hashtag[i]])
+    diseño.parte_inferior_hashtag()
+    input('Oprima enter para continuar ')
 
+def actualizar_hashtag(opcion_hashtag,elemento_elegido,hashtag_dict):
+    if elemento_elegido == 1:
+        hashtag_dict[opcion_hashtag]['Cant. posteos']=validez.validar_numero('cantidad de posteos',1,10)
+        return
+    
+    elif elemento_elegido == 2:
+        hashtag_dict[opcion_hashtag]['Cant. posteos']=validez.validar_numero('cantidad de posteos',1,10)
+        return
+    else:
+        hashtag_dict[opcion_hashtag]['Cant. posteos']=validez.validar_numero('cantidad de posteos',1,10)
+        return
 
+def eliminar_hashtag(hashtag_eliminar,hashtag_dict):
+    hashtag_dict.pop(hashtag_eliminar)
 #Funciones CRUD Posteos
 def agregar_publicacion(posteos):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)

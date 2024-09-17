@@ -111,23 +111,34 @@ def ordenamiento(matriz):
     return matriz
 
 #Matrices
+# 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
 usuario = [[1, "Martintin",     234,        200,         100,   "martincho@outlook.com"     ],
            [2, "Diego.lopez",  2000,        800,        1000,   "diegolopez@gmail.com"      ], 
-           [3, "carlitaa",     5000,        500,        8000,   "carlaguilar@gmail.com"     ],   # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
-           [4, "Marcediaz",     200,       1000,         100,   "marcelodiaz12@hotmail.com"]]
+           [3, "carlitaa",     5000,        500,        8000,   "carlaguilar@gmail.com"     ],   
+           [4, "Marcediaz",     200,       1000,         100,   "marcelodiaz12@hotmail.com"]
+           ]
   
-usuarios_dict={             #Crear diccionario
+usuarios_dict={                #Crear diccionario
     fil[0]:{
         'Usuario':fil[1],
-        'Seguidores':fil[2],
-        'Seguidos':fil[3],
+        'Seguidores':fil[2],   #Una tupla con el id del usuario y los datos del usuario
+        'Seguidos':fil[3],     #Dentro de los datos del usuario son tuplas entre la infromacion y su 'etiqueta'
         'Likes':fil[4],
         'Correo':fil[5]
     }for fil in usuario
 }
 
+hashtags = [["#Feriado",   400 ,  2000 ,  4000],   # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
+            ["#UADELabs",  2000,  10000,  50000]
+            ]  
                                     
-
+hashtags_dict={
+    fil[0]:{
+        'Cant. posteos':fil[1],
+        'Veces compartido':fil[2],
+        'Likes':fil[3]
+    }for fil in hashtags
+}
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
 """
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
@@ -175,18 +186,23 @@ while menu!=-1:
     elif menu==2:                #----Hashtag     ----
         opcion_crud = crud_hashtags()
         if opcion_crud==1:                #Agregar
-            hashtags.append(crud.agregar(menu))
+            crud.agregar_hashtag(hashtags_dict)
 
         elif opcion_crud==2:              #Eliminar
-            print("Falta funcion")
+            crud.leer_hashtag(hashtags_dict)
+            print("Ingrese el hashtag que desee eliminar",end="")
+            hashtag_fila= validez.hashtag_existente(hashtags_dict)
+            crud.eliminar_hashtag(hashtag_fila,hashtags_dict)
 
         elif opcion_crud==3:              #Actualizar
-            opcion_hashtag = crud.seleccionar_hashtag(hashtags)
-            opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags)
-            hashtags[opcion_hashtag][opcion_hashtag_elemento]=crud.actualizar(menu,opcion_hashtag_elemento)
+            crud.leer_hashtag(hashtags_dict)
+            print('Ingres el hashtag que desea modificar: ',end="")
+            opcion_hashtag = validez.hashtag_existente(hashtags_dict)
+            opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags_dict)
+            crud.actualizar_hashtag(opcion_hashtag,opcion_hashtag_elemento,hashtags_dict)
 
         elif opcion_crud == 4:                        #Leer
-            crud.leer_hashtag(hashtags)
+            crud.leer_hashtag(hashtags_dict)
         
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()

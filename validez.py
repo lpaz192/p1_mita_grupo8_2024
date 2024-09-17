@@ -1,14 +1,14 @@
 import re
 from datetime import datetime
 
-patron_mail = r"^[a-zA-Z0-9_]{2,20}+@[a-zA-Z]{2,10}+\.[a-zA-Z]{2,10}"
-patron_usuario = r"^[a-zA-Z_]{2,20}"
-
+patron_mail = r"^[a-zA-Z0-9_]{2,15}@[a-zA-Z]{2,10}\.[a-zA-Z]{2,5}$"
+patron_usuario = r"^[a-zA-Z_0-9]{2,17}$"
+patron_hashtag = r'^#[a-zA-Z0-9_.@!()/&%$]{1,20}$'
 
 #Funciones lambda
 comprobar_usuario= lambda nombre:re.match(patron_usuario,nombre)
 comprobar_mail=lambda mail:re.match(patron_mail,mail)
-
+comprobar_hashtag = lambda hashtag: re.match(patron_hashtag,hashtag)
 #Funciones
 
 def validar_fecha(fecha):
@@ -47,9 +47,36 @@ def validar_mail():     #Se busca validar que el mail ingresado sea correcto
 
 #Validar id
 def validar_id(usuarios):
-    id_seleccion = input(f"Ingrese un id existente: ")
+    id_seleccion = input("Ingrese un id existente: ")
     while True:
         for id_usuarios in usuarios:
             if id_seleccion.isdigit() and int(id_seleccion) == id_usuarios:
                 return int(id_seleccion)
         id_seleccion = input("Numero de id invalido, por favor ingrese un id valido: ")
+    
+#Validar hashtag
+def validar_hashtag():
+    hashtag = input("Ingrese un hashtag: ")
+    while True:
+        if comprobar_hashtag(hashtag):
+            return hashtag
+        else:
+            hashtag = input("Hashtag invalido, por favor ingrese un hashtag valido: ")
+
+#Hashtag no repetido
+def hashtag_no_repetido(hashtag_dict):
+    while True:
+        hashtag = validar_hashtag()
+        if hashtag in hashtag_dict:
+            print("El hashtag ingresado ya existe.")
+        else:
+            return hashtag
+
+#hashtag existente
+def hashtag_existente(hashtag_dict):
+    hashtag = input()
+    while True:
+        if hashtag in hashtag_dict:
+            return hashtag
+        else:
+            hashtag=input("El hashtag ingresado no existe, por favor ingrese un hashtag existente: ")

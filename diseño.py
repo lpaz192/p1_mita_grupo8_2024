@@ -1,4 +1,3 @@
-import crud
 # Diseño menu principal
 def __menu__():
     print("\n---Menu Principal---")
@@ -55,15 +54,15 @@ def estadisticas():
     return int(input("Seleccione una opcción: "))
 
 #Diseño de tablas usuario
-parte_superior=lambda: print(f"┌{'─'*6}┬{'─'*17}┬{'─'*12}┬{'─'*12}┬{'─'*12}┬{'─'*42}┐")
-encabezado_usuarios=lambda: print(f"│ {'Id':<4} │ {'Usuarios':<15} │ {'Seguidores':<10} │ {'Seguidos':<10} │ {'Likes':<10} │ { 'Correos':<40} │")
-mostrar_usuario=lambda id, datos: print(f"│ {id:<4} │ {datos['Usuario']:<15} │ {datos['Seguidores']:<10} │ {datos['Seguidos']:<10} │ {datos['Likes']:<10} │ {datos['Correo']:<40} │")
-parte_conectiva=lambda: print(f"├{'─'*6}┼{'─'*17}┼{'─'*12}┼{'─'*12}┼{'─'*12}┼{'─'*42}┤")
-parte_inferior=lambda:  print(f"└{'─'*6}┴{'─'*17}┴{'─'*12}┴{'─'*12}┴{'─'*12}┴{'─'*42}┘")
+parte_superior=lambda: print(f"┌{'─'*6}┬{'─'*17}┬{'─'*12}┬{'─'*12}┬{'─'*12}┬{'─'*32}┐")
+encabezado_usuarios=lambda: print(f"│ {'Id':<4} │ {'Usuarios':<15} │ {'Seguidores':<10} │ {'Seguidos':<10} │ {'Likes':<10} │ { 'Correos':<30} │")
+mostrar_usuario=lambda id, datos: print(f"│ {id:<4} │ {datos['Usuario']:<15} │ {datos['Seguidores']:<10} │ {datos['Seguidos']:<10} │ {datos['Likes']:<10} │ {datos['Correo']:<30} │")
+parte_conectiva=lambda: print(f"├{'─'*6}┼{'─'*17}┼{'─'*12}┼{'─'*12}┼{'─'*12}┼{'─'*32}┤")
+parte_inferior=lambda:  print(f"└{'─'*6}┴{'─'*17}┴{'─'*12}┴{'─'*12}┴{'─'*12}┴{'─'*32}┘")
 
 #Diseño de tablas hashtag
-parte_superior_hashtag=lambda: print(f"┌{'─'*17}┬{'─'*15}┬{'─'*18}┬{'─'*14}┐")
-encabezado_hashtags=lambda: print(f"│ {'Hashtags':<15} │ {'Cant. posteos':<13} │ {'Veces compartido':<16} │ {'Likes':<12} │")
-mostrar_hashtag=lambda fil: print(f"│ {fil[0]:<15} │ {fil[1]:<12}  │ {fil[2]:<12}     │ {fil[3]:<12} │")
-parte_conectiva_hashtag=lambda: print(f"├{'─'*17}┼{'─'*15}┼{'─'*18}┼{'─'*14}┤")
-parte_inferior_hashtag=lambda: print(f"└{'─'*17}┴{'─'*15}┴{'─'*18}┴{'─'*14}┘")
+parte_superior_hashtag=lambda: print(f"┌{'─'*17}┬{'─'*15}┬{'─'*18}┬{'─'*12}┐")
+encabezado_hashtags=lambda:          print(f"│ {'Hashtags':<15} │ {'Cant. posteos':<13} │ {'Veces compartido':<16} │ {'Likes':<10} │")
+mostrar_hashtag=lambda hashtag, fil: print(f"│ {hashtag:<15} │ {fil['Cant. posteos']:<13} │ {fil['Veces compartido']:<16} │ {fil['Likes']:<10} │")
+parte_conectiva_hashtag=lambda: print(f"├{'─'*17}┼{'─'*15}┼{'─'*18}┼{'─'*12}┤")
+parte_inferior_hashtag=lambda: print(f"└{'─'*17}┴{'─'*15}┴{'─'*18}┴{'─'*12}┘")
