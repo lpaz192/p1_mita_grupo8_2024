@@ -268,7 +268,7 @@ def agregar_publicacion(posteos):
     print("Publicación agregada exitosamente.")
 
 def eliminar_publicacion(posteos):
-    id_post = input("Ingrese el ID de la publicación a eliminar: ")
+    id_post = input("Ingrese el ID de la publicación a eliminar: ").zfill(3)
 
     for i in range(len(posteos)):
         if posteos[i][0] == id_post:

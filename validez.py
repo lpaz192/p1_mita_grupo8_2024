@@ -11,12 +11,16 @@ comprobar_mail=lambda mail:re.match(patron_mail,mail)
 comprobar_hashtag = lambda hashtag: re.match(patron_hashtag,hashtag)
 #Funciones
 
+from datetime import datetime
+
 def validar_fecha(fecha):
-    try: 
-        datetime.strtime(fecha, '%Y-%m-%d')
-        return True 
+    try:
+        # Cambiar strtime por strptime
+        datetime.strptime(fecha, '%Y-%m-%d')
+        return True
     except ValueError:
         return False
+
 
 #Validar numero
 def validar_numero(tipo, min_digitos=1, max_digitos=12):

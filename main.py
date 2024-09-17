@@ -140,7 +140,7 @@ hashtags_dict={
     }for fil in hashtags
 }
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
-"""
+
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
     while True:
@@ -150,7 +150,7 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     likes = random.randint(0, 1000)
     comentarios = random.randint(0, 1000)
     posteos.append([id_post, fecha_publicacion, likes, comentarios])
-"""
+
 
 #Menu principal
 menu=0
@@ -207,13 +207,13 @@ while menu!=-1:
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
         if opcion == 1:
-            crud.agregar_publicacion()
+            crud.agregar_publicacion(posteos)
         elif opcion == 2:
-            crud.eliminar_publicacion()
+            crud.eliminar_publicacion(posteos)
         elif opcion == 3:
-            crud.actualizar_publicacion()
+            crud.actualizar_publicacion(posteos)
         elif opcion == 4: 
-            crud.leer_publicaciones()
+            crud.leer_publicaciones(posteos)
         else:
             print("Opción no válida.")
         
