@@ -80,6 +80,11 @@ while menu != -1:
             #eliminar hashtags?????
             pass
 '''
+'''
+#por si no quieren hacerlo manual esto hace el paso de matriz a diccionario
+keys = usuario[0]
+usuarios_dict = [dict(zip(keys, row)) for row in usuario[1:]]
+'''
 
 """ Notas: 
 
@@ -90,6 +95,7 @@ import crud, metricas, json, validez
 from diseño import __menu__, crud_hashtags, crud_usuarios, estadisticas, crud_publicacion
 
 #Funciones
+"""
 def eleccion():
     matriz_elegida=0
     while matriz_elegida!=1 and matriz_elegida!=2:
@@ -99,10 +105,7 @@ def eleccion():
             print("Por favor ingrese un numero dentro de los solicitados")
         else:     
             return matriz_elegida
-        """
-    except ValueError:
-        print("Error: Por favor ingrese un numero valido")
-"""
+            """
 def ordenamiento(matriz):
     matriz.sort()
     return matriz
@@ -122,12 +125,6 @@ usuarios_dict={             #Crear diccionario
         'Correo':fil[5]
     }for fil in usuario
 }
-print(usuarios_dict)
-'''
-#por si no quieren hacerlo manual esto hace el paso de matriz a diccionario
-keys = usuario[0]
-usuarios_dict = [dict(zip(keys, row)) for row in usuario[1:]]
-'''
 
 hashtags = [["#Feriado",   400 ,  2000 ,  4000],              # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
             ["#UADELabs",  2000,  10000,  50000]
@@ -158,15 +155,23 @@ while menu!=-1:
             crud.agregar_usuario(usuarios_dict)
 
         elif opcion_crud==2:                 #Eliminar
-            usuario_fila=crud.seleccionar_usuario(usuario)
-            crud.eliminar_usuario(usuario_fila,usuario)
+            crud.leer_usuario(usuarios_dict)
+            print('Para eliminar')
+            usuario_fila = validez.validar_id(usuarios_dict)
+            crud.eliminar_usuario(usuario_fila,usuarios_dict)
         
         elif opcion_crud==3:                 #Actualizar
-            opcion_usuario = crud.seleccionar_usuario(usuario)
-            opcion_usuario_elemento = crud.seleccionar_elemento_usuairos(opcion_usuario,usuario)
-            crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuario)
+            crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
+            #Se selecciona el usuario a modificar
+            opcion_usuario = validez.validar_id(usuarios_dict)   
+            
+            #Se selecciona el elemento a modificar
+            opcion_usuario_elemento = crud.seleccionar_elemento_usuairos(opcion_usuario,usuarios_dict) 
+            
+            #Se modifica el elemento
+            crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuarios_dict)
         
-        elif opcion_crud == 4:                           #Leer
+        elif opcion_crud == 4:               #Leer
             crud.leer_usuario(usuarios_dict)
 
     elif menu==2:                #----Hashtag     ----

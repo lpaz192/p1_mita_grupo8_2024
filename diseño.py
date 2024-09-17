@@ -55,13 +55,15 @@ def estadisticas():
     return int(input("Seleccione una opcción: "))
 
 #Diseño de tablas usuario
-parte_superior=lambda: print(f"┌{'─'*4}┬{'─'*20}┬{'─'*8}┬{'─'*8}┬{'─'*8}┬{'─'*40}┐")
-mostrar_usuario=lambda id, datos: print(f"│{id:^4}│{datos['Usuario']:^20}│{datos['Seguidores']:^8}│{datos['Seguidos']:^8}│{datos['Likes']:^8}│{datos['Correo']:^40}│")
-parte_conectiva=lambda: print(f"├{'─'*4}┼{'─'*20}┼{'─'*8}┼{'─'*8}┼{'─'*8}┼{'─'*40}┤")
-parte_inferior=lambda: print(f"└{'─'*4}┴{'─'*20}┴{'─'*8}┴{'─'*8}┴{'─'*8}┴{'─'*40}┘")
+parte_superior=lambda: print(f"┌{'─'*6}┬{'─'*17}┬{'─'*12}┬{'─'*12}┬{'─'*12}┬{'─'*42}┐")
+encabezado_usuarios=lambda: print(f"│ {'Id':<4} │ {'Usuarios':<15} │ {'Seguidores':<10} │ {'Seguidos':<10} │ {'Likes':<10} │ { 'Correos':<40} │")
+mostrar_usuario=lambda id, datos: print(f"│ {id:<4} │ {datos['Usuario']:<15} │ {datos['Seguidores']:<10} │ {datos['Seguidos']:<10} │ {datos['Likes']:<10} │ {datos['Correo']:<40} │")
+parte_conectiva=lambda: print(f"├{'─'*6}┼{'─'*17}┼{'─'*12}┼{'─'*12}┼{'─'*12}┼{'─'*42}┤")
+parte_inferior=lambda:  print(f"└{'─'*6}┴{'─'*17}┴{'─'*12}┴{'─'*12}┴{'─'*12}┴{'─'*42}┘")
 
 #Diseño de tablas hashtag
-parte_superior_hashtag=lambda: print(f"┌{'─'*15}┬{'─'*8}┬{'─'*8}┬{'─'*8}┐")
-mostrar_hashtag=lambda fil: print(f"│{fil[0]:15}│{fil[1]:^8}│{fil[2]:^8}│{fil[3]:^8}│")
-parte_conectiva_hashtag=lambda: print(f"├{'─'*15}┼{'─'*8}┼{'─'*8}┼{'─'*8}┤")
-parte_inferior_hashtag=lambda: print(f"└{'─'*15}┴{'─'*8}┴{'─'*8}┴{'─'*8}┘")
+parte_superior_hashtag=lambda: print(f"┌{'─'*17}┬{'─'*15}┬{'─'*18}┬{'─'*14}┐")
+encabezado_hashtags=lambda: print(f"│ {'Hashtags':<15} │ {'Cant. posteos':<13} │ {'Veces compartido':<16} │ {'Likes':<12} │")
+mostrar_hashtag=lambda fil: print(f"│ {fil[0]:<15} │ {fil[1]:<12}  │ {fil[2]:<12}     │ {fil[3]:<12} │")
+parte_conectiva_hashtag=lambda: print(f"├{'─'*17}┼{'─'*15}┼{'─'*18}┼{'─'*14}┤")
+parte_inferior_hashtag=lambda: print(f"└{'─'*17}┴{'─'*15}┴{'─'*18}┴{'─'*14}┘")

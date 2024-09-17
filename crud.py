@@ -131,28 +131,23 @@ def eliminar(matriz):
 
 import json,validez,re,diseño
 
-#Funciones secundarias de usarios
-def seleccionar_usuario(matriz):
-    while True:
-        print("\n---Usuarios---")
-        leer_usuario(matriz)
-        aux = int(input("Seleccione un usuario con el numero de id: "))
-        if  aux>=0 and aux<=len(matriz[0]):
-            return aux
-        input("Dato invalido")
+#Funciones labmda
+nuevo_id=lambda usuarios: max(usuarios.keys())+1 if usuarios else 1
 
-def seleccionar_elemento_usuairos(id,matriz):
+#Funciones secundarias de usarios
+def seleccionar_elemento_usuairos(id,usuario):
+    print(f"\n---Usuario con ID {id}---")
+    print(f"1. Usuario:      {usuario[id]['Usuario']}")
+    print(f"2. Seguidores:   {usuario[id]['Seguidores']}")
+    print(f"3. Seguidos:     {usuario[id]['Seguidos']}")
+    print(f"4. Likes:        {usuario[id]['Likes']}")
+    print(f"5. Correos:      {usuario[id]['Correo']}")
+    elemento = input("Seleccione un elemento: ")
     while True:
-        print(f"\n---Usuario con ID {matriz[id][0]}---")
-        print(f"1. Usuario  {matriz[id][1]}")
-        print(f"2. Seguidores: {matriz[id][2]}")
-        print(f"3. Seguidos: {matriz[id][3]}")
-        print(f"4. Likes: {matriz[id][4]}")
-        print(f"5. Correos: {matriz[id][5]}")
-        aux = int(input("Seleccione un elemento: "))
-        if aux >0 and aux<=len(matriz[id]):
-            return aux
-        input("Dato invalido")
+        if elemento.isdigit() and int(elemento) > 0 and int(elemento) <= 5:
+            return int(elemento)
+        else:
+            elemento = input("Elemento invalido, por favor ingrese un elemento valido: ")
 
 #Funciones secundarias de Hashtags
 def seleccionar_hashtag(matriz):
@@ -178,80 +173,48 @@ def selccionar_elemento_hashtag(hashtag,matriz):
 
 #Funciones CRUD Usuarios
 def agregar_usuario(usuarios):      #Agregar
-    #Solicitar información
-    nuevo_id= input()
-    nuevo_nombre= input()
-    nuevo_seguidores= input()
-    nuevo_seguido= input()
-    nuevo_likes= input()
-    nuevo_correo= input()
-    
     #Agregar usuario
-    usuarios[nuevo_id] = {
-        'Usuario':nuevo_nombre,
-        'Seguidores':nuevo_seguidores,
-        'Seguidos':nuevo_seguido,
-        'Likes':nuevo_likes,
-        'Correo':nuevo_correo
+    usuarios[nuevo_id(usuarios)] = {
+        'Usuario':validez.validar_usuario(),
+        'Seguidores':validez.validar_numero('seguidores'),
+        'Seguidos':validez.validar_numero('seguidos'),
+        'Likes':validez.validar_numero('likes'),
+        'Correo':validez.validar_mail()
     }
-    """
-    col=0
-    while col<len(usuarios[0]):
-        if col == 1:
-            aux=input(f"Ingrese {x[col]}:")
-            if validez.validar_usuario(aux)==None:
-                aux=input(f"Ingrese un {x[col]} valido: ")
-            else:
-                lista.append(aux)
-                col+=1
-        elif col == 5:
-            aux=input(f"Ingrese {x[col]}:")
-            while validez.validar_mail(aux)==None:
-                aux=input("Ingrese un mail valido: ")
-            lista.append(aux)  
-            col+=1
-        else:   
-            lista.append(int(input(f"Ingrese {x[col]}: ")))
-            col+=1
-    usuarios[len(usuarios)-1].extend(lista)
-"""
+   
 def leer_usuario(usuarios):         #Leer
     for id_usuario, datos_usuario in usuarios.items():
         if id_usuario==1:
             diseño.parte_superior()
+            diseño.encabezado_usuarios()
+            diseño.parte_conectiva()
             diseño.mostrar_usuario(id_usuario,datos_usuario)
             diseño.parte_conectiva()
             
-        elif usuarios[len(usuarios)-1]==fil:
+        elif max(usuarios.keys())==id_usuario:
             diseño.mostrar_usuario(id_usuario, datos_usuario)
             diseño.parte_inferior()
         else:
             diseño.mostrar_usuario(id_usuario, datos_usuario)
             diseño.parte_conectiva()
-    input()
+    input('Oprima enter para continuar ')
 
-def actualizar_usuario(opcion_usuario,opcion_elemento,usuarios):    #Actualizar
-    if opcion_elemento == 0:
-        aux=input("Ingrese el nuevo usuario (entre 3 y 20 caracteres): ")
-        while validez.validar_usuario(aux)==None:
-            aux=input("Ingrese un nuevo usuario valido: ")
+def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    #Actualizar
+    if elemento_elegido == 1:
+        usuarios[opcion_usuario]['Usuario']=validez.validar_usuario()
+
+    elif elemento_elegido == 2:
+        usuarios[opcion_usuario]['Seguidores'] = validez.validar_numero('seguidores')
+        
+    elif elemento_elegido == 3:
+        usuarios[opcion_usuario]['Seguidos'] = validez.validar_numero('seguidos')
     
-    elif opcion_elemento ==1:
-        aux=int(input("Ingrese el nueva cantidad seguidores: "))
-        
-    elif opcion_elemento == 2:
-        aux=int(input("Ingrese la nueva cantidad de seguidos: "))
-        
-    elif opcion_elemento == 3:
-        aux=int(input("Ingrese la nueva cantidad de likes: "))
-       
+    elif elemento_elegido == 4:
+        usuarios[opcion_usuario]['Likes'] = validez.validar_numero('likes')
     else:
-        aux=input("Ingrese el nuevo correo: ")
-        while validez.validar_mail(aux)==None:
-            aux=input("Ingrese un mail valido: ")
-    usuarios[opcion_usuario][opcion_elemento]=aux
+        usuarios[opcion_usuario]['Correo'] = validez.validar_mail()
 
-def eliminar_usuario(id,usuarios):
+def eliminar_usuario(id,usuarios): #Eliminar
     usuarios.pop(id)
 
 #Funciones CRUD Hashtags
@@ -259,6 +222,9 @@ def leer_hashtag(hashtag):         #Leer
     for fil in hashtag:
         if hashtag[0]==fil:
             diseño.parte_superior_hashtag()
+            diseño.encabezado_hashtags()
+            diseño.parte_conectiva_hashtag()
+            
             diseño.mostrar_hashtag(fil)
             diseño.parte_conectiva_hashtag()
         elif hashtag[len(hashtag)-1]==fil:
