@@ -253,6 +253,12 @@ def eliminar_hashtag(hashtag_eliminar,hashtag_dict):
 def agregar_publicacion(posteos):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)
 
+    #para que no hayan dos con el mismo id
+    for posteo in posteos:
+        if posteo[0] == id_post:
+            print("Error: Ya existe una publicación con este ID.")
+            return
+
     while True:
         fecha_publicacion = input("Ingrese la fecha de la publicación (YYYY-MM-DD): ")
         if validez.validar_fecha(fecha_publicacion):
@@ -280,6 +286,12 @@ def eliminar_publicacion(posteos):
     print("ID de publicación no encontrado.")
 
 def actualizar_publicacion(posteos):
+
+    print("Publicaciones disponibles:")
+    for posteo in posteos:
+        print(f"ID: {posteo[0]}, Fecha: {posteo[1]}, Likes: {posteo[2]}, Comentarios: {posteo[3]}")
+
+
     id_post = input("Ingrese el ID de la publicación a actualizar: ")
     
     index = -1
