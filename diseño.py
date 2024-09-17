@@ -45,6 +45,15 @@ def crud_publicacion():
     print("-1. Volver al menu principal")
     return int(input("Seleccione una opcción: "))
 
+#Diseño Ordenamiento
+def ordenamiento():
+    print("\n--- Ordenar ---")
+    print("1. Ordenar usuarios")
+    print("2. Ordenar hashtags")
+    print("3. Ordenar publicaciones")
+    print("-1. Volver al menú principal")
+    return int(input("Seleccione una opción: "))
+
 #Diseño Estadisticas
 def estadisticas():
     print("\n---Estadisticas---")

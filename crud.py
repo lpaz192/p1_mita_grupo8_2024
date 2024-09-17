@@ -379,3 +379,55 @@ def leer_publicaciones(posteos):
         imprimir_posteos(posteos)
     else:
         print("Opción no válida.")
+
+#ORDENAMIENTO PUBLICACIONES
+
+def ordenar_publicaciones(posteos):
+    print("\n--- Ordenar Publicaciones ---")
+    print("1. Ordenar por ID")
+    print("2. Ordenar por cantidad de likes")
+    print("-1. Volver al menú principal")
+    
+    opcion = int(input("Seleccione una opción: "))
+    
+    if opcion == 1:
+        ordenar_por_id(posteos)
+    elif opcion == 2:
+        ordenar_por_likes(posteos)
+    elif opcion == -1:
+        return
+    else:
+        print("Opción no válida.")
+
+
+def ordenar_por_id(posteos):
+    print("Elija el orden de clasificación por ID:")
+    print("1. De menor a mayor")
+    print("2. De mayor a menor")
+    opcion = int(input("Seleccione una opción: "))
+
+    if opcion == 1:
+        posteos.sort(key=lambda x: x[0])
+    elif opcion == 2:
+        posteos.sort(key=lambda x: x[0], reverse=True)
+    else:
+        print("Opción no válida.")
+        return
+
+    imprimir_posteos(posteos)  
+
+def ordenar_por_likes(posteos):
+    print("Elija el orden de clasificación por cantidad de likes:")
+    print("1. De menor a mayor")
+    print("2. De mayor a menor")
+    opcion = int(input("Seleccione una opción: "))
+
+    if opcion == 1:
+        posteos.sort(key=lambda x: x[2])
+    elif opcion == 2:
+        posteos.sort(key=lambda x: x[2], reverse=True)
+    else:
+        print("Opción no válida.")
+        return
+
+    imprimir_posteos(posteos)  
