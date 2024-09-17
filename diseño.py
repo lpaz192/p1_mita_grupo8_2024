@@ -66,3 +66,10 @@ encabezado_hashtags=lambda:          print(f"│ {'Hashtags':<15} │ {'Cant. po
 mostrar_hashtag=lambda hashtag, fil: print(f"│ {hashtag:<15} │ {fil['Cant. posteos']:<13} │ {fil['Veces compartido']:<16} │ {fil['Likes']:<10} │")
 parte_conectiva_hashtag=lambda: print(f"├{'─'*17}┼{'─'*15}┼{'─'*18}┼{'─'*12}┤")
 parte_inferior_hashtag=lambda: print(f"└{'─'*17}┴{'─'*15}┴{'─'*18}┴{'─'*12}┘")
+
+#Diseño de tablas publicaciones 
+parte_superior_publicacion = lambda: print(f"┌{'─'*12}┬{'─'*20}┬{'─'*10}┬{'─'*15}┐")
+encabezado_publicacion = lambda: print(f"│ {'ID':<12} │ {'Fecha':<20} │ {'Likes':<10} │ {'Comentarios':<15} │")
+mostrar_publicacion = lambda id_post, fecha, likes, comentarios: print(f"│ {id_post:<12} │ {fecha:<20} │ {likes:<10} │ {comentarios:<15} │")
+parte_conectiva_publicacion = lambda: print(f"├{'─'*12}┼{'─'*20}┼{'─'*10}┼{'─'*15}┤")
+parte_inferior_publicacion = lambda: print(f"└{'─'*12}┴{'─'*20}┴{'─'*10}┴{'─'*15}┘")

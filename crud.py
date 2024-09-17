@@ -250,6 +250,24 @@ def actualizar_hashtag(opcion_hashtag,elemento_elegido,hashtag_dict):
 def eliminar_hashtag(hashtag_eliminar,hashtag_dict):
     hashtag_dict.pop(hashtag_eliminar)
 #Funciones CRUD Posteos
+
+def imprimir_posteos(posteos):
+    print("Publicaciones disponibles:")
+    
+    diseño.parte_superior_publicacion()
+    diseño.encabezado_publicacion()
+    
+    for i in range(len(posteos)):
+        if i == 0:
+            diseño.parte_conectiva_publicacion()
+        elif i == len(posteos) - 1:
+            diseño.mostrar_publicacion(*posteos[i])
+            diseño.parte_inferior_publicacion()
+        else:
+            diseño.parte_conectiva_publicacion()
+            diseño.mostrar_publicacion(*posteos[i])
+
+
 def agregar_publicacion(posteos):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)
 
@@ -287,10 +305,7 @@ def eliminar_publicacion(posteos):
 
 def actualizar_publicacion(posteos):
 
-    print("Publicaciones disponibles:")
-    for posteo in posteos:
-        print(f"ID: {posteo[0]}, Fecha: {posteo[1]}, Likes: {posteo[2]}, Comentarios: {posteo[3]}")
-
+    imprimir_posteos(posteos)
 
     id_post = input("Ingrese el ID de la publicación a actualizar: ")
     
@@ -358,8 +373,6 @@ def leer_publicaciones(posteos):
             print("ID de publicación no encontrado.")
     
     elif opcion == "2":
-        print("\n---Lista de Publicaciones---")
-        for posteo in posteos:
-            print("ID:", posteo[0], "Fecha:", posteo[1], "Likes:", posteo[2], "Comentarios:", posteo[3])
+        imprimir_posteos(posteos)
     else:
         print("Opción no válida.")
