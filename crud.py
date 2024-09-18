@@ -315,7 +315,7 @@ def actualizar_publicacion(posteos, usuarios):
 
     imprimir_posteos(posteos)
 
-    id_post = input("Ingrese el ID de la publicación a actualizar: ")
+    id_post = input("Ingrese el ID de la publicación a actualizar: ").zfill(3)
     
     index = -1
     for i in range(len(posteos)):
