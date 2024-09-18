@@ -257,10 +257,8 @@ def imprimir_posteos(posteos):
     diseño.parte_superior_publicacion()
     diseño.encabezado_publicacion()
     
-    for i in range(len(posteos)):
-        if i == 0:
-            diseño.parte_conectiva_publicacion()
-        elif i == len(posteos) - 1:
+    for i in range(1, len(posteos)):  # Comienza desde el índice 1
+        if i == len(posteos) - 1:
             diseño.mostrar_publicacion(*posteos[i])
             diseño.parte_inferior_publicacion()
         else:
@@ -406,13 +404,19 @@ def ordenar_por_id(posteos):
     print("2. De mayor a menor")
     opcion = int(input("Seleccione una opción: "))
 
+    encabezado = posteos[0]  
+    datos = posteos[1:] 
+
+
     if opcion == 1:
-        posteos.sort(key=lambda x: x[0])
+        datos.sort(key=lambda x: int(x[0])) 
     elif opcion == 2:
-        posteos.sort(key=lambda x: x[0], reverse=True)
+        datos.sort(key=lambda x: int(x[0]), reverse=True)
     else:
         print("Opción no válida.")
         return
+
+    posteos = [encabezado] + datos
 
     imprimir_posteos(posteos)  
 
@@ -422,12 +426,20 @@ def ordenar_por_likes(posteos):
     print("2. De mayor a menor")
     opcion = int(input("Seleccione una opción: "))
 
+    encabezado = posteos[0]
+    datos = posteos[1:]
+
+    for post in datos:
+        post[2] = int(post[2])
+
     if opcion == 1:
-        posteos.sort(key=lambda x: x[2])
+        datos.sort(key=lambda x: x[2]) 
     elif opcion == 2:
-        posteos.sort(key=lambda x: x[2], reverse=True)
+        datos.sort(key=lambda x: x[2], reverse=True)
     else:
         print("Opción no válida.")
         return
+
+    posteos = [encabezado] + datos
 
     imprimir_posteos(posteos)  

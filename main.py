@@ -106,9 +106,6 @@ def eleccion():
         else:     
             return matriz_elegida
             """
-def ordenamiento(matriz):
-    matriz.sort()
-    return matriz
 
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
