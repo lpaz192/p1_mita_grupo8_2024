@@ -10,12 +10,20 @@ from diseño import __menu__, crud_hashtags, crud_usuarios, estadisticas, crud_p
 
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
-usuario = [[1, "Martinn",     234,   200,   100,   "martincho@outlook.com"    ],
-           [2, "Diego.lopez",  2000,   800,   1000,  "diegolopez@gmail.com"     ], 
-           [3, "carlaa_",     5000,   500,   8000,  "carlaguilar@gmail.com"    ],   
-           [4, "Marcediaz",     200,   1000,  100,   "marcelodiaz12@hotmail.com"],
-           [5, "gasparlab",     600,   300,  200,   "gasparlabastie@gmail.com"]
-           ]
+usuario = [
+    [1,  "Martinn",         234,   200,   100,    "martincho@outlook.com"    ],
+    [2,  "Diego.lopez",     2000,  800,   1000,   "diegolopez@gmail.com"     ], 
+    [3,  "carlaa_",         5000,  500,   8000,   "carlaguilar@gmail.com"    ],   
+    [4,  "Marcediaz",       200,   1000,  100,    "marcelodiaz12@hotmail.com"],
+    [5,  "gasparlab",       600,   300,   200,    "gasparlabastie@gmail.com" ],
+    [6,  "maria.jones",     1200,  450,   500,    "mjones@hotmail.com"       ],
+    [7,  "Lucas12",         1800,  750,   900,    "lucas12@domain.com"       ],
+    [8,  "AnaPerez",        2500,  1100,  1200,   "anaperez@domain.org"      ],
+    [9,  "JuanP",           1500,  400,   850,    "juanp@correo.com"         ],
+    [10, "CamiloG_",        800,   600,   300,    "camilogomez@gmail.com"    ],
+    [11, "nati.fernandez",  1700,  1000,  1200,   "nati_fernandez@yahoo.com" ],
+    [12, "David_89",        3500,  1500,  2500,   "david89@gmail.com"        ]
+]
   
 usuarios_dict={                #Crear diccionario usuarios
     fil[0]:{
@@ -27,12 +35,21 @@ usuarios_dict={                #Crear diccionario usuarios
     }for fil in usuario
 }
 
-hashtags = [["#Feriado",     400 ,  2000 ,  6000  ],   # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
-            ["#UADELabs",    200,   1500,   5000  ],
-            ["#UADE",        3000,  50000,  200000],
-            ["#Progra1",     500,   3000,   80000 ],
-            ["#ArteDigital", 2000,  40000,  100000],
-            ]  
+# 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
+hashtags = [
+    ["#Feriado",           400,   2000,   6000  ],   
+    ["#UADELabs",          200,   1500,   5000  ],
+    ["#UADE",              3000,  50000,  200000],
+    ["#Progra1",           500,   3000,   80000 ],
+    ["#ArteDigital",       2000,  40000,  100000],
+    ["#FitnessGoals",      1500,  10000,  45000 ],
+    ["#VueltaAlCole",      800,   5000,   20000 ],
+    ["#TechNews",          600,   4000,   15000 ],
+    ["#CineFan",           1200,  25000,  70000 ],
+    ["#Recetas",           500,   3000,   12000 ],
+    ["#Viajes2024",        2200,  60000,  250000]
+]
+
                                     
 hashtags_dict={                #Crear diccionario hashtags
     fil[0]:{
@@ -41,8 +58,9 @@ hashtags_dict={                #Crear diccionario hashtags
         'Likes':fil[3]
     }for fil in hashtags
 }
-posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario"]]
+posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario",'Hashtag']]
 
+hashtags_index= list(hashtags_dict.keys())
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
     while True:
@@ -52,12 +70,13 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     likes = random.randint(0, 10000)
     comentarios = random.randint(0, 1000)
 
+    hashtags_id=hashtags_index[random.randint(0,len(hashtags_index)-1)]
     ids_usuarios = list(usuarios_dict.keys())
     id_usuario = random.choice(ids_usuarios)
     datos_usuario = usuarios_dict[id_usuario]
     nombre_usuario = datos_usuario['Usuario']
 
-    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario])
+    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario,hashtags_id])
 
 
 #Menu principal
@@ -131,7 +150,7 @@ while menu!=-1:
     
     elif menu==4:  # ---- Ordenar ----
         opcion = ordenamiento()  
-        if opcion == 3:
+        if opcion == 1:
             crud.ordenar_publicaciones(posteos) 
 
 
