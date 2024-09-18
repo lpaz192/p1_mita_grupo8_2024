@@ -1,9 +1,9 @@
 import re
 from datetime import datetime
 
-patron_mail = r"^[a-zA-Z0-9_]{2,15}@[a-zA-Z]{2,10}\.[a-zA-Z]{2,5}$"
-patron_usuario = r"^[a-zA-Z_0-9]{2,17}$"
-patron_hashtag = r'^#[a-zA-Z0-9_.@!()/&%$]{1,20}$'
+patron_mail = r"^[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+patron_usuario = r"^[a-zA-Z_0-9]{2,15}$"
+patron_hashtag = r'^#[a-zA-Z0-9_.@!()/&%$]{1,15}$'
 
 #Funciones lambda
 comprobar_usuario= lambda nombre:re.match(patron_usuario,nombre)

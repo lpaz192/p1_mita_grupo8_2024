@@ -277,7 +277,6 @@ def leer_publicaciones(posteos):
         print("Opción no válida.")
 
 #ORDENAMIENTO PUBLICACIONES
-
 def ordenar_publicaciones(posteos):
     print("\n--- Ordenar Publicaciones ---")
     print("1. Ordenar por ID")
