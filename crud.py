@@ -266,7 +266,7 @@ def imprimir_posteos(posteos):
             diseño.mostrar_publicacion(*posteos[i])
 
 
-def agregar_publicacion(posteos):
+def agregar_publicacion(posteos, usuarios):
     id_post = input("Ingrese el ID de la publicación: ").zfill(3)
 
     #para que no hayan dos con el mismo id
@@ -286,7 +286,14 @@ def agregar_publicacion(posteos):
     likes = int(input("Ingrese la cantidad de likes: "))
     comentarios = int(input("Ingrese la cantidad de comentarios: "))
     
-    posteos.append([id_post, fecha_publicacion, likes, comentarios])
+    id_usuario = input("Ingrese el ID del usuario: ").zfill(3)
+    if id_usuario not in usuarios:
+        print(f"Error: El ID de usuario {id_usuario} no existe.")
+        return
+
+    usuario = usuarios[id_usuario]
+    
+    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario])
     print("Publicación agregada exitosamente.")
 
 def eliminar_publicacion(posteos):
@@ -304,7 +311,7 @@ def eliminar_publicacion(posteos):
     #pero si no lo encuentra no hace return y tira la alerta
     print("ID de publicación no encontrado.")
 
-def actualizar_publicacion(posteos):
+def actualizar_publicacion(posteos, usuarios):
 
     imprimir_posteos(posteos)
 
@@ -323,7 +330,8 @@ def actualizar_publicacion(posteos):
     print("1. Fecha de publicación")
     print("2. Likes")
     print("3. Comentarios")
-    print("4. Modificar toda la publicación")
+    print("4. ID de Usuario")
+    print("5. Modificar toda la publicación")
     opcion = int(input("Ingrese su opción: "))
 
     if opcion == 1:
@@ -339,8 +347,19 @@ def actualizar_publicacion(posteos):
 
     elif opcion == 3:
         posteos[index][3] = int(input("Ingrese la nueva cantidad de comentarios: "))
-
     elif opcion == 4:
+        # Actualizar el ID de usuario
+        id_usuario = diseño.validar_id(usuarios)
+        # Verificar que el ID de usuario existe en el diccionario
+        if id_usuario in usuarios:
+            usuario = usuarios[id_usuario]
+            posteos[index][4] = id_usuario
+            posteos[index][5] = usuario
+        else:
+            print("ID de usuario no encontrado en el diccionario.")
+            return
+        
+    elif opcion == 5:
         nueva_fecha = input("Ingrese la nueva fecha de la publicación (YYYY-MM-DD): ")
 
         #si la validacion de la fecha no es True o sea no esta bien
@@ -349,7 +368,13 @@ def actualizar_publicacion(posteos):
             return #para todo y volveria al principio
         nuevo_likes = int(input("Ingrese la nueva cantidad de likes: "))
         nuevo_comentarios = int(input("Ingrese la nueva cantidad de comentarios: "))
-        posteos[index] = [id_post, nueva_fecha, nuevo_likes, nuevo_comentarios]
+        id_usuario = input("Ingrese el ID del usuario: ")
+        if int(id_usuario) in usuarios:
+            usuario = usuarios[int(id_usuario)]
+            posteos[index] = [id_post, nueva_fecha, nuevo_likes, nuevo_comentarios, id_usuario, usuario]
+        else:
+            print("ID de usuario no encontrado en el diccionario.")
+            return
 
     else:
         print("Opción no válida.")

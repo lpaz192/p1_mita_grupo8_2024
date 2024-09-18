@@ -136,7 +136,7 @@ hashtags_dict={
         'Likes':fil[3]
     }for fil in hashtags
 }
-posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
+posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario"]]
 
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
@@ -146,7 +146,13 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
             break
     likes = random.randint(0, 1000)
     comentarios = random.randint(0, 1000)
-    posteos.append([id_post, fecha_publicacion, likes, comentarios])
+
+    ids_usuarios = list(usuarios_dict.keys())
+    id_usuario = random.choice(ids_usuarios)
+    datos_usuario = usuarios_dict[id_usuario]
+    nombre_usuario = datos_usuario['Usuario']
+
+    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario])
 
 
 #Menu principal
@@ -204,11 +210,11 @@ while menu!=-1:
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
         if opcion == 1:
-            crud.agregar_publicacion(posteos)
+            crud.agregar_publicacion(posteos, usuarios_dict)
         elif opcion == 2:
             crud.eliminar_publicacion(posteos)
         elif opcion == 3:
-            crud.actualizar_publicacion(posteos)
+            crud.actualizar_publicacion(posteos, usuarios_dict)
         elif opcion == 4: 
             crud.leer_publicaciones(posteos)
         else:
