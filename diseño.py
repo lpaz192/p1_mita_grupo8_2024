@@ -77,8 +77,8 @@ parte_conectiva_hashtag=lambda: print(f"├{'─'*17}┼{'─'*15}┼{'─'*18}�
 parte_inferior_hashtag=lambda: print(f"└{'─'*17}┴{'─'*15}┴{'─'*18}┴{'─'*12}┘")
 
 #Diseño de tablas publicaciones 
-parte_superior_publicacion = lambda: print(f"┌{'─'*12}┬{'─'*20}┬{'─'*10}┬{'─'*15}┬{'─'*25}┬{'─'*12}┐")
-encabezado_publicacion = lambda: print(f"│ {'ID':<10} │ {'Fecha':<18} │ {'Likes':<8} │ {'Comentarios':<13} │ {'ID Usuario':<12} │ {'Usuario':<20} │")
+parte_superior_publicacion = lambda: print(f"┌{'─'*12}┬{'─'*20}┬{'─'*10}┬{'─'*15}┬{'─'*12}┬{'─'*20}┐")
+encabezado_publicacion = lambda: print(f"│ {'ID':<10} │ {'Fecha':<18} │ {'Likes':<8} │ {'Comentarios':<13} │ {'ID Usuario':<10} │ {'Usuario':<18} │")
 mostrar_publicacion = lambda id_post, fecha, likes, comentarios, id_usuario, usuario: print(f"│ {id_post:<10} │ {fecha:<18} │ {likes:<8} │ {comentarios:<13} │ {id_usuario:<10} │ {usuario:<18} │")
 parte_conectiva_publicacion = lambda: print(f"├{'─'*12}┼{'─'*20}┼{'─'*10}┼{'─'*15}┼{'─'*12}┼{'─'*20}┤")
 parte_inferior_publicacion = lambda: print(f"└{'─'*12}┴{'─'*20}┴{'─'*10}┴{'─'*15}┴{'─'*12}┴{'─'*20}┘")
