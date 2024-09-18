@@ -134,10 +134,12 @@ def imprimir_posteos(posteos):
     
     for i in range(1, len(posteos)):  # Comienza desde el índice 1
         if i == len(posteos) - 1:
-            diseño.mostrar_publicacion(*posteos[i])
-        else:
             diseño.parte_conectiva_publicacion()
             diseño.mostrar_publicacion(*posteos[i])
+        else:   
+            diseño.parte_conectiva_publicacion()
+            diseño.mostrar_publicacion(*posteos[i])
+            
     diseño.parte_inferior_publicacion()
 
 def agregar_publicacion(posteos, usuarios):
@@ -160,7 +162,7 @@ def agregar_publicacion(posteos, usuarios):
     likes = int(input("Ingrese la cantidad de likes: "))
     comentarios = int(input("Ingrese la cantidad de comentarios: "))
     
-    id_usuario = input("Ingrese el ID del usuario: ").zfill(3)
+    id_usuario = input("Ingrese el ID del usuario: ")
     if id_usuario not in usuarios:
         print(f"Error: El ID de usuario {id_usuario} no existe.")
         return
