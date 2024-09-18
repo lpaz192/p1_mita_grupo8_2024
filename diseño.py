@@ -1,10 +1,10 @@
 # Diseño menu principal
 def __menu__():
     print("\n---Menu Principal---")
-    print("1.  CRUD usuarios")
-    print("2.  CRUD hastags")
-    print("3.  CRUD publicación")
-    print("4.  Para ordenar")
+    print("1.  Gestion de usuarios")
+    print("2.  Gestion de hastags")
+    print("3.  Gestion de publicaciones")
+    print("4.  Ordenamiento")
     print("5.  Estadisticas")
     print("-1. Para cancelar")
     menu = input("Seleccione una opcción: ")
@@ -20,7 +20,7 @@ def crud_usuarios():
     aux=0
     while aux==0 or aux>4:
         if aux==0 or aux>4:
-            print("\n---CRUD Usuarios---")
+            print("\n---Gestion de Usuarios---")
             print("1. Agregar usuario")
             print("2. Eliminar usuario")
             print("3. Actualizar usuario")
@@ -33,7 +33,7 @@ def crud_usuarios():
    
 #Diseño CRUD Hashtags
 def crud_hashtags():
-    print("\n---CRUD hashtags---")
+    print("\n---Gestion de hashtags---")
     print("1. Agregar hashtags")
     print("2. Eliminar hashtags")
     print("3. Actualizar hashtags")
@@ -43,7 +43,7 @@ def crud_hashtags():
 
 #Diseño CRUD Publicacion
 def crud_publicacion():
-    print("\n---CRUD Publicacion---")
+    print("\n---Gestion de Publicaciones---")
     print("1. Agregar publicacion")
     print("2. Eliminar publicacion")
     print("3. Actualizar publicacion")

@@ -91,6 +91,7 @@ while menu!=-1:
         
         elif opcion_crud == 4:               #Leer
             crud.leer_usuario(usuarios_dict)
+            input('Oprima enter para continuar ')
 
     elif menu==2:                #----Hashtag     ----
         opcion_crud = crud_hashtags()
@@ -112,6 +113,7 @@ while menu!=-1:
 
         elif opcion_crud == 4:                        #Leer
             crud.leer_hashtag(hashtags_dict)
+            input('Oprima enter para continuar ')
         
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
@@ -129,14 +131,8 @@ while menu!=-1:
     
     elif menu==4:  # ---- Ordenar ----
         opcion = ordenamiento()  
-        if opcion == 1:
-            print("ordenar usuarios ")
-        elif opcion == 2:
-            print("ordenar hashtags")
-        elif opcion == 3:
+        if opcion == 3:
             crud.ordenar_publicaciones(posteos) 
-        else:
-            print("Opción no válida.")
 
 
     elif menu==5:                #----Estadisticas----

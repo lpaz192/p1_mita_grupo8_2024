@@ -60,7 +60,6 @@ def leer_usuario(usuarios):         #Leer
             diseño.parte_conectiva()
             diseño.mostrar_usuario(id_usuario, datos_usuario)
     diseño.parte_inferior()
-    input('Oprima enter para continuar. ')
 
 def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    #Actualizar
     #Actualizar Usuario
@@ -108,7 +107,6 @@ def leer_hashtag(hashtags_dict):
             diseño.parte_conectiva_hashtag()
             diseño.mostrar_hashtag(hashtag[i], hashtags_dict[hashtag[i]])
     diseño.parte_inferior_hashtag()
-    input('Oprima enter para continuar ')
 
 def actualizar_hashtag(opcion_hashtag,elemento_elegido,hashtag_dict):
     if elemento_elegido == 1:
@@ -162,12 +160,12 @@ def agregar_publicacion(posteos, usuarios):
     likes = int(input("Ingrese la cantidad de likes: "))
     comentarios = int(input("Ingrese la cantidad de comentarios: "))
     
-    id_usuario = input("Ingrese el ID del usuario: ")
+    id_usuario = validez.validar_id(usuarios)
     if id_usuario not in usuarios:
         print(f"Error: El ID de usuario {id_usuario} no existe.")
         return
 
-    usuario = usuarios[id_usuario]
+    usuario = usuarios[id_usuario]['Usuario']
     
     posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario])
     print("Publicación agregada exitosamente.")
@@ -217,7 +215,6 @@ def actualizar_publicacion(posteos, usuarios):
         else:
             print("Fecha inválida.")
             return
-
     elif opcion == 2:
         posteos[index][2] = int(input("Ingrese la nueva cantidad de likes: "))
 
@@ -275,6 +272,7 @@ def leer_publicaciones(posteos):
     
     elif opcion == "2":
         imprimir_posteos(posteos)
+        input('Oprima enter para continuar ')
     else:
         print("Opción no válida.")
 
