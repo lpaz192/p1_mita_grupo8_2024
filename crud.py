@@ -262,7 +262,7 @@ def leer_publicaciones(posteos):
     opcion = input("Seleccione una opción: ")
 
     if opcion == "1":
-        id_post = input("Ingrese el ID de la publicación que desea ver: ")
+        id_post = input("Ingrese el ID de la publicación que desea ver: ").zfill(3)
         encontrado = False
         for posteo in posteos:
             if posteo[0] == id_post:
