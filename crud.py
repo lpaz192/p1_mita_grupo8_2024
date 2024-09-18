@@ -223,7 +223,7 @@ def actualizar_publicacion(posteos, usuarios):
         posteos[index][3] = int(input("Ingrese la nueva cantidad de comentarios: "))
     elif opcion == 4:
         # Actualizar el ID de usuario
-        id_usuario = diseño.validar_id(usuarios)
+        id_usuario = int(input("Ingrese el ID del usuario: "))
         # Verificar que el ID de usuario existe en el diccionario
         if id_usuario in usuarios:
             usuario = usuarios[id_usuario]
