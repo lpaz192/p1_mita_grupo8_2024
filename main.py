@@ -106,6 +106,7 @@ def eleccion():
         else:     
             return matriz_elegida
             """
+            
 def ordenamiento(matriz):
     matriz.sort()
     return matriz
@@ -218,7 +219,7 @@ while menu!=-1:
             print("Opción no válida.")
         
     
-    elif menu == 4:  # ---- Ordenar ----
+    elif menu==4:  # ---- Ordenar ----
         opcion = ordenamiento()  
         if opcion == 1:
             print("ordenar usuarios ")
