@@ -7,7 +7,13 @@ def __menu__():
     print("4.  Para ordenar")
     print("5.  Estadisticas")
     print("-1. Para cancelar")
-    return int(input("Seleccione una opcción: "))
+    menu = input("Seleccione una opcción: ")
+    while True:
+        if menu.isdigit():
+            if int(menu)>=1 and int(menu)<=5 or int(menu)==-1:
+                return int(menu)
+        menu=input('Opcion no valida, por favor ingrese un numero dentro del rango solicitado: ')
+        
 
 #Diseño CRUD Usuarios
 def crud_usuarios():
@@ -63,22 +69,22 @@ def estadisticas():
     return int(input("Seleccione una opcción: "))
 
 #Diseño de tablas usuario
-parte_superior=lambda: print(f"┌{'─'*6}┬{'─'*17}┬{'─'*12}┬{'─'*12}┬{'─'*12}┬{'─'*32}┐")
+parte_superior=lambda: print(f"\n┌{'─'*6}┬{'─'*17}┬{'─'*12}┬{'─'*12}┬{'─'*12}┬{'─'*32}┐")
 encabezado_usuarios=lambda: print(f"│ {'Id':<4} │ {'Usuarios':<15} │ {'Seguidores':<10} │ {'Seguidos':<10} │ {'Likes':<10} │ { 'Correos':<30} │")
-mostrar_usuario=lambda id, datos: print(f"│ {id:<4} │ {datos['Usuario']:<15} │ {datos['Seguidores']:<10} │ {datos['Seguidos']:<10} │ {datos['Likes']:<10} │ {datos['Correo']:<30} │")
+mostrar_usuario=lambda id, datos: print(f"│ {str(id).zfill(4):<4} │ {datos['Usuario']:<15} │ {datos['Seguidores']:<10} │ {datos['Seguidos']:<10} │ {datos['Likes']:<10} │ {datos['Correo']:<30} │")
 parte_conectiva=lambda: print(f"├{'─'*6}┼{'─'*17}┼{'─'*12}┼{'─'*12}┼{'─'*12}┼{'─'*32}┤")
 parte_inferior=lambda:  print(f"└{'─'*6}┴{'─'*17}┴{'─'*12}┴{'─'*12}┴{'─'*12}┴{'─'*32}┘")
 
 #Diseño de tablas hashtag
-parte_superior_hashtag=lambda: print(f"┌{'─'*17}┬{'─'*15}┬{'─'*18}┬{'─'*12}┐")
+parte_superior_hashtag=lambda: print(f"\n┌{'─'*17}┬{'─'*15}┬{'─'*18}┬{'─'*12}┐")
 encabezado_hashtags=lambda:          print(f"│ {'Hashtags':<15} │ {'Cant. posteos':<13} │ {'Veces compartido':<16} │ {'Likes':<10} │")
 mostrar_hashtag=lambda hashtag, fil: print(f"│ {hashtag:<15} │ {fil['Cant. posteos']:<13} │ {fil['Veces compartido']:<16} │ {fil['Likes']:<10} │")
 parte_conectiva_hashtag=lambda: print(f"├{'─'*17}┼{'─'*15}┼{'─'*18}┼{'─'*12}┤")
 parte_inferior_hashtag=lambda: print(f"└{'─'*17}┴{'─'*15}┴{'─'*18}┴{'─'*12}┘")
 
 #Diseño de tablas publicaciones 
-parte_superior_publicacion = lambda: print(f"┌{'─'*12}┬{'─'*20}┬{'─'*10}┬{'─'*15}┐")
-encabezado_publicacion = lambda: print(f"│ {'ID':<10} │ {'Fecha':<18} │ {'Likes':<8} │ {'Comentarios':<13} │")
-mostrar_publicacion = lambda id_post, fecha, likes, comentarios: print(f"│ {id_post:<10} │ {fecha:<18} │ {likes:<8} │ {comentarios:<13} │")
-parte_conectiva_publicacion = lambda: print(f"├{'─'*12}┼{'─'*20}┼{'─'*10}┼{'─'*15}┤")
-parte_inferior_publicacion = lambda: print(f"└{'─'*12}┴{'─'*20}┴{'─'*10}┴{'─'*15}┘")
+parte_superior_publicacion = lambda: print(f"\n┌{'─'*6}┬{'─'*17}┬{'─'*17}┬{'─'*12}┬{'─'*10}┬{'─'*13}┐")
+encabezado_publicacion = lambda: print(f"│ {'ID':<4} │ {'Usuario':<15} │ {'Hashtag':<15} │ {'Fecha':<10} │ {'Likes':<8} │ {'Comentarios':<11} │")
+mostrar_publicacion = lambda id_post, usuario, hashtag, fecha, likes, comentarios: print(f"│ {id_post:<4} │ {usuario:<15} │ {hashtag:<15} │ {fecha:<10} │ {likes:<8} │ {comentarios:<11} │")
+parte_conectiva_publicacion = lambda: print(f"├{'─'*6}┼{'─'*17}┼{'─'*17}┼{'─'*12}┼{'─'*10}┼{'─'*13}┤")
+parte_inferior_publicacion = lambda: print(f"└{'─'*6}┴{'─'*17}┴{'─'*17}┴{'─'*12}┴{'─'*10}┴{'─'*13}┘")
