@@ -115,13 +115,13 @@ while menu!=-1:
         
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
-        if opcion == 1:
+        if opcion == 1:          #Agregar
             crud.agregar_publicacion(posteos, usuarios_dict)
-        elif opcion == 2:
+        elif opcion == 2:        #Eliminar
             crud.eliminar_publicacion(posteos)
-        elif opcion == 3:
+        elif opcion == 3:        #Actualizar
             crud.actualizar_publicacion(posteos, usuarios_dict)
-        elif opcion == 4: 
+        elif opcion == 4:        #Leer
             crud.leer_publicaciones(posteos)
         else:
             print("Opción no válida.")
