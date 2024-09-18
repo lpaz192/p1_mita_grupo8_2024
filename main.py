@@ -41,9 +41,7 @@ hashtags_dict={                #Crear diccionario hashtags
         'Likes':fil[3]
     }for fil in hashtags
 }
-
-posteos = [["ID Post", "ID usuario", "Hashtag", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios"]]
-lista_hashtag = list(hashtags_dict.keys())
+posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario"]]
 
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
@@ -54,13 +52,12 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     likes = random.randint(0, 10000)
     comentarios = random.randint(0, 1000)
 
-    lista_id = list(usuarios_dict.keys())
-    lista_hashtag = list(hashtags_dict.keys())
+    ids_usuarios = list(usuarios_dict.keys())
+    id_usuario = random.choice(ids_usuarios)
+    datos_usuario = usuarios_dict[id_usuario]
+    nombre_usuario = datos_usuario['Usuario']
 
-    usuario_posteo = usuarios_dict[lista_id[random.randint(0,len(lista_id)-1)]]['Usuario']
-    hashtag_posteo = lista_hashtag[random.randint(0,len(lista_hashtag)-1)]
-
-    posteos.append([id_post, usuario_posteo, hashtag_posteo, fecha_publicacion, likes, comentarios])
+    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario])
 
 
 #Menu principal
@@ -76,13 +73,14 @@ while menu!=-1:
 
         elif opcion_crud==2:                 #Eliminar
             crud.leer_usuario(usuarios_dict)
-            print("\nIngrese el usuario que desee eliminar",end="")
+            print("\nPara eliminar ",end="")
             usuario_fila = validez.validar_id(usuarios_dict)
             crud.eliminar_usuario(usuario_fila,usuarios_dict)
         
         elif opcion_crud==3:                 #Actualizar
             crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
             #Se selecciona el usuario a modificar
+            print("\nPara actualizar ",end="")
             opcion_usuario = validez.validar_id(usuarios_dict)   
             
             #Se selecciona el elemento a modificar
@@ -101,7 +99,7 @@ while menu!=-1:
 
         elif opcion_crud==2:              #Eliminar
             crud.leer_hashtag(hashtags_dict)
-            print("\nIngrese el hashtag que desee eliminar",end="")
+            print("\nPara eliminar ingrese un hashtag existente: ",end="")
             hashtag_fila= validez.hashtag_existente(hashtags_dict)
             crud.eliminar_hashtag(hashtag_fila,hashtags_dict)
 
@@ -118,11 +116,11 @@ while menu!=-1:
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
         if opcion == 1:
-            crud.agregar_publicacion(posteos)
+            crud.agregar_publicacion(posteos, usuarios_dict)
         elif opcion == 2:
             crud.eliminar_publicacion(posteos)
         elif opcion == 3:
-            crud.actualizar_publicacion(posteos)
+            crud.actualizar_publicacion(posteos, usuarios_dict)
         elif opcion == 4: 
             crud.leer_publicaciones(posteos)
         else:

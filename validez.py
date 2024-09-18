@@ -51,7 +51,7 @@ def validar_mail():     #Se busca validar que el mail ingresado sea correcto
 
 #Validar id
 def validar_id(usuarios):
-    id_seleccion = input("Ingrese un id existente: ")
+    id_seleccion = input("ingrese un id existente: ")
     while True:
         for id_usuarios in usuarios:
             if id_seleccion.isdigit() and int(id_seleccion) == id_usuarios:
