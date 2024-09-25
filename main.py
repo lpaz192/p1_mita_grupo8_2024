@@ -1,13 +1,6 @@
-""" Notas: 
-
-"""
 from datetime import datetime
-import random
-import crud, metricas, json, validez
-from diseño import __menu__, crud_hashtags, crud_usuarios, estadisticas, crud_publicacion, ordenamiento  
-
-#Funciones
-
+from diseño import crud_hashtags, crud_publicacion, crud_usuarios, mostrar_menu, estadisticas, mostrar_ordenamiento
+import crud, metricas, json, validez, random, diseño, ordenamiento
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
 usuario = [
@@ -25,16 +18,6 @@ usuario = [
     [12, "David_89",        3500,  1500,  2500,   "david89@gmail.com"        ]
 ]
   
-usuarios_dict={                #Crear diccionario usuarios
-    fil[0]:{
-        'Usuario':fil[1],
-        'Seguidores':fil[2],   #Una tupla con el id del usuario y los datos del usuario
-        'Seguidos':fil[3],     #Dentro de los datos del usuario son tuplas entre la infromacion y su 'etiqueta'
-        'Likes':fil[4],
-        'Correo':fil[5]
-    }for fil in usuario
-}
-
 # 'Hashtag'  'Cant posteos'  'Veces compartido'  'Likes' 
 hashtags = [
     ["#Feriado",           400,   2000,   6000  ],   
@@ -50,7 +33,16 @@ hashtags = [
     ["#Viajes2024",        2200,  60000,  250000]
 ]
 
-                                    
+usuarios_dict={                #Crear diccionario usuarios
+    fil[0]:{
+        'Usuario':fil[1],
+        'Seguidores':fil[2],   #Una tupla con el id del usuario y los datos del usuario
+        'Seguidos':fil[3],     #Dentro de los datos del usuario son tuplas entre la infromacion y su 'etiqueta'
+        'Likes':fil[4],
+        'Correo':fil[5]
+    }for fil in usuario
+}
+
 hashtags_dict={                #Crear diccionario hashtags
     fil[0]:{
         'Cant. posteos':fil[1],
@@ -58,6 +50,7 @@ hashtags_dict={                #Crear diccionario hashtags
         'Likes':fil[3]
     }for fil in hashtags
 }
+
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario",'Hashtag']]
 
 hashtags_index= list(hashtags_dict.keys())
@@ -82,8 +75,9 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
 #Menu principal
 menu=0
 while menu!=-1:
-    menu = __menu__()
+    menu = mostrar_menu()
 
+    
     if menu==1:                        #----  Usuario     ----
         opcion_crud=crud_usuarios()   
         
@@ -137,7 +131,7 @@ while menu!=-1:
     elif menu==3:                #----Publicacion ----
         opcion=crud_publicacion()
         if opcion == 1:          #Agregar
-            crud.agregar_publicacion(posteos, usuarios_dict)
+            crud.agregar_publicacion(posteos, usuarios_dict, hashtags_dict)
         elif opcion == 2:        #Eliminar
             crud.eliminar_publicacion(posteos)
         elif opcion == 3:        #Actualizar
@@ -149,9 +143,9 @@ while menu!=-1:
         
     
     elif menu==4:  # ---- Ordenar ----
-        opcion = ordenamiento()  
+        opcion = mostrar_ordenamiento()  
         if opcion == 1:
-            crud.ordenar_publicaciones(posteos) 
+            ordenamiento.ordenar_publicaciones(posteos) 
 
 
     elif menu==5:                #----Estadisticas----
