@@ -81,7 +81,7 @@ while menu!=-1:
     menu = mostrar_menu()
 
     
-    if menu==1:                        #----  Usuario     ----
+    if menu==1:                         #----  Usuario   ----
         opcion_crud=crud_usuarios()   
         
         if opcion_crud==1:                   #Agregar
@@ -109,7 +109,7 @@ while menu!=-1:
             crud.leer_usuario(usuarios_dict)
             input('Oprima enter para continuar ')
 
-    elif menu==2:                #----Hashtag     ----
+    elif menu==2:                       #----Hashtag     ----
         opcion_crud = crud_hashtags()
         if opcion_crud==1:                #Agregar
             crud.agregar_hashtag(hashtags_dict)
@@ -131,7 +131,7 @@ while menu!=-1:
             crud.leer_hashtag(hashtags_dict)
             input('Oprima enter para continuar ')
         
-    elif menu==3:                #----Publicacion ----
+    elif menu==3:                       #----Publicacion ----
         opcion=crud_publicacion()
         if opcion == 1:          #Agregar
             crud.agregar_publicacion(posteos, usuarios_dict, hashtags_dict)
@@ -143,16 +143,14 @@ while menu!=-1:
             crud.leer_publicaciones(posteos)
         else:
             print("Opción no válida.")
-        
-    
-    elif menu==4:  # ---- Ordenar ----
+           
+    elif menu==4:                       # ---- Ordenar   ----
         opcion = mostrar_ordenamiento()  
         if opcion == 1:
             ordenamiento.ordenar_publicaciones(posteos) 
 
-
-    elif menu==5:                #----Estadisticas----
+    elif menu==5:                       #----Estadisticas----
         estadisticas()
-    
+        
     elif menu!=-1:
         print("Opcion no valida")   
