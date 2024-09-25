@@ -1,6 +1,6 @@
 from datetime import datetime
 from diseño import crud_hashtags, crud_publicacion, crud_usuarios, mostrar_menu, estadisticas, mostrar_ordenamiento
-import crud, metricas, json, validez, random, diseño, ordenamiento
+import crud, metricas, json, validez, random, ordenamiento
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
 usuario = [
