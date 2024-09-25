@@ -33,17 +33,20 @@ hashtags = [
     ["#Viajes2024",        2200,  60000,  250000]
 ]
 
-usuarios_dict={                #Crear diccionario usuarios
+#Diccionarios
+#Crear diccionario usuarios
+usuarios_dict={                
     fil[0]:{
         'Usuario':fil[1],
-        'Seguidores':fil[2],   #Una tupla con el id del usuario y los datos del usuario
-        'Seguidos':fil[3],     #Dentro de los datos del usuario son tuplas entre la infromacion y su 'etiqueta'
+        'Seguidores':fil[2],   #Un diccionario con el id del usuario y los datos del usuario
+        'Seguidos':fil[3],     #Dentro de los datos del usuario son diccioanrios con la infromacion y su 'etiqueta'
         'Likes':fil[4],
         'Correo':fil[5]
     }for fil in usuario
 }
 
-hashtags_dict={                #Crear diccionario hashtags
+#Crear diccionario hashtags
+hashtags_dict={                
     fil[0]:{
         'Cant. posteos':fil[1],
         'Veces compartido':fil[2],
@@ -97,7 +100,7 @@ while menu!=-1:
             opcion_usuario = validez.validar_id(usuarios_dict)   
             
             #Se selecciona el elemento a modificar
-            opcion_usuario_elemento = crud.seleccionar_elemento_usuairos(opcion_usuario,usuarios_dict) 
+            opcion_usuario_elemento = crud.seleccionar_elemento_usuarios(opcion_usuario,usuarios_dict) 
             
             #Se modifica el elemento
             crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuarios_dict)

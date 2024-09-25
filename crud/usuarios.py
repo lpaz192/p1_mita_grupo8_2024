@@ -2,7 +2,7 @@ import diseño, validez
 nuevo_id=lambda usuarios: max(usuarios.keys())+1 if usuarios else 1
 
 #Funciones secundarias de usarios
-def seleccionar_elemento_usuairos(id,usuario):
+def seleccionar_elemento_usuarios(id,usuario):
     print(f"\n---Usuario con ID {id}---")
     print(f"1. Usuario:      {usuario[id]['Usuario']}")
     print(f"2. Seguidores:   {usuario[id]['Seguidores']}")
