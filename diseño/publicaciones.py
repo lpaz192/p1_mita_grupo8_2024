@@ -1,4 +1,16 @@
 #Diseño CRUD Publicacion
+def obtener_opcion():
+    opciones=[-1,1,2,3,4]
+    while True:
+        try:
+            opcion=int(input('Selecione una opcion valida: '))
+            if not opcion in opciones:
+                print('Opcion invalida.')
+                continue
+            return opcion
+        except ValueError:
+            print('Entrada no valida.')
+
 def crud_publicacion():
     print("\n---Gestion de Publicaciones---")
     print("1. Agregar publicacion")
@@ -6,7 +18,7 @@ def crud_publicacion():
     print("3. Actualizar publicacion")
     print("4. Leer publicacion")
     print("-1. Volver al menu principal")
-    return int(input("Seleccione una opcción: "))
+    return obtener_opcion()
 
 
 #Diseño de tablas publicaciones 

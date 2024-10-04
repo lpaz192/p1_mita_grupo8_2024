@@ -1,18 +1,25 @@
 #Diseño CRUD Usuarios
+def obtener_opcion():
+    opciones=[-1,1,2,3,4]
+    while True:
+        try:
+            opcion=int(input('Selecione una opcion valida: '))
+            if not opcion in opciones:
+                print('Opcion invalida.')
+                continue
+            return opcion
+        except ValueError:
+            print('Entrada no valida.')
+
 def crud_usuarios():
-    aux=0
-    while aux==0 or aux>4:
-        if aux==0 or aux>4:
-            print("\n---Gestion de Usuarios---")
-            print("1. Agregar usuario")
-            print("2. Eliminar usuario")
-            print("3. Actualizar usuario")
-            print("4. Leer usuario")
-            print("-1. Volver al menu principal")
-            aux = int(input("Seleccione una opcción: "))
-        else: 
-            print("Opcion no valida")
-    return aux
+    print("\n---Gestion de Usuarios---")
+    print("1. Agregar usuario")
+    print("2. Eliminar usuario")
+    print("3. Actualizar usuario")
+    print("4. Leer usuario")
+    print("-1. Volver al menu principal")
+    return (obtener_opcion())
+
 
 #Diseño de tablas usuario
 parte_superior=lambda: print(f"\n┌{'─'*6}┬{'─'*17}┬{'─'*12}┬{'─'*12}┬{'─'*12}┬{'─'*32}┐")

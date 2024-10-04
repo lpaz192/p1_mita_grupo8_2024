@@ -1,6 +1,6 @@
 from datetime import datetime
 from diseño import crud_hashtags, crud_publicacion, crud_usuarios, mostrar_menu, estadisticas, mostrar_ordenamiento
-import crud, metricas, json, validez, random, ordenamiento
+import crud, json, validez, random, ordenamiento
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
 usuario = [
@@ -54,6 +54,7 @@ hashtags_dict={
     }for fil in hashtags
 }
 
+#Crear posteos / Estructura principal de posteos
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario",'Hashtag']]
 
 hashtags_index= list(hashtags_dict.keys())
@@ -74,83 +75,120 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
 
     posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario,hashtags_id])
 
+#Funcinoes de opciones
+def opcion_crud_usuarios():
+    opcion_elegida = crud_usuarios()   
+            
+    #Agregar
+    if opcion_elegida == 1:                   
+        crud.agregar_usuario(usuarios_dict)
 
-#Menu principal
-menu=0
-while menu!=-1:
-    menu = mostrar_menu()
-
+    #Eliminar
+    elif opcion_elegida == 2:                 
+        crud.leer_usuario(usuarios_dict)
+        print("\nPara eliminar ",end="")
+        usuario_fila = validez.validar_id(usuarios_dict)
+        crud.eliminar_usuario(usuario_fila,usuarios_dict)
     
-    if menu==1:                         #----  Usuario   ----
-        opcion_crud=crud_usuarios()   
+    #Actualizar
+    elif opcion_elegida == 3:                 
+        crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
+        #Se selecciona el usuario a modificar
+        print("\nPara actualizar ",end="")
+        opcion_usuario = validez.validar_id(usuarios_dict)   
         
-        if opcion_crud==1:                   #Agregar
-            crud.agregar_usuario(usuarios_dict)
-
-        elif opcion_crud==2:                 #Eliminar
-            crud.leer_usuario(usuarios_dict)
-            print("\nPara eliminar ",end="")
-            usuario_fila = validez.validar_id(usuarios_dict)
-            crud.eliminar_usuario(usuario_fila,usuarios_dict)
+        #Se selecciona el elemento a modificar
+        opcion_usuario_elemento = crud.seleccionar_elemento_usuarios(opcion_usuario,usuarios_dict) 
         
-        elif opcion_crud==3:                 #Actualizar
-            crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
-            #Se selecciona el usuario a modificar
-            print("\nPara actualizar ",end="")
-            opcion_usuario = validez.validar_id(usuarios_dict)   
-            
-            #Se selecciona el elemento a modificar
-            opcion_usuario_elemento = crud.seleccionar_elemento_usuarios(opcion_usuario,usuarios_dict) 
-            
-            #Se modifica el elemento
-            crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuarios_dict)
+        #Se modifica el elemento
+        crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuarios_dict)
+    
+    #Leer
+    elif opcion_elegida == 4:               
+        crud.leer_usuario(usuarios_dict)
+        input('Oprima enter para continuar ')
+
+def opcion_crud_hashtags():
+    opcion_elegida = crud_hashtags()
+
+    #Agregar
+    if opcion_elegida == 1:                
+        crud.agregar_hashtag(hashtags_dict)
+
+    #Eliminar
+    elif opcion_elegida == 2:              
+        crud.leer_hashtag(hashtags_dict)
+        print("\nPara eliminar ingrese un hashtag existente: ",end="")
+        hashtag_fila= validez.hashtag_existente(hashtags_dict)
+        crud.eliminar_hashtag(hashtag_fila,hashtags_dict)
+
+    #Actualizar
+    elif opcion_elegida == 3:              
+        crud.leer_hashtag(hashtags_dict)
+        print('\nIngres el hashtag que desea modificar: ',end="")
+        opcion_hashtag = validez.hashtag_existente(hashtags_dict)
+        opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags_dict)
+        crud.actualizar_hashtag(opcion_hashtag,opcion_hashtag_elemento,hashtags_dict)
+
+    #Leer
+    elif opcion_elegida == 4:                        
+        crud.leer_hashtag(hashtags_dict)
+        input('Oprima enter para continuar ')
+    
+def opcion_crud_publicaciones():
+    opcion_elegida=crud_publicacion()
+
+    #Agregar
+    if opcion_elegida == 1:          
+        crud.agregar_publicacion(posteos, usuarios_dict, hashtags_dict)
+    
+    #Eliminar
+    elif opcion_elegida == 2:        
+        crud.eliminar_publicacion(posteos)
+    
+    #Actualizar
+    elif opcion_elegida == 3:        
+        crud.actualizar_publicacion(posteos, usuarios_dict)
+    
+    #Leer
+    elif opcion_elegida == 4:        
+        crud.leer_publicaciones(posteos)
+    else:
+        print("Opción no válida.")
+    
+#Menu principal
+def __main__():
+    opcion_menu=0
+    while opcion_menu!=-1:
+        opcion_menu = mostrar_menu()
         
-        elif opcion_crud == 4:               #Leer
-            crud.leer_usuario(usuarios_dict)
-            input('Oprima enter para continuar ')
+        #----  CRUD Usuario     ----
+        if opcion_menu==1:                         
+            opcion_crud_usuarios()
 
-    elif menu==2:                       #----Hashtag     ----
-        opcion_crud = crud_hashtags()
-        if opcion_crud==1:                #Agregar
-            crud.agregar_hashtag(hashtags_dict)
-
-        elif opcion_crud==2:              #Eliminar
-            crud.leer_hashtag(hashtags_dict)
-            print("\nPara eliminar ingrese un hashtag existente: ",end="")
-            hashtag_fila= validez.hashtag_existente(hashtags_dict)
-            crud.eliminar_hashtag(hashtag_fila,hashtags_dict)
-
-        elif opcion_crud==3:              #Actualizar
-            crud.leer_hashtag(hashtags_dict)
-            print('\nIngres el hashtag que desea modificar: ',end="")
-            opcion_hashtag = validez.hashtag_existente(hashtags_dict)
-            opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags_dict)
-            crud.actualizar_hashtag(opcion_hashtag,opcion_hashtag_elemento,hashtags_dict)
-
-        elif opcion_crud == 4:                        #Leer
-            crud.leer_hashtag(hashtags_dict)
-            input('Oprima enter para continuar ')
+        #----  CRUD Hashtag     ----
+        elif opcion_menu==2:                       
+            opcion_crud_hashtags()
         
-    elif menu==3:                       #----Publicacion ----
-        opcion=crud_publicacion()
-        if opcion == 1:          #Agregar
-            crud.agregar_publicacion(posteos, usuarios_dict, hashtags_dict)
-        elif opcion == 2:        #Eliminar
-            crud.eliminar_publicacion(posteos)
-        elif opcion == 3:        #Actualizar
-            crud.actualizar_publicacion(posteos, usuarios_dict)
-        elif opcion == 4:        #Leer
-            crud.leer_publicaciones(posteos)
-        else:
-            print("Opción no válida.")
-           
-    elif menu==4:                       # ---- Ordenar   ----
-        opcion = mostrar_ordenamiento()  
-        if opcion == 1:
-            ordenamiento.ordenar_publicaciones(posteos) 
+        #----  CRUD Publicacion ----
+        elif opcion_menu==3:                       
+            opcion_crud_publicaciones()
 
-    elif menu==5:                       #----Estadisticas----
-        estadisticas()
+        # ---- Ordenar          ----
+        elif opcion_menu==4:                       
+            opcion = mostrar_ordenamiento()  
+            if opcion == 1:
+                ordenamiento.ordenar_publicaciones(posteos) 
         
-    elif menu!=-1:
-        print("Opcion no valida")   
+        #----  Estadisticas----
+        elif opcion_menu==5:                       
+            estadisticas()
+        
+        elif opcion_menu==-1:
+            break
+        elif opcion_menu!=-1:
+            print("Opcion no valida")   
+
+
+if __name__ == '__main__':
+    __main__()

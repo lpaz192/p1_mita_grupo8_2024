@@ -1,4 +1,16 @@
 #Diseño CRUD Hashtags
+def obtener_opcion():
+    opciones=[-1,1,2,3,4]
+    while True:
+        try:
+            opcion=int(input('Selecione una opcion valida: '))
+            if not opcion in opciones:
+                print('Opcion invalida.')
+                continue
+            return opcion
+        except ValueError:
+            print('Entrada no valida.')
+
 def crud_hashtags():
     print("\n---Gestion de hashtags---")
     print("1. Agregar hashtags")
@@ -6,7 +18,7 @@ def crud_hashtags():
     print("3. Actualizar hashtags")
     print("4. Leer hashtags")
     print("-1. Volver al menu principal")
-    return int(input("Seleccione una opcción: "))
+    return obtener_opcion()
 
 #Diseño de tablas hashtag
 parte_superior=lambda: print(f"\n┌{'─'*17}┬{'─'*15}┬{'─'*18}┬{'─'*12}┐")

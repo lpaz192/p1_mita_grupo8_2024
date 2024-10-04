@@ -1,4 +1,16 @@
 # Diseño menu principal
+def obtener_opcion():
+    opciones=[-1,1,2,3,4,5]
+    while True:
+        try:
+            opcion=int(input('Selecione una opcion valida: '))
+            if not opcion in opciones:
+                print('Opcion invalida.')
+                continue
+            return opcion
+        except ValueError:
+            print('Entrada no valida.')
+
 def mostrar_menu():
     print("\n---Menu Principal---")
     print("1.  Gestion de usuarios")
@@ -7,9 +19,4 @@ def mostrar_menu():
     print("4.  Ordenamiento")
     print("5.  Estadisticas")
     print("-1. Para cancelar")
-    menu = input("Seleccione una opcción: ")
-    while True:
-        if menu.isdigit() or menu=='-1':
-            if int(menu)>=1 and int(menu)<=5 or int(menu)==-1:
-                return int(menu)
-        menu=input('Opcion no valida, por favor ingrese un numero dentro del rango solicitado: ')
+    return obtener_opcion()
