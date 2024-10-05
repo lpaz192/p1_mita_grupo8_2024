@@ -1,5 +1,10 @@
 from datetime import datetime
-from diseño import crud_hashtags, crud_publicacion, crud_usuarios, mostrar_menu, estadisticas, mostrar_ordenamiento
+from diseño import (crud_hashtags, 
+                    crud_publicacion, 
+                    crud_usuarios, 
+                    mostrar_menu, 
+                    estadisticas, 
+                    mostrar_ordenamiento)
 import crud, json, validez, random, ordenamiento
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
@@ -80,15 +85,16 @@ def opcion_crud_usuarios():
     opcion_elegida = crud_usuarios()   
             
     #Agregar
-    if opcion_elegida == 1:                   
+    if opcion_elegida == 1:
+        print()                   
         crud.agregar_usuario(usuarios_dict)
 
     #Eliminar
     elif opcion_elegida == 2:                 
         crud.leer_usuario(usuarios_dict)
-        print("\nPara eliminar ",end="")
-        usuario_fila = validez.validar_id(usuarios_dict)
-        crud.eliminar_usuario(usuario_fila,usuarios_dict)
+        print("\nPara eliminar ingrese un id existente: ", end="")
+        usuario_id = validez.validar_id(usuarios_dict)
+        crud.eliminar_usuario(usuario_id,usuarios_dict)
     
     #Actualizar
     elif opcion_elegida == 3:                 

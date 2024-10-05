@@ -30,9 +30,21 @@ def validar_mail():
 
 #Validar id
 def validar_id(usuarios):
-    id_seleccion = input("ingrese un id de un usuario existente: ")
+
+    ids = usuarios.keys()
     while True:
+        try:
+            id_existente = int(input())
+            if not id_existente in ids:
+                print('El id ingresado no existe, por favor ingrese un id existente: ')
+                continue
+            return id_existente
+        except ValueError:
+            print('Entrada no valida, por favor ingrese un id existente: ')
+    
+        '''
         for id_usuarios in usuarios:
             if id_seleccion.isdigit() and int(id_seleccion) == id_usuarios:
                 return int(id_seleccion)
         id_seleccion = input("Numero de id invalido, por favor ingrese un id valido: ")
+        '''

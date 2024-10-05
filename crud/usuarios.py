@@ -17,18 +17,21 @@ def seleccionar_elemento_usuarios(id,usuario):
             elemento = input("Elemento invalido, por favor ingrese un elemento valido: ")
 
 #Funciones CRUD Usuarios
-def agregar_usuario(usuarios):      #Agregar
-    #Agregar usuario
-    print()
-    usuarios[nuevo_id(usuarios)] = {
-        'Usuario':validez.validar_usuario(),
-        'Seguidores':validez.validar_numero('seguidores'),
-        'Seguidos':validez.validar_numero('seguidos'),
-        'Likes':validez.validar_numero('likes'),
-        'Correo':validez.validar_mail()
+
+#Funcion agregar usuario
+def agregar_usuario(usuarios):      
+    '''Crea un nuevo id que es una sucesión del mas grande y posteriormente 
+    pide el ingreso de los datos'''
+    usuarios[nuevo_id(usuarios)] = {   
+        'Usuario':    validez.validar_usuario(),
+        'Seguidores': validez.validar_numero('seguidores'),
+        'Seguidos':   validez.validar_numero('seguidos'),
+        'Likes':      validez.validar_numero('likes'),
+        'Correo':     validez.validar_mail()
     }
    
-def leer_usuario(usuarios):         #Leer
+#Funcion leer usuario
+def leer_usuario(usuarios):        
     diseño.usuarios.parte_superior()
     diseño.usuarios.encabezado()
     for id_usuario, datos_usuario in usuarios.items():
@@ -43,7 +46,9 @@ def leer_usuario(usuarios):         #Leer
             diseño.usuarios.mostrar(id_usuario, datos_usuario)
     diseño.usuarios.parte_inferior()
 
-def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    #Actualizar
+#Funcion actualizar usuario
+def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    
+    
     #Actualizar Usuario
     if elemento_elegido == 1:   
         usuarios[opcion_usuario]['Usuario']=validez.validar_usuario()
@@ -60,5 +65,6 @@ def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    #Actualizar
     else:                       
         usuarios[opcion_usuario]['Correo'] = validez.validar_mail()
 
-def eliminar_usuario(id,usuarios): #Eliminar
+#Funcion eliminar usuario
+def eliminar_usuario(id,usuarios): 
     usuarios.pop(id)
