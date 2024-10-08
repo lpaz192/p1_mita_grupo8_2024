@@ -41,10 +41,3 @@ def validar_id(usuarios):
             return id_existente
         except ValueError:
             print('Entrada no valida, por favor ingrese un id existente: ')
-    
-        '''
-        for id_usuarios in usuarios:
-            if id_seleccion.isdigit() and int(id_seleccion) == id_usuarios:
-                return int(id_seleccion)
-        id_seleccion = input("Numero de id invalido, por favor ingrese un id valido: ")
-        '''

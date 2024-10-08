@@ -9,6 +9,9 @@ def seleccionar_elemento_usuarios(id,usuario):
     print(f"3. Seguidos:     {usuario[id]['Seguidos']}")
     print(f"4. Likes:        {usuario[id]['Likes']}")
     print(f"5. Correos:      {usuario[id]['Correo']}")
+    opciones = [1,2,3,4,5]
+    return validez.obtener_opcion(opciones)
+    
     elemento = input("Seleccione un elemento: ")
     while True:
         if elemento.isdigit() and int(elemento) > 0 and int(elemento) <= 5:
@@ -16,7 +19,7 @@ def seleccionar_elemento_usuarios(id,usuario):
         else:
             elemento = input("Elemento invalido, por favor ingrese un elemento valido: ")
 
-#Funciones CRUD Usuarios
+#FUNCIONES CRUD USUARIOS
 
 #Funcion agregar usuario
 def agregar_usuario(usuarios):      
@@ -38,12 +41,14 @@ def leer_usuario(usuarios):
         if id_usuario==min(usuarios.keys()):
             diseño.usuarios.parte_conectiva()
             diseño.usuarios.mostrar(id_usuario,datos_usuario)
+
         elif max(usuarios.keys())==id_usuario:
             diseño.usuarios.parte_conectiva()
             diseño.usuarios.mostrar(id_usuario, datos_usuario)
         else:
             diseño.usuarios.parte_conectiva()
             diseño.usuarios.mostrar(id_usuario, datos_usuario)
+    
     diseño.usuarios.parte_inferior()
 
 #Funcion actualizar usuario

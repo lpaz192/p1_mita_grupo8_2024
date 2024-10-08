@@ -17,8 +17,7 @@ def imprimir_posteos(posteos):
     diseño.publicaciones.parte_inferior()
 
 def agregar_publicacion(posteos, usuarios,hashtag):
-    id_post = input("Ingrese el ID de la publicación: ").zfill(3)
-
+    id_post = validez.validar_numero('nuevo id',1,4)
     #para que no hayan dos con el mismo id
     for posteo in posteos:
         if posteo[0] == id_post:
@@ -26,23 +25,25 @@ def agregar_publicacion(posteos, usuarios,hashtag):
             return
 
     while True:
-        fecha_publicacion = input("Ingrese la fecha de la publicación (YYYY-MM-DD): ")
+        fecha_publicacion = input("Ingrese la fecha de la publicación (DD-MM-YYYY): ")
         if validez.validar_fecha(fecha_publicacion):
             break
         else:
-            print("Fecha inválida, por favor ingrese una fecha en formato válido (YYYY-MM-DD).")
+            print("Fecha inválida, por favor ingrese una fecha en formato válido (DD-MM-YYYY).")
     
     
-    likes = int(input("Ingrese la cantidad de likes: "))
-    comentarios = int(input("Ingrese la cantidad de comentarios: "))
-    
-    print("Para seleccionar el usuario que realizo la publicacion")
-    print("Por favor", end=" ")
+    likes = validez.validar_numero('likes')
+    comentarios = validez.validar_numero('cantidad de comentarios')
 
+    print('--- Seleccion de usuario ---')
+    print('1. Para ver la tabla de usuarios')
+    print('2. Para selecionar usuario')
+    opcion= validez.obtener_opcion([1,2])
+        
+    print("Para seleccionar el usuario que realizo la publicacion")
+    print("Por favor, ingrese el numero de id del usuario o selecciones -1 para ver la tabla: ", end="")
+    
     id_usuario = validez.validar_id(usuarios)
-    if id_usuario not in usuarios:
-        print(f"Error: El ID de usuario {id_usuario} no existe.")
-        return
 
     usuario = usuarios[id_usuario]['Usuario']
     

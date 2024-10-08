@@ -66,7 +66,7 @@ hashtags_index= list(hashtags_dict.keys())
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
     while True:
-        fecha_publicacion = datetime.now().strftime('%Y-%m-%d')
+        fecha_publicacion = datetime.now().strftime('%d-%m-%Y')
         if validez.validar_fecha(fecha_publicacion):
             break
     likes = random.randint(0, 10000)
@@ -194,7 +194,6 @@ def __main__():
             break
         elif opcion_menu!=-1:
             print("Opcion no valida")   
-
 
 if __name__ == '__main__':
     __main__()
