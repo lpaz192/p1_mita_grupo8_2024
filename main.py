@@ -6,6 +6,86 @@ from diseño import (crud_hashtags,
                     estadisticas, 
                     mostrar_ordenamiento)
 import crud, json, validez, random, ordenamiento
+
+
+'''
+import instaloader
+
+loader = instaloader.Instaloader()
+
+# cargar usuarios manualmente
+def cargar_usuarios():
+    usuarios = []
+    print("Ingresa los nombres de usuario a analizar (escribe 'fin' para terminar):")
+    while True:
+        usuario = input("Usuario: ")
+        if usuario.lower() == 'fin':
+            break
+        usuarios.append(usuario)
+    return usuarios
+
+# bbtener datos de usuarios
+def obtener_datos_usuarios(usuarios):
+    usuarios_data = {}
+    for usuario in usuarios:
+        try:
+            profile = instaloader.Profile.from_username(loader.context, usuario)
+            usuarios_data[usuario] = {
+                'Seguidores': profile.followers,
+                'Seguidos': profile.followees,
+                'Publicaciones': []
+            }
+        except Exception as e:
+            print(f"Error al obtener datos de {usuario}: {e}")
+    return usuarios_data
+
+# obtener publicaciones 
+def obtener_publicaciones(usuario):
+    publicaciones_data = []
+    try:
+        profile = instaloader.Profile.from_username(loader.context, usuario)
+        for post in profile.get_posts():
+            publicaciones_data.append({
+                'Fecha de publicación': post.date,
+                'Cantidad de likes': post.likes,
+                'Cantidad de comentarios': post.comments,
+                'Hashtags': post.caption_hashtags,
+            })
+            if len(publicaciones_data) >= 10:  # solo carga 10
+                break
+    except Exception as e:
+        print(f"Error al obtener publicaciones de {usuario}: {e}")
+    return publicaciones_data
+
+
+usuarios_a_analizar = cargar_usuarios()
+
+usuarios_dict = obtener_datos_usuarios(usuarios_a_analizar)
+
+# obtener las publicaciones de cada usuario
+for usuario in usuarios_a_analizar:
+    publicaciones = obtener_publicaciones(usuario)
+    usuarios_dict[usuario]['Publicaciones'] = publicaciones
+
+posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario", 'Hashtags']]
+
+for usuario, data in usuarios_dict.items():
+    for idx, publicacion in enumerate(data['Publicaciones']):
+        id_post = str(idx + 1).zfill(3)  # id del post
+        fecha_publicacion = publicacion['Fecha de publicación'].strftime('%Y-%m-%d')
+        likes = publicacion['Cantidad de likes']
+        comentarios = publicacion['Cantidad de comentarios']
+        hashtags_id = ', '.join(publicacion['Hashtags']) if publicacion['Hashtags'] else "Sin hashtags"
+        
+        posteos.append([id_post, fecha_publicacion, likes, comentarios, usuario, usuario, hashtags_id])
+
+# mostrar posts
+for post in posteos:
+    print(post)
+
+'''
+
+
 #Matrices
 # 'ID'  'Usuario' 'Seguidores'  'Seguidos' 'Likes' 'Correo'  
 usuario = [
