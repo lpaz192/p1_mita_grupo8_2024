@@ -23,7 +23,7 @@ def obtener_opcion(opciones_list):
         try:
             opcion = int(input('Seleccione una opcion: '))
             if not opcion in opciones_list:
-                print('Numero invalido, por favor selecione una opcion valida.')
+                print('Opcion invalida, por favor selecione una opcion valida.')
                 continue
             return opcion
         except ValueError:

@@ -222,7 +222,7 @@ def opcion_crud_hashtags():
         input('Oprima enter para continuar ')
     
 def opcion_crud_publicaciones():
-    opcion_elegida=crud_publicacion()
+    opcion_elegida = crud_publicacion()
 
     #Agregar
     if opcion_elegida == 1:          
@@ -244,8 +244,8 @@ def opcion_crud_publicaciones():
     
 #Menu principal
 def __main__():
-    opcion_menu=0
-    while opcion_menu!=-1:
+    opcion_menu = 0
+    while opcion_menu != -1:
         opcion_menu = mostrar_menu()
         
         #----  CRUD Usuario     ----
