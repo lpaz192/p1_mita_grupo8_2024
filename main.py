@@ -180,7 +180,7 @@ def opcion_crud_usuarios():
     elif opcion_elegida == 3:                 
         crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
         #Se selecciona el usuario a modificar
-        print("\nPara actualizar ",end="")
+        print("\nIngrese el ID del usuario que desea modificar: ",end="")
         opcion_usuario = validez.validar_id(usuarios_dict)   
         
         #Se selecciona el elemento a modificar

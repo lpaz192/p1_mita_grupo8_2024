@@ -21,7 +21,7 @@ def obtener_opcion(opciones_list):
 
     while True:
         try:
-            opcion = int(input('\nSeleccione una opcion: '))
+            opcion = int(input('Seleccione una opcion: '))
             if not opcion in opciones_list:
                 print('Numero invalido, por favor selecione una opcion valida.')
                 continue

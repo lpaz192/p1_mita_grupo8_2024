@@ -1,4 +1,5 @@
 import diseño, validez
+from crud import leer_usuario
 #Funciones CRUD Publicaciones
 def imprimir_posteos(posteos):
     print("Publicaciones disponibles:")
@@ -35,11 +36,17 @@ def agregar_publicacion(posteos, usuarios,hashtag):
     likes = validez.validar_numero('likes')
     comentarios = validez.validar_numero('cantidad de comentarios')
 
-    print('--- Seleccion de usuario ---')
-    print('1. Para ver la tabla de usuarios')
-    print('2. Para selecionar usuario')
-    opcion= validez.obtener_opcion([1,2])
-        
+    """
+    print('Ingrese el numero de ID del usuario (Si desea ver la tabla de usuarios ingrese -1)')
+    opciones = [-1,usuarios.keys()]
+    opcion= validez.obtener_opcion(opciones)
+    if opcion == -1:
+        leer_usuario(usuarios)
+        id_usuario =input('Ingrese el id del usuario: ')
+    else:
+        id_usuario = opcion
+    """
+
     print("Para seleccionar el usuario que realizo la publicacion")
     print("Por favor, ingrese el numero de id del usuario o selecciones -1 para ver la tabla: ", end="")
     
