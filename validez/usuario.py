@@ -5,15 +5,23 @@ patron_usuario = r"[a-zA-Z_0-9]{2,15}$"
 #Funciones lambda
 comprobar_usuario= lambda nombre:re.match(patron_usuario,nombre)
 comprobar_mail=lambda mail:re.match(patron_mail,mail)
-
+#Comparar usuario
+def comparar_usuario(nombre_usuario, usuarios):
+    for usuario_id, datos in usuarios.items():
+        if datos['Usuario'] == nombre_usuario:
+            return True
+         
+    return False
 #Validar usuario
-def validar_usuario():
+def validar_usuario(usuario_dict):
     ''''Pide un ingreso de usuario, en caso de que sea invalido 
     entra en el while hasta conseguir un usuario valido'''
 
     usuario = input("Ingrese un nuevo usuario: ")  #Solicitar usuario
     
     while not comprobar_usuario(usuario):  #Buscar validez del usuario
+        usuario=input("Usuario invalido, por favor ingrese un usuario valido: ") #Pedir un nuevo usuario
+    while comparar_usuario(usuario, usuario_dict):
         usuario=input("Usuario invalido, por favor ingrese un usuario valido: ") #Pedir un nuevo usuario
     return usuario
 

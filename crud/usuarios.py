@@ -26,7 +26,7 @@ def agregar_usuario(usuarios):
     '''Crea un nuevo id que es una sucesión del mas grande y posteriormente 
     pide el ingreso de los datos'''
     usuarios[nuevo_id(usuarios)] = {   
-        'Usuario':    validez.validar_usuario(),
+        'Usuario':    validez.validar_usuario(usuarios),
         'Seguidores': validez.validar_numero('seguidores'),
         'Seguidos':   validez.validar_numero('seguidos'),
         'Likes':      validez.validar_numero('likes'),
