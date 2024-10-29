@@ -6,8 +6,7 @@ from diseño import (crud_hashtags,
                     estadisticas, 
                     mostrar_ordenamiento)
 import crud, json, validez, random, ordenamiento
-
-
+from archivos_json import inicializar_diccionairo_archivo
 '''
 import instaloader
 
@@ -24,7 +23,7 @@ def cargar_usuarios():
         usuarios.append(usuario)
     return usuarios
 
-# bbtener datos de usuarios
+# obtener datos de usuarios
 def obtener_datos_usuarios(usuarios):
     usuarios_data = {}
     for usuario in usuarios:
@@ -167,14 +166,14 @@ def opcion_crud_usuarios():
     #Agregar
     if opcion_elegida == 1:
         print()                   
-        crud.agregar_usuario(usuarios_dict)
+        crud.agregar_usuario('usuario.json')
 
     #Eliminar
     elif opcion_elegida == 2:                 
-        crud.leer_usuario(usuarios_dict)
-        print("\nPara eliminar ingrese un id existente: ", end="")
-        usuario_id = validez.validar_id(usuarios_dict)
-        crud.eliminar_usuario(usuario_id,usuarios_dict)
+        crud.leer_usuario('usuario.json')
+        print("\nPara eliminar un usuario ingrese el id del usuario: ", end="")
+        usuario_id = validez.validar_id('usuario.json')
+        crud.eliminar_usuario('usuario.json',usuario_id)
     
     #Actualizar
     elif opcion_elegida == 3:                 
@@ -191,7 +190,7 @@ def opcion_crud_usuarios():
     
     #Leer
     elif opcion_elegida == 4:               
-        crud.leer_usuario(usuarios_dict)
+        crud.leer_usuario('usuario.json')
         input('Oprima enter para continuar ')
 
 def opcion_crud_hashtags():
@@ -275,5 +274,7 @@ def __main__():
         elif opcion_menu!=-1:
             print("Opcion no valida")   
 
+inicializar_diccionairo_archivo('usuario.json', usuarios_dict)
+inicializar_diccionairo_archivo('hastag.json', hashtags_dict)
 if __name__ == '__main__':
     __main__()

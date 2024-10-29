@@ -1,0 +1,57 @@
+{
+    "#Feriado": {
+        "Cant. posteos": 400,
+        "Veces compartido": 2000,
+        "Likes": 6000
+    },
+    "#UADELabs": {
+        "Cant. posteos": 200,
+        "Veces compartido": 1500,
+        "Likes": 5000
+    },
+    "#UADE": {
+        "Cant. posteos": 3000,
+        "Veces compartido": 50000,
+        "Likes": 200000
+    },
+    "#Progra1": {
+        "Cant. posteos": 500,
+        "Veces compartido": 3000,
+        "Likes": 80000
+    },
+    "#ArteDigital": {
+        "Cant. posteos": 2000,
+        "Veces compartido": 40000,
+        "Likes": 100000
+    },
+    "#FitnessGoals": {
+        "Cant. posteos": 1500,
+        "Veces compartido": 10000,
+        "Likes": 45000
+    },
+    "#VueltaAlCole": {
+        "Cant. posteos": 800,
+        "Veces compartido": 5000,
+        "Likes": 20000
+    },
+    "#TechNews": {
+        "Cant. posteos": 600,
+        "Veces compartido": 4000,
+        "Likes": 15000
+    },
+    "#CineFan": {
+        "Cant. posteos": 1200,
+        "Veces compartido": 25000,
+        "Likes": 70000
+    },
+    "#Recetas": {
+        "Cant. posteos": 500,
+        "Veces compartido": 3000,
+        "Likes": 12000
+    },
+    "#Viajes2024": {
+        "Cant. posteos": 2200,
+        "Veces compartido": 60000,
+        "Likes": 250000
+    }
+}

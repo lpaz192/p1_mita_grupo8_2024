@@ -1,4 +1,4 @@
-import re
+import re, json
 patron_mail = r"^[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 patron_usuario = r"[a-zA-Z_0-9]{2,15}$"
 
@@ -33,19 +33,18 @@ def validar_mail():
     correo= input("Ingrese un nuevo correo: ") #Solicitar correo
 
     while not comprobar_mail(correo): #Buscar validez del correo
+    
         correo=input("Correo invalido, por favor ingrese un correo valido: ") #Pedir un nuevo inreso
     return correo
 
 #Validar id
-def validar_id(usuarios):
-
+def validar_id(nombre_archivo):
+    with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
+        usuarios = json.load(archivo)
     ids = usuarios.keys()
     while True:
-        try:
-            id_existente = int(input())
-            if not id_existente in ids:
-                print('El id ingresado no existe, por favor ingrese un id existente: ')
-                continue
+        id_existente = input()
+        if id_existente in ids:
             return id_existente
-        except ValueError:
-            print('Entrada no valida, por favor ingrese un id existente: ')
+        else:
+            print('El id ingresado no existe, por favor ingrese un id existente: ', end='')
