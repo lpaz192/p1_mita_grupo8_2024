@@ -11,22 +11,16 @@ def seleccionar_elemento_usuarios(id,usuario):
     print(f"5. Correos:      {usuario[id]['Correo']}")
     opciones = [1,2,3,4,5]
     return validez.obtener_opcion(opciones)
-    
-    elemento = input("Seleccione un elemento: ")
-    while True:
-        if elemento.isdigit() and int(elemento) > 0 and int(elemento) <= 5:
-            return int(elemento)
-        else:
-            elemento = input("Elemento invalido, por favor ingrese un elemento valido: ")
-
 #FUNCIONES CRUD USUARIOS
 
 #Funcion agregar usuario
 def agregar_usuario(nombre_archivo):      
     '''Crea un nuevo id que es una sucesión del mas grande y posteriormente 
     pide el ingreso de los datos'''
+    
     with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
         usuarios = json.load(archivo)
+
     claves = [int(ids) for ids in usuarios] 
     usuarios[nuevo_id(claves)] = {   
         'Usuario':    validez.validar_usuario(usuarios),
@@ -63,11 +57,22 @@ def leer_usuario(nombre_archivo):
         diseño.usuarios.parte_inferior()
 
 #Funcion actualizar usuario
-def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):    
+def actualizar_usuario(nombre_archivo):    
+    '''Pide el ingreso'''
+    with open(nombre_archivo, 'r',encoding='UTF-8') as archivo:
+        usuarios = json.load(archivo)
+    
+    leer_usuario('usuario.json')  #Se muestra la matriz
+    #Se selecciona el usuario a modificar
+    print("\nIngrese el ID del usuario que desea modificar: ",end="")
+    opcion_usuario = validez.validar_id('usuario.json')   
+    
+    #Se selecciona el elemento a modificar
+    elemento_elegido = seleccionar_elemento_usuarios(opcion_usuario,usuarios) 
     
     #Actualizar Usuario
     if elemento_elegido == 1:   
-        usuarios[opcion_usuario]['Usuario']=validez.validar_usuario()
+        usuarios[opcion_usuario]['Usuario']=validez.validar_usuario(usuarios)
     #Actualizar Seguidores
     elif elemento_elegido == 2: 
         usuarios[opcion_usuario]['Seguidores'] = validez.validar_numero('seguidores')
@@ -80,7 +85,9 @@ def actualizar_usuario(opcion_usuario,elemento_elegido,usuarios):
     #Actualizar Correo
     else:                       
         usuarios[opcion_usuario]['Correo'] = validez.validar_mail()
-
+    
+    with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
+        json.dump(usuarios, archivo, indent=4)
 #Funcion eliminar usuario
 def eliminar_usuario(nombre_archivo,id): 
     with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:

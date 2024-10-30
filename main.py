@@ -177,17 +177,7 @@ def opcion_crud_usuarios():
     
     #Actualizar
     elif opcion_elegida == 3:                 
-        crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
-        #Se selecciona el usuario a modificar
-        print("\nIngrese el ID del usuario que desea modificar: ",end="")
-        opcion_usuario = validez.validar_id(usuarios_dict)   
-        
-        #Se selecciona el elemento a modificar
-        opcion_usuario_elemento = crud.seleccionar_elemento_usuarios(opcion_usuario,usuarios_dict) 
-        
-        #Se modifica el elemento
-        crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuarios_dict)
-    
+        crud.actualizar_usuario('usuario.json')
     #Leer
     elif opcion_elegida == 4:               
         crud.leer_usuario('usuario.json')
@@ -198,26 +188,19 @@ def opcion_crud_hashtags():
 
     #Agregar
     if opcion_elegida == 1:                
-        crud.agregar_hashtag(hashtags_dict)
+        crud.agregar_hashtag('hashtag.json')
 
     #Eliminar
     elif opcion_elegida == 2:              
-        crud.leer_hashtag(hashtags_dict)
-        print("\nPara eliminar ingrese un hashtag existente: ",end="")
-        hashtag_fila= validez.hashtag_existente(hashtags_dict)
-        crud.eliminar_hashtag(hashtag_fila,hashtags_dict)
+        crud.eliminar_hashtag('hashtag.json')
 
     #Actualizar
     elif opcion_elegida == 3:              
-        crud.leer_hashtag(hashtags_dict)
-        print('\nIngres el hashtag que desea modificar: ',end="")
-        opcion_hashtag = validez.hashtag_existente(hashtags_dict)
-        opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags_dict)
-        crud.actualizar_hashtag(opcion_hashtag,opcion_hashtag_elemento,hashtags_dict)
+        crud.actualizar_hashtag('hashtag.json')
 
     #Leer
     elif opcion_elegida == 4:                        
-        crud.leer_hashtag(hashtags_dict)
+        crud.leer_hashtag('hashtag.json')
         input('Oprima enter para continuar ')
     
 def opcion_crud_publicaciones():
@@ -274,7 +257,11 @@ def __main__():
         elif opcion_menu!=-1:
             print("Opcion no valida")   
 
+
+'''En caso de que los archivos json esten vacios o no existan
+estas funciones los crea y los llena con los datos del python'''
 inicializar_diccionairo_archivo('usuario.json', usuarios_dict)
-inicializar_diccionairo_archivo('hastag.json', hashtags_dict)
+inicializar_diccionairo_archivo('hashtag.json', hashtags_dict)
+
 if __name__ == '__main__':
     __main__()
