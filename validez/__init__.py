@@ -7,8 +7,14 @@ import re
 
 #Validar numero
 def validar_numero(tipo, min_digitos=1, max_digitos=12):
+    '''Pide el ingreso de un numero entre el rsngo de digitos indicado
+    en caso de ser indicado el rango, este va a tomar un valor mminimo de 1 
+    y un valor maximo de 12'''
+    
     patron=rf"^[0-9]{{{min_digitos},{max_digitos}}}$"
+
     num = input(f"Ingrese el numero de {tipo} (entre {min_digitos} y {max_digitos} digitos): ")
+    
     while not re.match(patron,num):  #Buscar validez del numero
         num = input("Numero invalido, por favor ingrese un numero valido: ") #Pedir un nuevo numero
     return int(num)

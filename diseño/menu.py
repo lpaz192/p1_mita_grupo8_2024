@@ -8,6 +8,7 @@ def mostrar_menu():
     print("3.  Gestion de publicaciones")
     print("4.  Ordenamiento")
     print("5.  Estadisticas")
+    print('6.  Archivos')
     print("-1. Para cancelar")
-    opciones=[-1,1,2,3,4,5]
+    opciones=[-1,1,2,3,4,5,6]
     return obtener_opcion(opciones)

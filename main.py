@@ -4,9 +4,12 @@ from diseño import (crud_hashtags,
                     crud_usuarios, 
                     mostrar_menu, 
                     estadisticas, 
+                    menu_archivos,
+                    confrimar_formateo,
                     mostrar_ordenamiento)
 import crud, json, validez, random, ordenamiento
 from archivos_json import inicializar_diccionairo_archivo
+from archivos_txt import inicializar_txt
 '''
 import instaloader
 
@@ -224,6 +227,35 @@ def opcion_crud_publicaciones():
     else:
         print("Opción no válida.")
     
+def opcion_archivos():
+    opcion_elegida = menu_archivos()
+    '''En caso de que los archivos json esten vacios o no existan
+    estas funciones los crea y los llena con los datos del python'''
+    
+    #Archivos USUARIOS
+    if opcion_elegida == 1:
+        if confrimar_formateo('archivos de usuarios'):
+            inicializar_diccionairo_archivo('usuario.json', usuarios_dict)
+            input('Formateo realizado correctamente')
+        else:
+            input('Operacion cancelada')
+
+    #Archivos HASHTAG
+    elif opcion_elegida == 2:
+        if confrimar_formateo('archivos de hashtag'):
+            inicializar_diccionairo_archivo('hashtag.json', hashtags_dict)
+            input('Formateo realizado correctamente')
+        else:
+            input('Operacion cancelada')
+
+    #Archivos POSTEOS
+    elif opcion_elegida == 3:
+        if confrimar_formateo('archivos de hashtag'):
+            inicializar_txt('publicaciones.txt',posteos)    
+            input('Formateo realizado correctamente')
+        else:
+            input('Operacion cancelada')  
+                  
 #Menu principal
 def __main__():
     opcion_menu = 0
@@ -231,37 +263,34 @@ def __main__():
         opcion_menu = mostrar_menu()
         
         #----  CRUD Usuario     ----
-        if opcion_menu==1:                         
+        if opcion_menu == 1:                         
             opcion_crud_usuarios()
 
         #----  CRUD Hashtag     ----
-        elif opcion_menu==2:                       
+        elif opcion_menu == 2:                       
             opcion_crud_hashtags()
         
         #----  CRUD Publicacion ----
-        elif opcion_menu==3:                       
+        elif opcion_menu == 3:                       
             opcion_crud_publicaciones()
 
         # ---- Ordenar          ----
-        elif opcion_menu==4:                       
+        elif opcion_menu == 4:                       
             opcion = mostrar_ordenamiento()  
             if opcion == 1:
                 ordenamiento.ordenar_publicaciones(posteos) 
         
         #----  Estadisticas----
-        elif opcion_menu==5:                       
+        elif opcion_menu == 5:                       
             estadisticas()
-        
+
+        elif opcion_menu == 6:
+            opcion_archivos()
+
         elif opcion_menu==-1:
             break
         elif opcion_menu!=-1:
             print("Opcion no valida")   
-
-
-'''En caso de que los archivos json esten vacios o no existan
-estas funciones los crea y los llena con los datos del python'''
-inicializar_diccionairo_archivo('usuario.json', usuarios_dict)
-inicializar_diccionairo_archivo('hashtag.json', hashtags_dict)
 
 if __name__ == '__main__':
     __main__()
