@@ -18,6 +18,7 @@ def imprimir_posteos(posteos):
     diseño.publicaciones.parte_inferior()
 
 def agregar_publicacion(posteos, usuarios,hashtag):
+    
     id_post = validez.validar_numero('nuevo id',1,4)
     #para que no hayan dos con el mismo id
     for posteo in posteos:

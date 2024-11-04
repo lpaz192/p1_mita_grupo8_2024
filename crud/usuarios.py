@@ -88,6 +88,7 @@ def actualizar_usuario(nombre_archivo):
     
     with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
         json.dump(usuarios, archivo, indent=4)
+        
 #Funcion eliminar usuario
 def eliminar_usuario(nombre_archivo,id): 
     with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:

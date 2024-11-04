@@ -10,6 +10,7 @@ from diseño import (crud_hashtags,
 import crud, json, validez, random, ordenamiento
 from archivos_json import inicializar_diccionairo_archivo
 from archivos_txt import inicializar_txt
+
 '''
 import instaloader
 
@@ -224,8 +225,6 @@ def opcion_crud_publicaciones():
     #Leer
     elif opcion_elegida == 4:        
         crud.leer_publicaciones(posteos)
-    else:
-        print("Opción no válida.")
     
 def opcion_archivos():
     opcion_elegida = menu_archivos()
@@ -255,7 +254,7 @@ def opcion_archivos():
             input('Formateo realizado correctamente')
         else:
             input('Operacion cancelada')  
-                  
+
 #Menu principal
 def __main__():
     opcion_menu = 0
@@ -286,11 +285,6 @@ def __main__():
 
         elif opcion_menu == 6:
             opcion_archivos()
-
-        elif opcion_menu==-1:
-            break
-        elif opcion_menu!=-1:
-            print("Opcion no valida")   
 
 if __name__ == '__main__':
     __main__()
