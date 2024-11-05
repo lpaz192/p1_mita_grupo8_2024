@@ -1,4 +1,38 @@
 import diseño, validez
+
+'''
+
+
+import json
+
+def cargar_usuarios(filename='usuarios.json'):
+    try:
+        with open(filename, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
+
+def guardar_usuarios(usuarios, filename='usuarios.json'):
+    with open(filename, 'w') as file:
+        json.dump(usuarios, file)
+
+def agregar_usuario(usuarios):
+    usuarios[nuevo_id(usuarios)] = {   
+        'Usuario': validez.validar_usuario(),
+        'Seguidores': validez.validar_numero('seguidores'),
+        'Seguidos': validez.validar_numero('seguidos'),
+        'Likes': validez.validar_numero('likes'),
+        'Correo': validez.validar_mail()
+    }
+    guardar_usuarios(usuarios)
+
+
+'''
+
+
+
+
+
 nuevo_id=lambda usuarios: max(usuarios.keys())+1 if usuarios else 1
 
 #Funciones secundarias de usarios

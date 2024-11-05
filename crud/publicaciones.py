@@ -1,4 +1,31 @@
 import diseño, validez
+
+'''
+
+import json
+
+def cargar_publicaciones(filename='publicaciones.json'):
+    try:
+        with open(filename, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def guardar_publicaciones(posteos, filename='publicaciones.json'):
+    with open(filename, 'w') as file:
+        json.dump(posteos, file)
+
+def agregar_publicacion(posteos, usuarios, hashtag):
+    # como estaba antes aca, agregar
+    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, hashtag])
+    guardar_publicaciones(posteos)  # Guardar cambios en el archivo JSON
+
+
+'''
+
+
+
+
 #Funciones CRUD Publicaciones
 def imprimir_posteos(posteos):
     print("Publicaciones disponibles:")

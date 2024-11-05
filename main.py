@@ -13,6 +13,10 @@ import instaloader
 
 loader = instaloader.Instaloader()
 
+def guardar_json(datos, archivo):
+    with open(archivo, 'w', encoding='utf-8') as f:
+        json.dump(datos, f, ensure_ascii=False, indent=4)
+
 # cargar usuarios manualmente
 def cargar_usuarios():
     usuarios = []
@@ -57,6 +61,23 @@ def obtener_publicaciones(usuario):
         print(f"Error al obtener publicaciones de {usuario}: {e}")
     return publicaciones_data
 
+# obtener hashtags (parecido a las publicaciones)
+def obtener_hashtags(usuario):
+    hashtags_data = {}
+    try:
+        profile = instaloader.Profile.from_username(loader.context, usuario)
+        for post in profile.get_posts():
+            hashtags = post.caption_hashtags
+            for hashtag in hashtags:
+                if hashtag in hashtags_data:
+                    hashtags_data[hashtag] += 1
+                else:
+                    hashtags_data[hashtag] = 1
+            if len(hashtags_data) >= 10:  # solo carga 10 hashtags
+                break
+    except Exception as e:
+        print(f"Error al obtener hashtags de {usuario}: {e}")
+    return hashtags_data
 
 usuarios_a_analizar = cargar_usuarios()
 
@@ -66,6 +87,22 @@ usuarios_dict = obtener_datos_usuarios(usuarios_a_analizar)
 for usuario in usuarios_a_analizar:
     publicaciones = obtener_publicaciones(usuario)
     usuarios_dict[usuario]['Publicaciones'] = publicaciones
+
+# guardar datos de usuarios en JSON
+guardar_json(usuarios_dict, 'usuarios.json')
+
+# obtener hashtags de los usuarios
+hashtags_dict = {}
+for usuario in usuarios_a_analizar:
+    hashtags = obtener_hashtags(usuario)
+    for hashtag, count in hashtags.items():
+        if hashtag in hashtags_dict:
+            hashtags_dict[hashtag] += count
+        else:
+            hashtags_dict[hashtag] = count
+
+# guardar datos de hashtags en JSON
+guardar_json(hashtags_dict, 'hashtags.json')
 
 posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario", 'Hashtags']]
 
@@ -79,9 +116,6 @@ for usuario, data in usuarios_dict.items():
         
         posteos.append([id_post, fecha_publicacion, likes, comentarios, usuario, usuario, hashtags_id])
 
-# mostrar posts
-for post in posteos:
-    print(post)
 
 '''
 
