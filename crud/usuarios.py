@@ -1,5 +1,44 @@
+<<<<<<< HEAD
+import diseño, validez
+
+'''
+
+
+import json
+
+def cargar_usuarios(filename='usuarios.json'):
+    try:
+        with open(filename, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
+
+def guardar_usuarios(usuarios, filename='usuarios.json'):
+    with open(filename, 'w') as file:
+        json.dump(usuarios, file)
+
+def agregar_usuario(usuarios):
+    usuarios[nuevo_id(usuarios)] = {   
+        'Usuario': validez.validar_usuario(),
+        'Seguidores': validez.validar_numero('seguidores'),
+        'Seguidos': validez.validar_numero('seguidos'),
+        'Likes': validez.validar_numero('likes'),
+        'Correo': validez.validar_mail()
+    }
+    guardar_usuarios(usuarios)
+
+
+'''
+
+
+
+
+
+nuevo_id=lambda usuarios: max(usuarios.keys())+1 if usuarios else 1
+=======
 import diseño, validez, json
 nuevo_id = lambda claves: max(claves) + 1 if claves else 1
+>>>>>>> fb37805bae5d3efc6021c1a514b7faa8a305290e
 
 #Funciones secundarias de usarios
 def seleccionar_elemento_usuarios(id,usuario):
@@ -88,6 +127,7 @@ def actualizar_usuario(nombre_archivo):
     
     with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
         json.dump(usuarios, archivo, indent=4)
+        
 #Funcion eliminar usuario
 def eliminar_usuario(nombre_archivo,id): 
     with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:

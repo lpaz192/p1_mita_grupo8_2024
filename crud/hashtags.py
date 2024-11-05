@@ -1,4 +1,41 @@
+<<<<<<< HEAD
+import diseño, validez
+
+'''
+import json
+
+def cargar_hashtags(filename='hashtags.json'):
+    try:
+        with open(filename, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
+
+def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
+    with open(filename, 'w') as file:
+        json.dump(hashtags_dict, file)
+
+def agregar_hashtag(hashtag_dict):
+    print()
+    nuevo_hashtag = validez.hashtag_no_repetido(hashtag_dict)
+    hashtag_dict[nuevo_hashtag] = {
+        'Cant. posteos': validez.validar_numero('cantidad de posteos', 1, 10),
+        'Veces compartido': validez.validar_numero('veces compartido', 1, 10),
+        'Likes': validez.validar_numero('likes', 1, 10),
+    }
+    guardar_hashtags(hashtag_dict)  # Guardar cambios en el archivo JSON
+
+def leer_hashtag(hashtags_dict):
+    hashtags_dict = cargar_hashtags()
+    # aca seria igual a lo que teniamos, agregar
+
+'''
+
+
+
+=======
 import diseño, validez, json
+>>>>>>> fb37805bae5d3efc6021c1a514b7faa8a305290e
 #Funciones secundarias de Hashtags
 def selccionar_elemento_hashtag(hashtagh_opcion,hashtags_dict): 
     print(f"\n---Hashtag {hashtagh_opcion}---")
