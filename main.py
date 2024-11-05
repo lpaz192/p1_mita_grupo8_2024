@@ -7,7 +7,7 @@ from diseño import (crud_hashtags,
                     menu_archivos,
                     confrimar_formateo,
                     mostrar_ordenamiento)
-import crud, json, validez, random, ordenamiento
+import crud, validez, random, ordenamiento
 from archivos_json import inicializar_diccionairo_archivo
 from archivos_txt import inicializar_txt
 '''
@@ -255,7 +255,7 @@ def opcion_archivos():
             input('Formateo realizado correctamente')
         else:
             input('Operacion cancelada')  
-                  
+
 #Menu principal
 def __main__():
     opcion_menu = 0
