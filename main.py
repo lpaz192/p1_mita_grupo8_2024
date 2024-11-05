@@ -4,9 +4,12 @@ from diseño import (crud_hashtags,
                     crud_usuarios, 
                     mostrar_menu, 
                     estadisticas, 
+                    menu_archivos,
+                    confrimar_formateo,
                     mostrar_ordenamiento)
 import crud, json, validez, random, ordenamiento
-
+from archivos_json import inicializar_diccionairo_archivo
+from archivos_txt import inicializar_txt
 
 '''
 import instaloader
@@ -28,7 +31,7 @@ def cargar_usuarios():
         usuarios.append(usuario)
     return usuarios
 
-# bbtener datos de usuarios
+# obtener datos de usuarios
 def obtener_datos_usuarios(usuarios):
     usuarios_data = {}
     for usuario in usuarios:
@@ -180,7 +183,7 @@ hashtags_index= list(hashtags_dict.keys())
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
     id_post = str(i).zfill(3)
     while True:
-        fecha_publicacion = datetime.now().strftime('%Y-%m-%d')
+        fecha_publicacion = datetime.now().strftime('%d-%m-%Y')
         if validez.validar_fecha(fecha_publicacion):
             break
     likes = random.randint(0, 10000)
@@ -201,31 +204,21 @@ def opcion_crud_usuarios():
     #Agregar
     if opcion_elegida == 1:
         print()                   
-        crud.agregar_usuario(usuarios_dict)
+        crud.agregar_usuario('usuario.json')
 
     #Eliminar
     elif opcion_elegida == 2:                 
-        crud.leer_usuario(usuarios_dict)
-        print("\nPara eliminar ingrese un id existente: ", end="")
-        usuario_id = validez.validar_id(usuarios_dict)
-        crud.eliminar_usuario(usuario_id,usuarios_dict)
+        crud.leer_usuario('usuario.json')
+        print("\nPara eliminar un usuario ingrese el id del usuario: ", end="")
+        usuario_id = validez.validar_id('usuario.json')
+        crud.eliminar_usuario('usuario.json',usuario_id)
     
     #Actualizar
     elif opcion_elegida == 3:                 
-        crud.leer_usuario(usuarios_dict)  #Se muestra la matriz
-        #Se selecciona el usuario a modificar
-        print("\nPara actualizar ",end="")
-        opcion_usuario = validez.validar_id(usuarios_dict)   
-        
-        #Se selecciona el elemento a modificar
-        opcion_usuario_elemento = crud.seleccionar_elemento_usuarios(opcion_usuario,usuarios_dict) 
-        
-        #Se modifica el elemento
-        crud.actualizar_usuario(opcion_usuario,opcion_usuario_elemento,usuarios_dict)
-    
+        crud.actualizar_usuario('usuario.json')
     #Leer
     elif opcion_elegida == 4:               
-        crud.leer_usuario(usuarios_dict)
+        crud.leer_usuario('usuario.json')
         input('Oprima enter para continuar ')
 
 def opcion_crud_hashtags():
@@ -233,30 +226,23 @@ def opcion_crud_hashtags():
 
     #Agregar
     if opcion_elegida == 1:                
-        crud.agregar_hashtag(hashtags_dict)
+        crud.agregar_hashtag('hashtag.json')
 
     #Eliminar
     elif opcion_elegida == 2:              
-        crud.leer_hashtag(hashtags_dict)
-        print("\nPara eliminar ingrese un hashtag existente: ",end="")
-        hashtag_fila= validez.hashtag_existente(hashtags_dict)
-        crud.eliminar_hashtag(hashtag_fila,hashtags_dict)
+        crud.eliminar_hashtag('hashtag.json')
 
     #Actualizar
     elif opcion_elegida == 3:              
-        crud.leer_hashtag(hashtags_dict)
-        print('\nIngres el hashtag que desea modificar: ',end="")
-        opcion_hashtag = validez.hashtag_existente(hashtags_dict)
-        opcion_hashtag_elemento = crud.selccionar_elemento_hashtag(opcion_hashtag,hashtags_dict)
-        crud.actualizar_hashtag(opcion_hashtag,opcion_hashtag_elemento,hashtags_dict)
+        crud.actualizar_hashtag('hashtag.json')
 
     #Leer
     elif opcion_elegida == 4:                        
-        crud.leer_hashtag(hashtags_dict)
+        crud.leer_hashtag('hashtag.json')
         input('Oprima enter para continuar ')
     
 def opcion_crud_publicaciones():
-    opcion_elegida=crud_publicacion()
+    opcion_elegida = crud_publicacion()
 
     #Agregar
     if opcion_elegida == 1:          
@@ -273,42 +259,66 @@ def opcion_crud_publicaciones():
     #Leer
     elif opcion_elegida == 4:        
         crud.leer_publicaciones(posteos)
-    else:
-        print("Opción no válida.")
     
+def opcion_archivos():
+    opcion_elegida = menu_archivos()
+    '''En caso de que los archivos json esten vacios o no existan
+    estas funciones los crea y los llena con los datos del python'''
+    
+    #Archivos USUARIOS
+    if opcion_elegida == 1:
+        if confrimar_formateo('archivos de usuarios'):
+            inicializar_diccionairo_archivo('usuario.json', usuarios_dict)
+            input('Formateo realizado correctamente')
+        else:
+            input('Operacion cancelada')
+
+    #Archivos HASHTAG
+    elif opcion_elegida == 2:
+        if confrimar_formateo('archivos de hashtag'):
+            inicializar_diccionairo_archivo('hashtag.json', hashtags_dict)
+            input('Formateo realizado correctamente')
+        else:
+            input('Operacion cancelada')
+
+    #Archivos POSTEOS
+    elif opcion_elegida == 3:
+        if confrimar_formateo('archivos de hashtag'):
+            inicializar_txt('publicaciones.txt',posteos)    
+            input('Formateo realizado correctamente')
+        else:
+            input('Operacion cancelada')  
+
 #Menu principal
 def __main__():
-    opcion_menu=0
-    while opcion_menu!=-1:
+    opcion_menu = 0
+    while opcion_menu != -1:
         opcion_menu = mostrar_menu()
         
         #----  CRUD Usuario     ----
-        if opcion_menu==1:                         
+        if opcion_menu == 1:                         
             opcion_crud_usuarios()
 
         #----  CRUD Hashtag     ----
-        elif opcion_menu==2:                       
+        elif opcion_menu == 2:                       
             opcion_crud_hashtags()
         
         #----  CRUD Publicacion ----
-        elif opcion_menu==3:                       
+        elif opcion_menu == 3:                       
             opcion_crud_publicaciones()
 
         # ---- Ordenar          ----
-        elif opcion_menu==4:                       
+        elif opcion_menu == 4:                       
             opcion = mostrar_ordenamiento()  
             if opcion == 1:
                 ordenamiento.ordenar_publicaciones(posteos) 
         
         #----  Estadisticas----
-        elif opcion_menu==5:                       
+        elif opcion_menu == 5:                       
             estadisticas()
-        
-        elif opcion_menu==-1:
-            break
-        elif opcion_menu!=-1:
-            print("Opcion no valida")   
 
+        elif opcion_menu == 6:
+            opcion_archivos()
 
 if __name__ == '__main__':
     __main__()

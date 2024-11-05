@@ -1,0 +1,86 @@
+{
+    "1": {
+        "Usuario": "Martinn",
+        "Seguidores": 234,
+        "Seguidos": 200,
+        "Likes": 100,
+        "Correo": "martincho@outlook.com"
+    },
+    "2": {
+        "Usuario": "Diego.lopez",
+        "Seguidores": 2000,
+        "Seguidos": 800,
+        "Likes": 1000,
+        "Correo": "diegolopez@gmail.com"
+    },
+    "3": {
+        "Usuario": "carlaa_",
+        "Seguidores": 5000,
+        "Seguidos": 500,
+        "Likes": 8000,
+        "Correo": "carlaguilar@gmail.com"
+    },
+    "4": {
+        "Usuario": "Marcediaz",
+        "Seguidores": 200,
+        "Seguidos": 1000,
+        "Likes": 100,
+        "Correo": "marcelodiaz12@hotmail.com"
+    },
+    "5": {
+        "Usuario": "gasparlab",
+        "Seguidores": 600,
+        "Seguidos": 300,
+        "Likes": 200,
+        "Correo": "gasparlabastie@gmail.com"
+    },
+    "6": {
+        "Usuario": "maria.jones",
+        "Seguidores": 1200,
+        "Seguidos": 450,
+        "Likes": 500,
+        "Correo": "mjones@hotmail.com"
+    },
+    "7": {
+        "Usuario": "Lucas12",
+        "Seguidores": 1800,
+        "Seguidos": 750,
+        "Likes": 900,
+        "Correo": "lucas12@domain.com"
+    },
+    "8": {
+        "Usuario": "AnaPerez",
+        "Seguidores": 2500,
+        "Seguidos": 1100,
+        "Likes": 1200,
+        "Correo": "anaperez@domain.org"
+    },
+    "9": {
+        "Usuario": "JuanP",
+        "Seguidores": 1500,
+        "Seguidos": 400,
+        "Likes": 850,
+        "Correo": "juanp@correo.com"
+    },
+    "10": {
+        "Usuario": "CamiloG_",
+        "Seguidores": 800,
+        "Seguidos": 600,
+        "Likes": 300,
+        "Correo": "camilogomez@gmail.com"
+    },
+    "11": {
+        "Usuario": "nati.fernandez",
+        "Seguidores": 1700,
+        "Seguidos": 1000,
+        "Likes": 1200,
+        "Correo": "nati_fernandez@yahoo.com"
+    },
+    "12": {
+        "Usuario": "David_89",
+        "Seguidores": 3500,
+        "Seguidos": 1500,
+        "Likes": 2500,
+        "Correo": "david89@gmail.com"
+    }
+}
