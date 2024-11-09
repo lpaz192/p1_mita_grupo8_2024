@@ -26,4 +26,4 @@ def calcular_metricas(usuarios_file, hashtags_file):
     print(f"Total de uso de hashtags: {total_uso_hashtags}")
 
 if __name__ == '__main__':
-    calcular_metricas('usuarios.json', 'hashtags.json')
+    calcular_metricas('usuario.json', 'hashtag.json')

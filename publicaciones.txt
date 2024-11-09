@@ -1,4 +1,4 @@
-ID Post                 Fecha de publicación    Cantidad de likes       Cantidad de comentarios ID Usuario              Usuario                 Hashtag                 
+ID-Post                 Fecha-de-publicación    Cantidad-de-likes       Cantidad-de-comentarios ID-Usuario              Usuario                 Hashtag                 
 001                     02-11-2024              5393                    499                     12                      David_89                #Recetas                
 002                     02-11-2024              7990                    830                     5                       gasparlab               #TechNews               
 003                     02-11-2024              6072                    846                     9                       JuanP                   #VueltaAlCole           

@@ -204,21 +204,21 @@ def opcion_crud_usuarios():
     #Agregar
     if opcion_elegida == 1:
         print()                   
-        crud.agregar_usuario('usuario.json')
+        crud.agregar_usuario('usuarios.json')
 
     #Eliminar
     elif opcion_elegida == 2:                 
-        crud.leer_usuario('usuario.json')
+        crud.leer_usuario('usuarios.json')
         print("\nPara eliminar un usuario ingrese el id del usuario: ", end="")
-        usuario_id = validez.validar_id('usuario.json')
-        crud.eliminar_usuario('usuario.json',usuario_id)
+        usuario_id = validez.validar_id('usuarios.json')
+        crud.eliminar_usuario('usuarios.json',usuario_id)
     
     #Actualizar
     elif opcion_elegida == 3:                 
-        crud.actualizar_usuario('usuario.json')
+        crud.actualizar_usuario('usuarios.json')
     #Leer
     elif opcion_elegida == 4:               
-        crud.leer_usuario('usuario.json')
+        crud.leer_usuario('usuarios.json')
         input('Oprima enter para continuar ')
 
 def opcion_crud_hashtags():
@@ -226,19 +226,19 @@ def opcion_crud_hashtags():
 
     #Agregar
     if opcion_elegida == 1:                
-        crud.agregar_hashtag('hashtag.json')
+        crud.agregar_hashtag('hashtags.json')
 
     #Eliminar
     elif opcion_elegida == 2:              
-        crud.eliminar_hashtag('hashtag.json')
+        crud.eliminar_hashtag('hashtags.json')
 
     #Actualizar
     elif opcion_elegida == 3:              
-        crud.actualizar_hashtag('hashtag.json')
+        crud.actualizar_hashtag('hashtags.json')
 
     #Leer
     elif opcion_elegida == 4:                        
-        crud.leer_hashtag('hashtag.json')
+        crud.leer_hashtag('hashtags.json')
         input('Oprima enter para continuar ')
     
 def opcion_crud_publicaciones():
@@ -246,19 +246,19 @@ def opcion_crud_publicaciones():
 
     #Agregar
     if opcion_elegida == 1:          
-        crud.agregar_publicacion(posteos, usuarios_dict, hashtags_dict)
+        crud.agregar_publicacion('publicaciones.txt', usuarios_dict, hashtags_dict)
     
     #Eliminar
     elif opcion_elegida == 2:        
-        crud.eliminar_publicacion(posteos)
+        crud.eliminar_publicacion('publicaciones.txt')
     
     #Actualizar
     elif opcion_elegida == 3:        
-        crud.actualizar_publicacion(posteos, usuarios_dict)
+        crud.actualizar_publicacion('publicaciones.txt', usuarios_dict)
     
     #Leer
     elif opcion_elegida == 4:        
-        crud.leer_publicaciones(posteos)
+        crud.leer_publicaciones('publicaciones.txt')
     
 def opcion_archivos():
     opcion_elegida = menu_archivos()
@@ -268,7 +268,7 @@ def opcion_archivos():
     #Archivos USUARIOS
     if opcion_elegida == 1:
         if confrimar_formateo('archivos de usuarios'):
-            inicializar_diccionairo_archivo('usuario.json', usuarios_dict)
+            inicializar_diccionairo_archivo('usuarios.json', usuarios_dict)
             input('Formateo realizado correctamente')
         else:
             input('Operacion cancelada')
@@ -276,7 +276,7 @@ def opcion_archivos():
     #Archivos HASHTAG
     elif opcion_elegida == 2:
         if confrimar_formateo('archivos de hashtag'):
-            inicializar_diccionairo_archivo('hashtag.json', hashtags_dict)
+            inicializar_diccionairo_archivo('hashtags.json', hashtags_dict)
             input('Formateo realizado correctamente')
         else:
             input('Operacion cancelada')

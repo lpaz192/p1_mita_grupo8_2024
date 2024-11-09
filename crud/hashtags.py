@@ -1,41 +1,16 @@
-<<<<<<< HEAD
-import diseño, validez
-
-'''
-import json
+import diseño, validez, json
 
 def cargar_hashtags(filename='hashtags.json'):
     try:
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding='UTF-8') as file:
             return json.load(file)
     except FileNotFoundError:
         return {}
 
 def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
-    with open(filename, 'w') as file:
-        json.dump(hashtags_dict, file)
+    with open(filename, 'w', encoding='UTF-8') as file:
+        json.dump(hashtags_dict, file, indent = 4)
 
-def agregar_hashtag(hashtag_dict):
-    print()
-    nuevo_hashtag = validez.hashtag_no_repetido(hashtag_dict)
-    hashtag_dict[nuevo_hashtag] = {
-        'Cant. posteos': validez.validar_numero('cantidad de posteos', 1, 10),
-        'Veces compartido': validez.validar_numero('veces compartido', 1, 10),
-        'Likes': validez.validar_numero('likes', 1, 10),
-    }
-    guardar_hashtags(hashtag_dict)  # Guardar cambios en el archivo JSON
-
-def leer_hashtag(hashtags_dict):
-    hashtags_dict = cargar_hashtags()
-    # aca seria igual a lo que teniamos, agregar
-
-'''
-
-
-
-=======
-import diseño, validez, json
->>>>>>> fb37805bae5d3efc6021c1a514b7faa8a305290e
 #Funciones secundarias de Hashtags
 def selccionar_elemento_hashtag(hashtagh_opcion,hashtags_dict): 
     print(f"\n---Hashtag {hashtagh_opcion}---")
@@ -47,8 +22,7 @@ def selccionar_elemento_hashtag(hashtagh_opcion,hashtags_dict):
     
 #Funciones CRUD Hashtags
 def agregar_hashtag(nombre_archivo):      #Agregar
-    with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
-        hashtags = json.load(archivo)
+    hashtags = cargar_hashtags(nombre_archivo)
 
     nuevo_hashtag = validez.hashtag_no_repetido(hashtags)
     hashtags[nuevo_hashtag] = {
@@ -56,13 +30,10 @@ def agregar_hashtag(nombre_archivo):      #Agregar
         'Veces compartido':validez.validar_numero('veces compartido',1,10),
         'Likes'           :validez.validar_numero('likes',1,10),
     }
-
-    with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
-        json.dump(hashtags, archivo, indent = 4)
+    guardar_hashtags(hashtags, nombre_archivo)
 
 def leer_hashtag(nombre_archivo):
-    with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
-        hashtags = json.load(archivo)
+    hashtags = cargar_hashtags(nombre_archivo)
 
     hashtag_keys = list(hashtags.keys())
     
@@ -81,11 +52,12 @@ def leer_hashtag(nombre_archivo):
     diseño.hashtags.parte_inferior()
 
 def actualizar_hashtag(nombre_archivo):
+
     leer_hashtag(nombre_archivo)
+    
     print('\nIngres el hashtag que desea modificar: ',end="")
     
-    with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
-        hashtags = json.load(archivo)
+    hashtags = cargar_hashtags(nombre_archivo)
     
     opcion_hashtag = validez.hashtag_existente(hashtags)
     elemento_elegido = selccionar_elemento_hashtag(opcion_hashtag,hashtags)
@@ -102,18 +74,15 @@ def actualizar_hashtag(nombre_archivo):
     else:
         hashtags[opcion_hashtag]['Likes']=validez.validar_numero('likes',1,10)
 
-    with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
-        json.dump(hashtags, archivo, indent = 4)
+    guardar_hashtags(hashtags, nombre_archivo)
 
 def eliminar_hashtag(nombre_archivo):
-    with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
-        hashtags = json.load(archivo)
+    hashtags = cargar_hashtags(nombre_archivo)
 
-    leer_hashtag('hashtag.json')
+    leer_hashtag('hashtags.json')
     print("\nPara eliminar ingrese un hashtag existente: ",end="")
     hashtag_eliminar = validez.hashtag_existente(hashtags)
     
     hashtags.pop(hashtag_eliminar)
 
-    with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
-        json.dump(hashtags, archivo, indent = 4)
+    guardar_hashtags(hashtags, nombre_archivo)

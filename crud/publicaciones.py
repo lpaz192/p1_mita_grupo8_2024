@@ -1,21 +1,23 @@
-import diseño, validez
-<<<<<<< HEAD
-
-'''
-
-import json
-
-def cargar_publicaciones(filename='publicaciones.json'):
+import diseño, validez, re
+from .hashtags import cargar_hashtags
+def cargar_publicaciones(filename='publicaciones.txt'):
+    posteos = []
     try:
-        with open(filename, 'r') as file:
-            return json.load(file)
+        with open(filename, 'r', encoding='UTF-8') as file:
+            for linea in file:
+                datos = re.split(r'\s+', linea.strip())
+                posteos.append(datos)
+            return posteos
     except FileNotFoundError:
         return []
 
-def guardar_publicaciones(posteos, filename='publicaciones.json'):
-    with open(filename, 'w') as file:
-        json.dump(posteos, file)
-
+def guardar_publicaciones(posteos, filename='publicaciones.txt'):
+    with open(filename, 'w', encoding='UTF-8') as arch:
+        for fila in posteos:
+            linea = ''.join([str(dato).ljust(24, ' ') for dato in fila])
+            arch.write(linea + '\n')
+    
+'''
 def agregar_publicacion(posteos, usuarios, hashtag):
     # como estaba antes aca, agregar
     posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, hashtag])
@@ -24,12 +26,7 @@ def agregar_publicacion(posteos, usuarios, hashtag):
 
 '''
 
-
-
-
-=======
 from crud import leer_usuario
->>>>>>> fb37805bae5d3efc6021c1a514b7faa8a305290e
 #Funciones CRUD Publicaciones
 def imprimir_posteos(posteos):
     print("Publicaciones disponibles:")
@@ -47,8 +44,9 @@ def imprimir_posteos(posteos):
             
     diseño.publicaciones.parte_inferior()
 
-def agregar_publicacion(posteos, usuarios,hashtag):
-    
+def agregar_publicacion(nombre_archivo, usuarios, hashtag):
+    posteos = cargar_publicaciones(nombre_archivo)
+
     id_post = validez.validar_numero('nuevo id',1,4)
     #para que no hayan dos con el mismo id
     for posteo in posteos:
@@ -81,7 +79,7 @@ def agregar_publicacion(posteos, usuarios,hashtag):
     print("Para seleccionar el usuario que realizo la publicacion")
     print("Por favor, ingrese el numero de id del usuario o selecciones -1 para ver la tabla: ", end="")
     
-    id_usuario = validez.validar_id(usuarios)
+    id_usuario = validez.validar_id('usuarios.json')
 
     usuario = usuarios[id_usuario]['Usuario']
     
@@ -91,7 +89,7 @@ def agregar_publicacion(posteos, usuarios,hashtag):
     posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, hashtag])
     print("Publicación agregada exitosamente.")
 
-def eliminar_publicacion(posteos):
+def eliminar_publicacion(nombre_archivo, posteos):
 
     imprimir_posteos(posteos)
 
@@ -106,7 +104,7 @@ def eliminar_publicacion(posteos):
     #pero si no lo encuentra no hace return y tira la alerta
     print("ID de publicación no encontrado.")
 
-def actualizar_publicacion(posteos, usuarios):
+def actualizar_publicacion(nombre_archivo, posteos, usuarios):
 
     imprimir_posteos(posteos)
 
@@ -175,7 +173,10 @@ def actualizar_publicacion(posteos, usuarios):
 
     print("Publicación actualizada exitosamente.")
 
-def leer_publicaciones(posteos):
+def leer_publicaciones(nombre_archivo):
+    posteos = cargar_publicaciones(nombre_archivo)
+    print(posteos)
+    
     print("1. Ver una publicación específica")
     print("2. Ver todas las publicaciones")
     opcion = input("Seleccione una opción: ")
