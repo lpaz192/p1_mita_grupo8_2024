@@ -2,6 +2,8 @@ import diseño, validez, json
 
 #Administracion de archivos json
 def cargar_usuarios(filename='usuarios.json'):
+    '''Recibe el nombre del archivo y lo intenta abrir
+    si no recibe ningún nombre abre el archivo "usuarios.json" '''
     try:
         with open(filename, 'r', encoding='UTF-8') as file:
             return json.load(file)
@@ -9,6 +11,8 @@ def cargar_usuarios(filename='usuarios.json'):
         return {}
 
 def guardar_usuarios(usuarios, filename='usuarios.json'):
+    '''Recibe el nombre del archivo a cerrar
+    en caso de no recibir nombre cierra el archivo "usuarios.json" '''
     with open(filename, 'w', encoding='UTF-8') as file:
         json.dump(usuarios, file, indent = 4)
 
@@ -36,6 +40,8 @@ def agregar_usuario(nombre_archivo):
    
     usuarios = cargar_usuarios()
     
+    print('---Agregar Usuario---')
+
     claves = [int(ids) for ids in usuarios] 
     usuarios[nuevo_id(claves)] = {   
         'Usuario':    validez.validar_usuario(usuarios),
@@ -48,7 +54,8 @@ def agregar_usuario(nombre_archivo):
     guardar_usuarios(usuarios)
    
 #Funcion leer usuario
-def leer_usuario(nombre_archivo):        
+def leer_usuario(nombre_archivo): 
+    '''Muestra los valores del diccionario en forma de tabla'''       
     usuarios = cargar_usuarios(nombre_archivo)
 
     diseño.usuarios.parte_superior()
@@ -76,6 +83,7 @@ def actualizar_usuario(nombre_archivo):
     
     leer_usuario('usuarios.json')  #Se muestra la matriz
     #Se selecciona el usuario a modificar
+    print('---Actualización de Usuario---')
     print("\nIngrese el ID del usuario que desea modificar: ",end="")
     opcion_usuario = validez.validar_id('usuarios.json')   
     

@@ -1,10 +1,12 @@
+from crud import cargar_usuarios
 import re, json
-patron_mail = r"^[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+patron_mail    = r"^[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 patron_usuario = r"[a-zA-Z_0-9]{2,15}$"
 
 #Funciones lambda
-comprobar_usuario= lambda nombre:re.match(patron_usuario,nombre)
-comprobar_mail=lambda mail:re.match(patron_mail,mail)
+comprobar_usuario = lambda nombre:re.match(patron_usuario,nombre)
+comprobar_mail    = lambda mail:re.match(patron_mail,mail)
+
 #Comparar usuario
 def comparar_usuario(nombre_usuario, usuarios):
     for usuario_id, datos in usuarios.items():
@@ -12,6 +14,7 @@ def comparar_usuario(nombre_usuario, usuarios):
             return True
          
     return False
+
 #Validar usuario
 def validar_usuario(usuario_dict):
     ''''Pide un ingreso de usuario, en caso de que sea invalido 
@@ -39,8 +42,8 @@ def validar_mail():
 
 #Validar id
 def validar_id(nombre_archivo):
-    with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
-        usuarios = json.load(archivo)
+    usuarios = cargar_usuarios(nombre_archivo)
+    
     ids = usuarios.keys()
     while True:
         id_existente = input()

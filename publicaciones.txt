@@ -1,0 +1,11 @@
+ID-Post                 Fecha-de-publicación    Cantidad-de-likes       Cantidad-de-comentarios ID-Usuario              Usuario                 Hashtag                 
+0001                    12-11-2024              7222                    908                     12                      David_89                #FitnessGoals           
+0002                    12-11-2024              2767                    263                     11                      nati.fernandez          #UADE                   
+0003                    12-11-2024              4542                    760                     2                       Diego.lopez             #TechNews               
+0004                    12-11-2024              4407                    649                     7                       Lucas12                 #ArteDigital            
+0005                    12-11-2024              6112                    782                     4                       Marcediaz               #Feriado                
+0006                    12-11-2024              9833                    32                      10                      CamiloG_                #UADE                   
+0007                    12-11-2024              9035                    210                     5                       gasparlab               #Viajes2024             
+0008                    12-11-2024              8126                    3                       12                      David_89                #CineFan                
+0009                    12-11-2024              2484                    604                     11                      nati.fernandez          #Viajes2024             
+0010                    12-11-2024              8405                    423                     4                       Marcediaz               #Feriado                

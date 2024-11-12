@@ -1,6 +1,8 @@
 import diseño, validez, json
 
 def cargar_hashtags(filename='hashtags.json'):
+    '''Recibe el nombre del archivo y lo intenta abrir
+    si no recibe ningún nombre abre el archivo "hashtags.json" '''
     try:
         with open(filename, 'r', encoding='UTF-8') as file:
             return json.load(file)
@@ -8,6 +10,8 @@ def cargar_hashtags(filename='hashtags.json'):
         return {}
 
 def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
+    '''Recibe el nombre del archivo a cerrar
+    en caso de no recibir nombre cierra el archivo "hashtags.json" '''
     with open(filename, 'w', encoding='UTF-8') as file:
         json.dump(hashtags_dict, file, indent = 4)
 
@@ -22,8 +26,10 @@ def selccionar_elemento_hashtag(hashtagh_opcion,hashtags_dict):
     
 #Funciones CRUD Hashtags
 def agregar_hashtag(nombre_archivo):      #Agregar
+    '''Pide el ingreso de los datos de un nuevo hashtag no repetido'''
     hashtags = cargar_hashtags(nombre_archivo)
 
+    print('\n---Agregar Hashtag---')
     nuevo_hashtag = validez.hashtag_no_repetido(hashtags)
     hashtags[nuevo_hashtag] = {
         'Cant. posteos'   :validez.validar_numero('cantidad de posteos',1,10),
@@ -33,6 +39,7 @@ def agregar_hashtag(nombre_archivo):      #Agregar
     guardar_hashtags(hashtags, nombre_archivo)
 
 def leer_hashtag(nombre_archivo):
+    '''Muestra los valores del diccionario en forma de tabla'''
     hashtags = cargar_hashtags(nombre_archivo)
 
     hashtag_keys = list(hashtags.keys())
@@ -52,7 +59,6 @@ def leer_hashtag(nombre_archivo):
     diseño.hashtags.parte_inferior()
 
 def actualizar_hashtag(nombre_archivo):
-
     leer_hashtag(nombre_archivo)
     
     print('\nIngres el hashtag que desea modificar: ',end="")

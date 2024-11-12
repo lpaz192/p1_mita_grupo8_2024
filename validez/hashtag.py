@@ -30,4 +30,4 @@ def hashtag_existente(hashtag_dict):
         if hashtag in hashtag_dict:
             return hashtag
         else:
-            hashtag=input("El hashtag ingresado no existe, por favor ingrese un hashtag existente: ")
+            hashtag = input("El hashtag ingresado no existe, por favor ingrese un hashtag existente: ")

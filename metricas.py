@@ -13,41 +13,41 @@ def mostrar_metricas_usuarios(usuarios_dict):
         print("No hay usuarios registrados.")
         return
     
-    total_usuarios = len(usuarios_dict)
+    total_usuarios   = len(usuarios_dict)
     total_seguidores = sum(user['Seguidores'] for user in usuarios_dict.values())
-    total_seguidos = sum(user['Seguidos'] for user in usuarios_dict.values())
-    total_likes = sum(user['Likes'] for user in usuarios_dict.values())
+    total_seguidos   = sum(user['Seguidos'] for user in usuarios_dict.values())
+    total_likes      = sum(user['Likes'] for user in usuarios_dict.values())
     
     promedio_seguidores = total_seguidores / total_usuarios if total_usuarios else 0
-    promedio_seguidos = total_seguidos / total_usuarios if total_usuarios else 0
-    promedio_likes = total_likes / total_usuarios if total_usuarios else 0
+    promedio_seguidos   = total_seguidos / total_usuarios if total_usuarios else 0
+    promedio_likes      = total_likes / total_usuarios if total_usuarios else 0
     
     print("\n** Métricas de Usuarios **")
-    print(f"Total de usuarios: {total_usuarios}")
-    print(f"Total de seguidores: {total_seguidores}")
-    print(f"Total de seguidos: {total_seguidos}")
-    print(f"Total de likes: {total_likes}")
-    print(f"Promedio de seguidores por usuario: {promedio_seguidores:.2f}")
-    print(f"Promedio de seguidos por usuario: {promedio_seguidos:.2f}")
-    print(f"Promedio de likes por usuario: {promedio_likes:.2f}")
+    print(f"Total de usuarios:     {total_usuarios}")
+    print(f"Total de seguidores:   {total_seguidores}")
+    print(f"Total de seguidos:     {total_seguidos}")
+    print(f"Total de likes:        {total_likes}")
+    print(f"Promedio de seguidores por usuario:  {promedio_seguidores:.2f}")
+    print(f"Promedio de seguidos por usuario:    {promedio_seguidos:.2f}")
+    print(f"Promedio de likes por usuario:       {promedio_likes:.2f}")
 
 def mostrar_metricas_posts(posteos):
     if not posteos:
         print("No hay publicaciones registradas.")
         return
     
-    total_publicaciones = len(posteos)
-    total_likes = sum(int(post[2]) for post in posteos)
-    total_comentarios = sum(int(post[3]) for post in posteos)
+    total_publicaciones =  len(posteos)
+    total_likes =          sum(int(post[2]) for post in posteos)
+    total_comentarios =    sum(int(post[3]) for post in posteos)
     
-    promedio_likes = total_likes / total_publicaciones if total_publicaciones else 0
+    promedio_likes       = total_likes / total_publicaciones if total_publicaciones else 0
     promedio_comentarios = total_comentarios / total_publicaciones if total_publicaciones else 0
     
     print("\n** Métricas de Publicaciones **")
-    print(f"Total de publicaciones: {total_publicaciones}")
-    print(f"Total de likes: {total_likes}")
-    print(f"Total de comentarios: {total_comentarios}")
-    print(f"Promedio de likes por publicación: {promedio_likes:.2f}")
+    print(f"Total de publicaciones:  {total_publicaciones}")
+    print(f"Total de likes:          {total_likes}")
+    print(f"Total de comentarios:    {total_comentarios}")
+    print(f"Promedio de likes por publicación:       {promedio_likes:.2f}")
     print(f"Promedio de comentarios por publicación: {promedio_comentarios:.2f}")
 
 def menu_estadisticas(usuarios_dict, posteos):

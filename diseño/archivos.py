@@ -11,7 +11,11 @@ def menu_archivos():
     return obtener_opcion(opciones)
 
 def confrimar_formateo(tipo):
-    respuesta = input(f'¿Estas seguro que deseas recetear {tipo}? (y/n): ').lower()
+    '''Esta funcion pide una validación extra antes de realizar una operacion
+    devuelve True si la respues es Y/y
+    devuelve False si la respuesta es N/n
+    '''
+    respuesta = input(f'¿Estas seguro que deseas recetear los {tipo}? (y/n): ').lower()
     while not respuesta in ('y','n'):
         respuesta = input('Por favor ingrese uno de los valores solicitados: ').lower()
     if respuesta == 'n':

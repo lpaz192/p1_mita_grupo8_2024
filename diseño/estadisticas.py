@@ -1,4 +1,5 @@
 from validez import obtener_opcion
+
 #Diseño Estadisticas
 def estadisticas():
     print("\n---Estadisticas---")

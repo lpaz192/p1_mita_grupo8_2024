@@ -180,7 +180,7 @@ hashtags_dict={
 }
 
 #Crear posteos / Estructura principal de posteos
-posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad de comentarios", "ID Usuario", "Usuario",'Hashtag']]
+posteos = [["ID-Post", "Fecha-de-publicación", "Cantidad-de-likes", "Cantidad-de-comentarios", "ID-Usuario", "Usuario",'Hashtag']]
 
 hashtags_index= list(hashtags_dict.keys())
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
@@ -200,7 +200,11 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
 
     posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario,hashtags_id])
 
+
+#Inicializador de archivos
 def iniciar_archivo(nombre_archivo, diccionario):
+    '''Intenta abrir el archivo
+    en caso de que no exista o este vacio lo crea y lo llena'''
     try:
         with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
             datos = json.load(archivo)
@@ -209,6 +213,8 @@ def iniciar_archivo(nombre_archivo, diccionario):
             json.dump(diccionario, archivo, indent=4)
 
 def iniciar_publicaciones(nombre_archivo, matriz):
+    '''Intenta abrir el archivo
+    en caso de que no exista o este vacio lo crea y lo llena'''
     try:
         with open(nombre_archivo, 'r',encoding='UTF-8') as arch:
             contenido = arch.read().strip()
@@ -306,7 +312,7 @@ def opcion_archivos():
 
     #Archivos POSTEOS
     elif opcion_elegida == 3:
-        if confrimar_formateo('archivos de hashtag'):
+        if confrimar_formateo('archivos de publicaiones'):
             inicializar_txt('publicaciones.txt',posteos)    
             input('Formateo realizado correctamente')
         else:
@@ -336,7 +342,7 @@ def __main__():
             if opcion == 1:
                 ordenamiento.ordenar_publicaciones(posteos) 
         
-        #----  Estadisticas----
+        #----  Estadisticas     ----
         elif opcion_menu == 5:                       
             usuarios_dict = cargar_usuarios('usuarios.json')  # Esto carga los usuarios
             posteos = cargar_publicaciones('publicaciones.txt')  # Esto carga las publicaciones
@@ -350,7 +356,8 @@ def __main__():
         elif opcion_menu == 6:
             opcion_archivos()
 
-
+'''En caso de que no existan o esten vacios los archivos 
+se incializan y se llenan'''
 iniciar_archivo('usuarios.json', usuarios_dict)
 iniciar_archivo('hashtags.json', hashtags_dict)
 iniciar_publicaciones('publicaciones.txt', posteos)

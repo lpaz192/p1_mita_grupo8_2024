@@ -1,6 +1,26 @@
 import diseño, validez, re
 from crud import leer_usuario,leer_hashtag, cargar_hashtags, cargar_usuarios
 
+def cargar_publicaciones(filename='publicaciones.txt'):
+    '''Recibe el nombre del archivo y lo intenta abrir
+    si no recibe ningún nombre abre el archivo "publicacines.txt" '''
+    posteos = []
+    with open(filename, 'r', encoding='UTF-8') as file:
+        for linea in file:
+            datos = re.split(r'\s+', linea.strip())
+            posteos.append(datos)
+        return posteos
+
+def guardar_publicaciones(posteos, filename='publicaciones.txt'):
+    '''Recibe el nombre del archivo a cerrar
+    en caso de no recibir nombre cierra el archivo "publicaciones.json" '''
+    with open(filename, 'w', encoding='UTF-8') as arch:
+        for fila in posteos:
+            linea = ''.join([str(dato).ljust(24, ' ') for dato in fila])
+            arch.write(linea + '\n')
+
+nuevo_id = lambda claves: max(claves) + 1 if claves else 1
+
 def selccionar_elemento_publicaciones(posteos, id_post): 
     print(f'\n---Publicación con id: {id_post}---')
     print(f'1. Likes:                {posteos[id_post][2]}')
@@ -10,39 +30,7 @@ def selccionar_elemento_publicaciones(posteos, id_post):
     opciones=[1,2,3,4]
     return validez.obtener_opcion(opciones)
 
-def cargar_publicaciones(filename='publicaciones.txt'):
-    posteos = []
-    with open(filename, 'r', encoding='UTF-8') as file:
-        for linea in file:
-            datos = re.split(r'\s+', linea.strip())
-            posteos.append(datos)
-        return posteos
-
-def guardar_publicaciones(posteos, filename='publicaciones.txt'):
-    with open(filename, 'w', encoding='UTF-8') as arch:
-        for fila in posteos:
-            linea = ''.join([str(dato).ljust(24, ' ') for dato in fila])
-            arch.write(linea + '\n')
-
-nuevo_id = lambda claves: max(claves) + 1 if claves else 1
-
 #Funciones CRUD Publicaciones
-def imprimir_posteos(posteos):
-    print("Publicaciones disponibles:")
-    
-    diseño.publicaciones.parte_superior()
-    diseño.publicaciones.encabezado()
-    
-    for i in range(1, len(posteos)):  # Comienza desde el índice 1
-        if i == len(posteos) - 1:
-            diseño.publicaciones.parte_conectiva()
-            diseño.publicaciones.mostrar(*posteos[i])
-        else:   
-            diseño.publicaciones.parte_conectiva()
-            diseño.publicaciones.mostrar(*posteos[i])
-            
-    diseño.publicaciones.parte_inferior()
-
 def agregar_publicacion(archivo_posteo, archivo_usuario, archivo_hashtag):
     posteos = cargar_publicaciones(archivo_posteo)
     usuarios = cargar_usuarios(archivo_usuario)
@@ -50,22 +38,23 @@ def agregar_publicacion(archivo_posteo, archivo_usuario, archivo_hashtag):
 
     claves = [int(fill[0]) for fill in usuarios] 
     id_post = nuevo_id(claves)
-
+    print('\n---Agregar Publicación')
     while True:
-        fecha_publicacion = input("Ingrese la fecha de la publicación (DD-MM-YYYY): ")
+        fecha_publicacion = input('Ingrese la fecha de la publicación (DD-MM-YYYY): ')
         if validez.validar_fecha(fecha_publicacion):
             break
         else:
-            print("Fecha inválida, por favor ingrese una fecha en formato válido (DD-MM-YYYY).")
+            print('Fecha inválida, por favor ingrese una fecha en formato válido (DD-MM-YYYY).')
     
     
     likes = validez.validar_numero('likes')
     comentarios = validez.validar_numero('cantidad de comentarios')
 
-    print("Para seleccionar el usuario que realizo la publicacion")
-    print("Por favor, ingrese el numero de id del usuario o seleccione -1 para ver la tabla: ")
+    print('Para seleccionar el usuario que realizo la publicacion')
+    print('Ingrese el numero de id del usuario o seleccione -1 para ver la tabla: ')
     
-    opciones = [-1,usuarios.keys()]
+    opciones = [key for key in usuarios.keys()]
+    opciones = opciones.append(-1)
     opcion= validez.obtener_opcion(opciones)
     if opcion == -1:
         leer_usuario('usuarios.json')
@@ -189,3 +178,20 @@ def leer_publicaciones(nombre_archivo):
         input('Oprima enter para continuar ')
     else:
         print("Opción no válida.")
+        
+def imprimir_posteos(posteos):
+    '''Muestra los valores de la matriz en forma de tabla'''
+    print("Publicaciones disponibles:")
+    
+    diseño.publicaciones.parte_superior()
+    diseño.publicaciones.encabezado()
+    
+    for i in range(1, len(posteos)):  # Comienza desde el índice 1
+        if i == len(posteos) - 1:
+            diseño.publicaciones.parte_conectiva()
+            diseño.publicaciones.mostrar(*posteos[i])
+        else:   
+            diseño.publicaciones.parte_conectiva()
+            diseño.publicaciones.mostrar(*posteos[i])
+            
+    diseño.publicaciones.parte_inferior()

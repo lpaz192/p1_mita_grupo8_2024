@@ -18,7 +18,8 @@ from .publicaciones import (actualizar_publicacion,
                             agregar_publicacion, 
                             leer_publicaciones, 
                             eliminar_publicacion, 
-                            imprimir_posteos)
+                            imprimir_posteos,
+                            guardar_publicaciones)
 
 from .publicaciones import cargar_publicaciones
 from .usuarios import cargar_usuarios

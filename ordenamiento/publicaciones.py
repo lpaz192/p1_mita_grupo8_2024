@@ -1,9 +1,12 @@
-from crud import imprimir_posteos
+from crud import (imprimir_posteos,
+                    cargar_publicaciones, 
+                    guardar_publicaciones)
 from validez import obtener_opcion
+
 #ORDENAMIENTO PUBLICACIONES
 
 #Ordenamiento
-def ordenar_publicaciones(posteos):
+def ordenar_publicaciones(nombre_archivo):
     print("\n--- Ordenar Publicaciones ---")
     print("1. Ordenar por ID")
     print("2. Ordenar por cantidad de likes")
@@ -13,17 +16,20 @@ def ordenar_publicaciones(posteos):
     opcion = obtener_opcion(opciones)
     
     if opcion == 1:
-        ordenar_por_id(posteos)
+        ordenar_por_id(nombre_archivo)
     elif opcion == 2:
-        ordenar_por_likes(posteos)
+        ordenar_por_likes(nombre_archivo)
     elif opcion == -1:
         return
 
-def ordenar_por_id(posteos):
+def ordenar_por_id(nombre_archivo):
+    posteos = cargar_publicaciones(nombre_archivo)
+    
     print("\nElija el orden de clasificación por ID:")
     print("1. De menor a mayor")
     print("2. De mayor a menor")
     print('-1. Para volver')
+    
     #Pide ingreso de datos
     opciones=[-1,1,2]
     opcion = obtener_opcion(opciones)           
@@ -40,10 +46,13 @@ def ordenar_por_id(posteos):
         return
 
     posteos = [encabezado] + datos
-
+    guardar_publicaciones(posteos, nombre_archivo)
+    
     imprimir_posteos(posteos)  
 
-def ordenar_por_likes(posteos):
+def ordenar_por_likes(nombre_archivo):
+    posteos = cargar_publicaciones(nombre_archivo)
+
     print("\nElija el orden de clasificación por cantidad de likes:")
     print("1. De menor a mayor")
     print("2. De mayor a menor")
@@ -65,6 +74,8 @@ def ordenar_por_likes(posteos):
         return
 
     posteos = [encabezado] + datos
+    guardar_publicaciones(posteos, nombre_archivo)
+
 
     imprimir_posteos(posteos)  
     return

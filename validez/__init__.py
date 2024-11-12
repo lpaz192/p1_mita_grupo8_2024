@@ -7,8 +7,8 @@ import re
 
 #Validar numero
 def validar_numero(tipo, min_digitos=1, max_digitos=12):
-    '''Pide el ingreso de un numero entre el rsngo de digitos indicado
-    en caso de ser indicado el rango, este va a tomar un valor mminimo de 1 
+    '''Pide el ingreso de un numero entre el rango de digitos indicado
+    en caso de no ser indicado el rango, este va a tomar un valor mminimo de 1 
     y un valor maximo de 12'''
     
     patron=rf"^[0-9]{{{min_digitos},{max_digitos}}}$"
