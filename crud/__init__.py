@@ -19,3 +19,6 @@ from .publicaciones import (actualizar_publicacion,
                             leer_publicaciones, 
                             eliminar_publicacion, 
                             imprimir_posteos)
+
+from .publicaciones import cargar_publicaciones
+from .usuarios import cargar_usuarios

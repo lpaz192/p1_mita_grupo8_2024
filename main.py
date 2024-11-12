@@ -8,6 +8,8 @@ from diseño import (crud_hashtags,
                     confrimar_formateo,
                     mostrar_ordenamiento)
 import crud, validez, random, ordenamiento, json
+import metricas
+from crud import cargar_usuarios, cargar_publicaciones
 from archivos_json import inicializar_diccionairo_archivo
 from archivos_txt import inicializar_txt
 
@@ -335,7 +337,12 @@ def __main__():
         
         #----  Estadisticas----
         elif opcion_menu == 5:                       
-            estadisticas()
+                        # Cargar los datos desde los archivos JSON y TXT
+            usuarios_dict = cargar_usuarios('usuarios.json')  # Esto carga los usuarios
+            posteos = cargar_publicaciones('publicaciones.txt')  # Esto carga las publicaciones
+            
+            # Llamar a la función de métricas pasando los datos
+            metricas.menu_estadisticas(usuarios_dict, posteos)
 
         elif opcion_menu == 6:
             opcion_archivos()
