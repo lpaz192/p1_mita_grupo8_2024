@@ -181,7 +181,7 @@ posteos = [["ID Post", "Fecha de publicación", "Cantidad de likes", "Cantidad d
 
 hashtags_index= list(hashtags_dict.keys())
 for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
-    id_post = str(i).zfill(3)
+    id_post = str(i).zfill(4)
     while True:
         fecha_publicacion = datetime.now().strftime('%d-%m-%Y')
         if validez.validar_fecha(fecha_publicacion):
@@ -246,7 +246,7 @@ def opcion_crud_publicaciones():
 
     #Agregar
     if opcion_elegida == 1:          
-        crud.agregar_publicacion('publicaciones.txt', usuarios_dict, hashtags_dict)
+        crud.agregar_publicacion('publicaciones.txt', 'usuarios.json', 'hashtags.json')
     
     #Eliminar
     elif opcion_elegida == 2:        
@@ -254,7 +254,7 @@ def opcion_crud_publicaciones():
     
     #Actualizar
     elif opcion_elegida == 3:        
-        crud.actualizar_publicacion('publicaciones.txt', usuarios_dict)
+        crud.actualizar_publicacion('publicaciones.txt')
     
     #Leer
     elif opcion_elegida == 4:        

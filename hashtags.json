@@ -48,5 +48,10 @@
         "Cant. posteos": 500,
         "Veces compartido": 3000,
         "Likes": 12000
+    },
+    "#Viajes2024": {
+        "Cant. posteos": 2200,
+        "Veces compartido": 60000,
+        "Likes": 250000
     }
 }

@@ -1,32 +1,31 @@
 import diseño, validez, re
-from .hashtags import cargar_hashtags
+from crud import leer_usuario,leer_hashtag, cargar_hashtags, cargar_usuarios
+
+def selccionar_elemento_publicaciones(posteos, id_post): 
+    print(f'\n---Publicación con id: {id_post}---')
+    print(f'1. Likes:                {posteos[id_post][2]}')
+    print(f'2. Comentarios:          {posteos[id_post][3]}')
+    print(f'3. Usuario:              {posteos[id_post][5]}')
+    print(f'4. Modificar toda la publicacion')
+    opciones=[1,2,3,4]
+    return validez.obtener_opcion(opciones)
+
 def cargar_publicaciones(filename='publicaciones.txt'):
     posteos = []
-    try:
-        with open(filename, 'r', encoding='UTF-8') as file:
-            for linea in file:
-                datos = re.split(r'\s+', linea.strip())
-                posteos.append(datos)
-            return posteos
-    except FileNotFoundError:
-        return []
+    with open(filename, 'r', encoding='UTF-8') as file:
+        for linea in file:
+            datos = re.split(r'\s+', linea.strip())
+            posteos.append(datos)
+        return posteos
 
 def guardar_publicaciones(posteos, filename='publicaciones.txt'):
     with open(filename, 'w', encoding='UTF-8') as arch:
         for fila in posteos:
             linea = ''.join([str(dato).ljust(24, ' ') for dato in fila])
             arch.write(linea + '\n')
-    
-'''
-def agregar_publicacion(posteos, usuarios, hashtag):
-    # como estaba antes aca, agregar
-    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, hashtag])
-    guardar_publicaciones(posteos)  # Guardar cambios en el archivo JSON
 
+nuevo_id = lambda claves: max(claves) + 1 if claves else 1
 
-'''
-
-from crud import leer_usuario
 #Funciones CRUD Publicaciones
 def imprimir_posteos(posteos):
     print("Publicaciones disponibles:")
@@ -44,15 +43,13 @@ def imprimir_posteos(posteos):
             
     diseño.publicaciones.parte_inferior()
 
-def agregar_publicacion(nombre_archivo, usuarios, hashtag):
-    posteos = cargar_publicaciones(nombre_archivo)
+def agregar_publicacion(archivo_posteo, archivo_usuario, archivo_hashtag):
+    posteos = cargar_publicaciones(archivo_posteo)
+    usuarios = cargar_usuarios(archivo_usuario)
+    hashtags = cargar_hashtags(archivo_hashtag)
 
-    id_post = validez.validar_numero('nuevo id',1,4)
-    #para que no hayan dos con el mismo id
-    for posteo in posteos:
-        if posteo[0] == id_post:
-            print("Error: Ya existe una publicación con este ID.")
-            return
+    claves = [int(fill[0]) for fill in usuarios] 
+    id_post = nuevo_id(claves)
 
     while True:
         fecha_publicacion = input("Ingrese la fecha de la publicación (DD-MM-YYYY): ")
@@ -65,32 +62,42 @@ def agregar_publicacion(nombre_archivo, usuarios, hashtag):
     likes = validez.validar_numero('likes')
     comentarios = validez.validar_numero('cantidad de comentarios')
 
-    """
-    print('Ingrese el numero de ID del usuario (Si desea ver la tabla de usuarios ingrese -1)')
+    print("Para seleccionar el usuario que realizo la publicacion")
+    print("Por favor, ingrese el numero de id del usuario o seleccione -1 para ver la tabla: ")
+    
     opciones = [-1,usuarios.keys()]
     opcion= validez.obtener_opcion(opciones)
     if opcion == -1:
-        leer_usuario(usuarios)
-        id_usuario =input('Ingrese el id del usuario: ')
+        leer_usuario('usuarios.json')
+        print('Ingrese el id del usuario: ', end='')
+        id_usuario =validez.validar_id('usuarios.json')
     else:
         id_usuario = opcion
-    """
-
-    print("Para seleccionar el usuario que realizo la publicacion")
-    print("Por favor, ingrese el numero de id del usuario o selecciones -1 para ver la tabla: ", end="")
-    
-    id_usuario = validez.validar_id('usuarios.json')
 
     usuario = usuarios[id_usuario]['Usuario']
     
-    print("Ingrese el hashtag que usa la publicacion: ", end=" ")
-    hashtag=validez.hashtag.hashtag_existente(hashtag)
+    print("Para seleccionar el hashtag que realizo la publicacion")
+    print("Por favor, ingrese el hashtag o selecciones -1 para ver la tabla: ", end="")
+    opciones = [-1]
+    opcion = int(input())
+    while True:
+        if opcion == -1:
+            leer_hashtag(archivo_hashtag)
+            print('Ingrese el hashtag de la publicación: ', end='')
+            nombre_hashtag = validez.hashtag_existente(hashtags)
+            break
+        elif opcion in hashtags:
+            nombre_hashtag = opcion
+            break
+        else:
+            opcion = input('Opcion invalida porfavor ingrese un dato valido: ')
 
-    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, hashtag])
+    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, nombre_hashtag])
     print("Publicación agregada exitosamente.")
+    guardar_publicaciones(posteos, 'publicaciones.txt')
 
-def eliminar_publicacion(nombre_archivo, posteos):
-
+def eliminar_publicacion(nombre_archivo):
+    posteos = cargar_publicaciones(nombre_archivo)
     imprimir_posteos(posteos)
 
     id_post = input("Ingrese el ID de la publicación a eliminar: ").zfill(3)
@@ -99,17 +106,21 @@ def eliminar_publicacion(nombre_archivo, posteos):
         if posteos[i][0] == id_post:
             del posteos[i]
             print("Publicación eliminada exitosamente.")
+            guardar_publicaciones(posteos, nombre_archivo)
             return #aca termina la funcion
     
     #pero si no lo encuentra no hace return y tira la alerta
     print("ID de publicación no encontrado.")
 
-def actualizar_publicacion(nombre_archivo, posteos, usuarios):
-
+def actualizar_publicacion(nombre_archivo):
+    posteos = cargar_publicaciones(nombre_archivo)
     imprimir_posteos(posteos)
 
-    id_post = input("Ingrese el ID de la publicación a actualizar: ").zfill(3)
-    
+    ids = [int(claves[0]) for claves in posteos[1:]]
+    print('Ingrese el ID de la publicacion a actualizar')
+    id_post = validez.obtener_opcion(ids)
+   
+    '''
     index = -1
     for i in range(len(posteos)):
         if posteos[i][0] == id_post:
@@ -118,7 +129,8 @@ def actualizar_publicacion(nombre_archivo, posteos, usuarios):
     if index == -1:
         print("ID de publicación no encontrado.")
         return
-
+'''
+    '''
     print("Seleccione el campo que desea actualizar:")
     print("1. Fecha de publicación")
     print("2. Likes")
@@ -126,63 +138,43 @@ def actualizar_publicacion(nombre_archivo, posteos, usuarios):
     print("4. ID de Usuario")
     print("5. Modificar toda la publicación")
     opcion = int(input("Ingrese su opción: "))
+    '''
+    opcion = selccionar_elemento_publicaciones(posteos, id_post)
 
-    if opcion == 1:
-        fecha_publicacion = input("Ingrese la nueva fecha de la publicación (YYYY-MM-DD): ")
-        if validez.validar_fecha(fecha_publicacion):
-            posteos[index][1] = fecha_publicacion
-        else:
-            print("Fecha inválida.")
-            return
-    elif opcion == 2:
-        posteos[index][2] = int(input("Ingrese la nueva cantidad de likes: "))
+    if opcion == 1:   #Actualizar cantidad de likes
+        posteos[id_post][2] = validez.validar_numero('cantidad de likes')
 
-    elif opcion == 3:
-        posteos[index][3] = int(input("Ingrese la nueva cantidad de comentarios: "))
-    elif opcion == 4:
-        # Actualizar el ID de usuario
-        id_usuario = validez.validar_id(usuarios)
-        # Verificar que el ID de usuario existe en el diccionario
-        if id_usuario in usuarios:
-            usuario = usuarios[id_usuario]['Usuario']
-            posteos[index][5] = usuario
-        else:
-            print("ID de usuario no encontrado en el diccionario.")
-            return
+    elif opcion == 2: #Actualizar cantidad de comentarios
+        posteos[id_post][3] = validez.validar_numero('cantidad de comentarios')
+    
+    elif opcion == 3: # Actualizar el nombre de usuario
         
-    elif opcion == 5:
-        nueva_fecha = input("Ingrese la nueva fecha de la publicación (YYYY-MM-DD): ")
-
-        #si la validacion de la fecha no es True o sea no esta bien
-        if not validez.validar_fecha(nueva_fecha):
-            print("Fecha inválida.")
-            return #para todo y volveria al principio
-        nuevo_likes = int(input("Ingrese la nueva cantidad de likes: "))
-        nuevo_comentarios = int(input("Ingrese la nueva cantidad de comentarios: "))
-        id_usuario = input("Ingrese el ID del usuario: ")
-        if int(id_usuario) in usuarios:
-            usuario = usuarios[int(id_usuario)]
-            posteos[index] = [id_post, nueva_fecha, nuevo_likes, nuevo_comentarios, id_usuario, usuario]
-        else:
-            print("ID de usuario no encontrado en el diccionario.")
-            return
-
-    else:
-        print("Opción no válida.")
-        return
-
+        usuarios_dict = cargar_usuarios('usuarios.json')
+        nuevo_usuario = validez.validar_usuario(usuarios_dict)
+        posteos[id_post][5] = nuevo_usuario
+    
+    elif opcion == 4: #Actualizar todo
+        usuarios_dict = cargar_usuarios('usuarios.json')
+        
+        nuevo_likes = validez.validar_numero('cantidad de likes')
+        nuevo_comentarios = validez.validar_numero('cantidad de comentarios')
+        nuevo_usuario = validez.validar_usuario(usuarios_dict)
+        posteos[id_post][3] = nuevo_likes
+        posteos[id_post][4] = nuevo_comentarios
+        posteos[id_post][5] = nuevo_usuario
+    
+    guardar_publicaciones(posteos, nombre_archivo)
     print("Publicación actualizada exitosamente.")
 
 def leer_publicaciones(nombre_archivo):
     posteos = cargar_publicaciones(nombre_archivo)
-    print(posteos)
     
     print("1. Ver una publicación específica")
     print("2. Ver todas las publicaciones")
     opcion = input("Seleccione una opción: ")
 
     if opcion == "1":
-        id_post = input("Ingrese el ID de la publicación que desea ver: ").zfill(3)
+        id_post = input("Ingrese el ID de la publicación que desea ver: ").zfill(4)
         encontrado = False
         for posteo in posteos:
             if posteo[0] == id_post:

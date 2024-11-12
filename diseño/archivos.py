@@ -3,19 +3,18 @@ from validez import obtener_opcion
 
 def menu_archivos():
     print("\n---Menu Archivos---")
-    print("1.  Formatear arvhivos usuarios")
-    print('2.  Formatear archivos hashtags')
-    print('3.  Formatear archivos posteos')
+    print("1.  Recetear arvhivos usuarios")
+    print('2.  Recetear archivos hashtags')
+    print('3.  Recetear archivos posteos')
     print("-1. Para cancelar")
     opciones=[-1,1,2,3]
     return obtener_opcion(opciones)
 
 def confrimar_formateo(tipo):
-    x = input(f'Estas seguro que deseas formatear {tipo} (y/n): ')
-    patron = ['n','N','y','Y']
-    while not x in patron:
-        x = input('Por favor ingrese uno de los valores solicitados: ')
-    if x == 'n' or x == 'N':
+    respuesta = input(f'¿Estas seguro que deseas recetear {tipo}? (y/n): ').lower()
+    while not respuesta in ('y','n'):
+        respuesta = input('Por favor ingrese uno de los valores solicitados: ').lower()
+    if respuesta == 'n':
         return False
     else:
         return True
