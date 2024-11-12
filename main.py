@@ -7,7 +7,7 @@ from diseño import (crud_hashtags,
                     menu_archivos,
                     confrimar_formateo,
                     mostrar_ordenamiento)
-import crud, validez, random, ordenamiento
+import crud, validez, random, ordenamiento, json
 from archivos_json import inicializar_diccionairo_archivo
 from archivos_txt import inicializar_txt
 
@@ -197,6 +197,26 @@ for i in range(1,11): #se crean 10 publicaciones con numeros aleatorios
 
     posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, nombre_usuario,hashtags_id])
 
+def iniciar_archivo(nombre_archivo, diccionario):
+    try:
+        with open(nombre_archivo, 'r', encoding='UTF-8') as archivo:
+            datos = json.load(archivo)
+    except (FileNotFoundError, json.JSONDecodeError):
+        with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
+            json.dump(diccionario, archivo, indent=4)
+
+def iniciar_publicaciones(nombre_archivo, matriz):
+    try:
+        with open(nombre_archivo, 'r',encoding='UTF-8') as arch:
+            contenido = arch.read().strip()
+            if contenido:
+                return 
+    except FileNotFoundError:
+        with open(nombre_archivo, 'w', encoding='UTF-8') as arch:
+            for fila in matriz:
+                linea = ''.join([str(dato).ljust(24, ' ') for dato in fila])
+                arch.write(linea + '\n')
+
 #Funcinoes de opciones
 def opcion_crud_usuarios():
     opcion_elegida = crud_usuarios()   
@@ -319,6 +339,11 @@ def __main__():
 
         elif opcion_menu == 6:
             opcion_archivos()
+
+
+iniciar_archivo('usuarios.json', usuarios_dict)
+iniciar_archivo('hashtags.json', hashtags_dict)
+iniciar_publicaciones('publicaciones.txt', posteos)
 
 if __name__ == '__main__':
     __main__()
