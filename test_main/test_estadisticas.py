@@ -5,7 +5,7 @@ usuarios_dict = {
         '002': {'Usuario': 'Diego.lopez', 'Seguidores': 200, 'Seguidos': 180, 'Likes': 800}
     }
 
-posteos = [
+posteos = [["ID-Post", "Fecha-de-publicación", "Cantidad-de-likes", "Cantidad-de-comentarios", "ID-Usuario", "Usuario",'Hashtag'],
         ['0001', '02-11-2012', '7000', '1000', '200', '0012', 'David_89','#Recetas'],
         ['0002', '15-05-2013', '5000', '1200', '300', '0020', 'Laura23', '#Viajes'],
         ['0003', '08-09-2020', '8500', '1500', '400', '0035', 'Carlos_G', '#Fitness'],

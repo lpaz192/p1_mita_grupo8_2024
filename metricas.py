@@ -4,13 +4,14 @@ from CuentasSPAM.clasificacion import analizar_spam_hashtags
 
 def mostar_metricas_usuarios(metricas):
     print('\n--- Métricas de Usuarios ---')
-    print(f'Total de usuarios:     {metricas['total_usuairos']}')
+    print(f'Total de usuarios:     {metricas['total_usuarios']}')
     print(f'Total de seguidores:   {metricas['total_seguidores']}')
     print(f'Total de seguidos:     {metricas['total_seguidos']}')
     print(f'Total de likes:        {metricas['total_likes']}')
     print(f'Promedio de seguidores por usuario:  {metricas['promedio_seguidores']:.2f}')
     print(f'Promedio de seguidos por usuario:    {metricas['promedio_seguidos']:.2f}')
     print(f'Promedio de likes por usuario:       {metricas['promedio_likes']:.2f}')
+    input()
 
 def mostrar_metricas_post(metricas):
     print('\n--- Métricas de Publicaciones ---')
@@ -19,7 +20,7 @@ def mostrar_metricas_post(metricas):
     print(f'Total de comentarios:    {metricas['total_comentarios']}')
     print(f'Promedio de likes por publicación:       {metricas['promedio_likes']:.2f}')
     print(f'Promedio de comentarios por publicación: {metricas['promedio_comentarios']:.2f}')
-
+    input()
 
 def cargar_datos():
     from crud import cargar_usuarios, cargar_publicaciones
@@ -72,9 +73,9 @@ def calcular_metricas_posts(posteos):
         'promedio_comentarios': 0
         }
     
-    total_publicaciones =  len(posteos)
-    total_likes =          sum(int(post[2]) for post in posteos)
-    total_comentarios =    sum(int(post[3]) for post in posteos)
+    total_publicaciones =  len(posteos)-1
+    total_likes =          sum(int(post[2]) for post in posteos[1:])
+    total_comentarios =    sum(int(post[3]) for post in posteos[1:])
     
     promedio_likes       = total_likes / total_publicaciones if total_publicaciones else 0
     promedio_comentarios = total_comentarios / total_publicaciones if total_publicaciones else 0
@@ -93,6 +94,7 @@ def menu_estadisticas(usuarios_dict, posteos):
     """
     print('\n--- Menú de Estadísticas ---')
     print('1. Métricas de Usuarios')
+    print('2. Métricas de Publicaciones')
     print('3. Análisis de Hashtags de Spam')  
     print('4. Volver al Menú Principal')
     
