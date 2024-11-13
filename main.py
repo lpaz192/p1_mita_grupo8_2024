@@ -9,7 +9,8 @@ from diseño import (crud_hashtags,
                     mostrar_ordenamiento)
 import crud, validez, random, ordenamiento, json
 import metricas
-# from test_main import pruebas_unitarias_metricas
+import test_main
+from test_main.test_menu import pruebas_unitarias
 from crud import cargar_usuarios, cargar_publicaciones
 from archivos_json import inicializar_diccionairo_archivo
 from archivos_txt import inicializar_txt
@@ -341,11 +342,8 @@ def __main__():
             usuarios_dict = cargar_usuarios('usuarios.json')  # Esto carga los usuarios
             posteos = cargar_publicaciones('publicaciones.txt')  # Esto carga las publicaciones
             
-            '''
-                if test_menu.pruebas_unitarias():
-                    metricas.menu_metricas()
-            '''
-            metricas.menu_estadisticas(usuarios_dict, posteos)
+            if pruebas_unitarias():
+                metricas.menu_metricas()
 
         elif opcion_menu == 6:
             opcion_archivos()
