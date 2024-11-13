@@ -1,5 +1,8 @@
 from crud import cargar_usuarios, cargar_publicaciones
 import json
+from CuentasSPAM import clasificacion
+from CuentasSPAM.clasificacion import analizar_spam_hashtags
+
 
 def cargar_datos():
     usuarios_dict = cargar_usuarios()
@@ -56,8 +59,8 @@ def menu_estadisticas(usuarios_dict, posteos):
     """
     print("\n** Menú de Estadísticas **")
     print("1. Métricas de Usuarios")
-    print("2. Métricas de Publicaciones")
-    print("3. Volver al Menú Principal")
+    print("3. Análisis de Hashtags de Spam")  
+    print("4. Volver al Menú Principal")
     
     try:
         opcion = int(input("Seleccione una opción: "))
@@ -68,7 +71,11 @@ def menu_estadisticas(usuarios_dict, posteos):
             mostrar_metricas_posts(posteos)
             menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
         elif opcion == 3:
-            return  
+            print("\n** Análisis de Hashtags de Spam **")
+            analizar_spam_hashtags()  # Llamada a la función de análisis de spam
+            menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
+        elif opcion == 4:
+            return  # Sale del menú de estadísticas
         else:
             print("Opción no válida, por favor seleccione una opción válida.")
             menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva

@@ -1,46 +1,67 @@
 import json
+from crud import cargar_hashtags, guardar_hashtags  
+import validez  
+import diseño 
 
-def clasificar_cuentas(publicaciones, bots, index=0, cuentas_spam=None, cuentas_seguras=None):
-    if cuentas_spam is None:
-        cuentas_spam = {}
-    if cuentas_seguras is None:
-        cuentas_seguras = {}
-        
-    # si se recorrio todas las publicaciones, dar los resultados
-    if index >= len(publicaciones):
-        return cuentas_spam, cuentas_seguras
+def cargar_hashtags_spam(filename='hashtags_spam.txt'):
+    try:
+        with open(filename, 'r', encoding='UTF-8') as file:
+            return set([line.strip() for line in file])
+    except FileNotFoundError:
+        print("Archivo de hashtags spam no encontrado.")
+        return set()
 
-    publicacion = publicaciones[index]
-    id_usuario = publicacion[4]  # los id se guardan en el 4
-    hashtag_encontrado = publicacion[6]  # los # se guardan en el 6
+def cargar_hashtags(filename='hashtags.json'):
+    try:
+        with open(filename, 'r', encoding='UTF-8') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
-    if hashtag_encontrado in bots:
-        # clasifica la cuenta como spam
-        cuentas_spam[id_usuario] = cuentas_spam.get(id_usuario, 0) + 1 
-    else:
-        # clasifica como cuenta segura si no ha sido marcada como spam
-        if id_usuario not in cuentas_spam:  
-            cuentas_seguras[id_usuario] = cuentas_seguras.get(id_usuario, 0) + 1 
+def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
+    with open(filename, 'w', encoding='UTF-8') as file:
+        json.dump(hashtags_dict, file, indent=4)
 
-    # llama recursivamente a la función para la siguiente publicación
-    return clasificar_cuentas(publicaciones, bots, index + 1, cuentas_spam, cuentas_seguras)
+def contar_hashtags_spam(hashtags_dict, spam_set, index=0, count=0):
+    hashtag_keys = list(hashtags_dict.keys())
+    
+    # si se recorrio todos los hashtags 
+    if index >= len(hashtag_keys):
+        return count
 
-def leer_y_clasificar(publicaciones_json, bots_txt):
-    with open(publicaciones_json, 'r') as f:
-        publicaciones = json.load(f)
+    # revisa si el hashtag actual está en la lista de spam
+    hashtag_actual = hashtag_keys[index]
+    if hashtag_actual in spam_set:
+        count += 1
+    
+    # llamada recursiva avanzando al siguiente indice
+    return contar_hashtags_spam(hashtags_dict, spam_set, index + 1, count)
 
-    with open(bots_txt, 'r') as f:
-        bots = set(line.strip() for line in f if line.strip())  # lee y limpia líneas
+def mostrar_hashtags_spam(hashtags_dict, spam_set, index=0):
+    hashtag_keys = list(hashtags_dict.keys())
+    
+    # si se recorre todos los hashtags 
+    if index >= len(hashtag_keys):
+        return
+    
+    hashtag_actual = hashtag_keys[index]
+    if hashtag_actual in spam_set:
+        print(f"Hashtag '{hashtag_actual}' es spam, utilizado en {hashtags_dict[hashtag_actual]['Cant. posteos']} posteos, "
+              f"{hashtags_dict[hashtag_actual]['Veces compartido']} veces compartido, {hashtags_dict[hashtag_actual]['Likes']} likes.")
+    
+    # llamada recursiva avanzando al siguiente indice
+    mostrar_hashtags_spam(hashtags_dict, spam_set, index + 1)
 
-    # llama a la función recursiva para clasificar cuentas
-    cuentas_spam, cuentas_seguras = clasificar_cuentas(publicaciones, bots)
+def analizar_spam_hashtags():
+    # carga el archivo JSON con los hashtags existentes
+    hashtags = cargar_hashtags()
+    #carga el archivo de texto con los hashtags clasificados como spam
+    hashtags_spam = cargar_hashtags_spam()
 
-    # mostrar resultados
-    print("Cuentas clasificadas como spam:")
-    for cuenta, cantidad in cuentas_spam.items():
-        print(f"Usuario ID: {cuenta}, Cantidad de publicaciones spam: {cantidad}")
+    #cuenta los hashtags clasificados como spam
+    total_spam = contar_hashtags_spam(hashtags, hashtags_spam)
+    print(f"Total de hashtags clasificados como spam encontrados: {total_spam}")
+    
+    mostrar_hashtags_spam(hashtags, hashtags_spam)
 
-    print("\nCuentas clasificadas como seguras:")
-    for cuenta, cantidad in cuentas_seguras.items():
-        print(f"Usuario ID: {cuenta}, Cantidad de publicaciones seguras: {cantidad}")
 
