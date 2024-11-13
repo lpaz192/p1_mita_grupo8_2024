@@ -10,7 +10,7 @@ from diseño import (crud_hashtags,
 import crud, validez, random, ordenamiento, json
 import metricas
 import test_main
-from test_main.test_menu import pruebas_unitarias
+from test_main.test_estadisticas import pruebas_unitarias
 from crud import cargar_usuarios, cargar_publicaciones
 from archivos_json import inicializar_diccionairo_archivo
 from archivos_txt import inicializar_txt

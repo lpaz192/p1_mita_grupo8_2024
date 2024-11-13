@@ -1,4 +1,3 @@
-from crud import cargar_usuarios
 import re, json
 patron_mail    = r"^[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 patron_usuario = r"[a-zA-Z_0-9]{2,15}$"
@@ -42,6 +41,7 @@ def validar_mail():
 
 #Validar id
 def validar_id(nombre_archivo):
+    from crud import cargar_usuarios
     usuarios = cargar_usuarios(nombre_archivo)
     
     ids = usuarios.keys()

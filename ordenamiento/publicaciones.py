@@ -1,6 +1,3 @@
-from crud import (imprimir_posteos,
-                    cargar_publicaciones, 
-                    guardar_publicaciones)
 from validez import obtener_opcion
 
 #ORDENAMIENTO PUBLICACIONES
@@ -23,6 +20,7 @@ def ordenar_publicaciones(nombre_archivo):
         return
 
 def ordenar_por_id(nombre_archivo):
+    from crud import cargar_publicaciones, guardar_publicaciones, imprimir_posteos
     posteos = cargar_publicaciones(nombre_archivo)
     
     print("\nElija el orden de clasificación por ID:")
@@ -51,6 +49,7 @@ def ordenar_por_id(nombre_archivo):
     imprimir_posteos(posteos)  
 
 def ordenar_por_likes(nombre_archivo):
+    from crud import cargar_publicaciones, guardar_publicaciones, imprimir_posteos
     posteos = cargar_publicaciones(nombre_archivo)
 
     print("\nElija el orden de clasificación por cantidad de likes:")
