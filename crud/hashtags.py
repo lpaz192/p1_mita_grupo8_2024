@@ -1,5 +1,6 @@
 import diseño, validez, json
 
+#Funciones de carga de archivos
 def cargar_hashtags(filename='hashtags.json'):
     '''Recibe el nombre del archivo y lo intenta abrir
     si no recibe ningún nombre abre el archivo "hashtags.json" '''
@@ -25,6 +26,8 @@ def selccionar_elemento_hashtag(hashtagh_opcion,hashtags_dict):
     return validez.obtener_opcion(opciones)
     
 #Funciones CRUD Hashtags
+
+#Función agregar hashtag
 def agregar_hashtag(nombre_archivo):      #Agregar
     '''Pide el ingreso de los datos de un nuevo hashtag no repetido'''
     hashtags = cargar_hashtags(nombre_archivo)
@@ -38,6 +41,7 @@ def agregar_hashtag(nombre_archivo):      #Agregar
     }
     guardar_hashtags(hashtags, nombre_archivo)
 
+#Función leer hashtag
 def leer_hashtag(nombre_archivo):
     '''Muestra los valores del diccionario en forma de tabla'''
     hashtags = cargar_hashtags(nombre_archivo)
@@ -58,6 +62,7 @@ def leer_hashtag(nombre_archivo):
             diseño.hashtags.mostrar(hashtag_keys[i], hashtags[hashtag_keys[i]])
     diseño.hashtags.parte_inferior()
 
+#Función actualizar hashtag
 def actualizar_hashtag(nombre_archivo):
     leer_hashtag(nombre_archivo)
     
@@ -82,6 +87,7 @@ def actualizar_hashtag(nombre_archivo):
 
     guardar_hashtags(hashtags, nombre_archivo)
 
+#Función eliminar hashtag
 def eliminar_hashtag(nombre_archivo):
     hashtags = cargar_hashtags(nombre_archivo)
 

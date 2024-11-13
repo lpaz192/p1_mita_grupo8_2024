@@ -1,6 +1,6 @@
 import diseño, validez, json
 
-#Administracion de archivos json
+#Funciones de carga de archivos
 def cargar_usuarios(filename='usuarios.json'):
     '''Recibe el nombre del archivo y lo intenta abrir
     si no recibe ningún nombre abre el archivo "usuarios.json" '''
@@ -16,7 +16,6 @@ def guardar_usuarios(usuarios, filename='usuarios.json'):
     with open(filename, 'w', encoding='UTF-8') as file:
         json.dump(usuarios, file, indent = 4)
 
-
 nuevo_id = lambda claves: max(claves) + 1 if claves else 1
 
 #Funciones secundarias de usarios
@@ -29,7 +28,6 @@ def seleccionar_elemento_usuarios(id,usuario):
     print(f"5. Correos:      {usuario[id]['Correo']}")
     opciones = [1,2,3,4,5]
     return validez.obtener_opcion(opciones)
-
 
 #FUNCIONES CRUD USUARIOS
 

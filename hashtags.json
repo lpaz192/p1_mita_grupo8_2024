@@ -1,4 +1,9 @@
 {
+    "#Feriado": {
+        "Cant. posteos": 400,
+        "Veces compartido": 2000,
+        "Likes": 6000
+    },
     "#UADELabs": {
         "Cant. posteos": 200,
         "Veces compartido": 1500,
@@ -48,10 +53,5 @@
         "Cant. posteos": 2200,
         "Veces compartido": 60000,
         "Likes": 250000
-    },
-    "#MateDiscreta": {
-        "Cant. posteos": 90,
-        "Veces compartido": 400,
-        "Likes": 10000
     }
 }

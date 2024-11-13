@@ -1,6 +1,7 @@
 import diseño, validez, re
 from crud import leer_usuario,leer_hashtag, cargar_hashtags, cargar_usuarios
 
+#Funciones de carga de archivos
 def cargar_publicaciones(filename='publicaciones.txt'):
     '''Recibe el nombre del archivo y lo intenta abrir
     si no recibe ningún nombre abre el archivo "publicacines.txt" '''
@@ -21,6 +22,7 @@ def guardar_publicaciones(posteos, filename='publicaciones.txt'):
 
 nuevo_id = lambda claves: max(claves) + 1 if claves else 1
 
+#Funciones secundarias de publicaciones
 def selccionar_elemento_publicaciones(posteos, id_post): 
     print(f'\n---Publicación con id: {id_post}---')
     print(f'1. Likes:                {posteos[id_post][2]}')
@@ -31,6 +33,8 @@ def selccionar_elemento_publicaciones(posteos, id_post):
     return validez.obtener_opcion(opciones)
 
 #Funciones CRUD Publicaciones
+
+#Función agregar hashtag
 def agregar_publicacion(archivo_posteo, archivo_usuario, archivo_hashtag):
     posteos = cargar_publicaciones(archivo_posteo)
     usuarios = cargar_usuarios(archivo_usuario)
@@ -49,27 +53,40 @@ def agregar_publicacion(archivo_posteo, archivo_usuario, archivo_hashtag):
     
     likes = validez.validar_numero('likes')
     comentarios = validez.validar_numero('cantidad de comentarios')
-
+    '''
     print('Para seleccionar el usuario que realizo la publicacion')
-    print('Ingrese el numero de id del usuario o seleccione -1 para ver la tabla: ')
+    print('Ingrese 1 para ingresar el id del usuario o ingrese -1 para ver la tabla: ')
     
-    opciones = [key for key in usuarios.keys()]
-    opciones = opciones.append(-1)
+    opciones = [-1,1]
     opcion= validez.obtener_opcion(opciones)
+    '''
+    leer_usuario('usuarios.json')
+    print('Ingrese el numero de ID del usuario que utiliza la publicación: ', end='')
+    opcion = input()
+    while not opcion in usuarios:
+            opcion = input('Opcion invalida porfavor ingrese un dato valido: ')
+    id_usuario = opcion
+    '''
     if opcion == -1:
         leer_usuario('usuarios.json')
         print('Ingrese el id del usuario: ', end='')
         id_usuario =validez.validar_id('usuarios.json')
     else:
         id_usuario = opcion
-
+'''
     usuario = usuarios[id_usuario]['Usuario']
     
+    leer_hashtag(archivo_hashtag)
+    print('Ingrese el hashtag que utiliza la publicación: ', end='')
+    opcion = input()
+    while not opcion in hashtags:
+            opcion = input('Opcion invalida porfavor ingrese un dato valido: ')
+    nombre_hashtag = opcion
+    '''
     print("Para seleccionar el hashtag que realizo la publicacion")
     print("Por favor, ingrese el hashtag o selecciones -1 para ver la tabla: ", end="")
     opciones = [-1]
-    opcion = int(input())
-    while True:
+     while True:
         if opcion == -1:
             leer_hashtag(archivo_hashtag)
             print('Ingrese el hashtag de la publicación: ', end='')
@@ -78,13 +95,17 @@ def agregar_publicacion(archivo_posteo, archivo_usuario, archivo_hashtag):
         elif opcion in hashtags:
             nombre_hashtag = opcion
             break
+        if opcion in hashtags:
+            nombre_hashtag = opcion
+            break
         else:
-            opcion = input('Opcion invalida porfavor ingrese un dato valido: ')
-
-    posteos.append([id_post, fecha_publicacion, likes, comentarios, id_usuario, usuario, nombre_hashtag])
-    print("Publicación agregada exitosamente.")
+        
+    '''
+    posteos.append([str(id_post).zfill(4), fecha_publicacion, likes, comentarios, id_usuario, usuario, nombre_hashtag])
+    input("Publicación agregada exitosamente.")
     guardar_publicaciones(posteos, 'publicaciones.txt')
 
+#Función eliminar publicación
 def eliminar_publicacion(nombre_archivo):
     posteos = cargar_publicaciones(nombre_archivo)
     imprimir_posteos(posteos)
@@ -101,6 +122,7 @@ def eliminar_publicacion(nombre_archivo):
     #pero si no lo encuentra no hace return y tira la alerta
     print("ID de publicación no encontrado.")
 
+#Función actualizar publicación
 def actualizar_publicacion(nombre_archivo):
     posteos = cargar_publicaciones(nombre_archivo)
     imprimir_posteos(posteos)
@@ -109,25 +131,6 @@ def actualizar_publicacion(nombre_archivo):
     print('Ingrese el ID de la publicacion a actualizar')
     id_post = validez.obtener_opcion(ids)
    
-    '''
-    index = -1
-    for i in range(len(posteos)):
-        if posteos[i][0] == id_post:
-            index = i
-            break
-    if index == -1:
-        print("ID de publicación no encontrado.")
-        return
-'''
-    '''
-    print("Seleccione el campo que desea actualizar:")
-    print("1. Fecha de publicación")
-    print("2. Likes")
-    print("3. Comentarios")
-    print("4. ID de Usuario")
-    print("5. Modificar toda la publicación")
-    opcion = int(input("Ingrese su opción: "))
-    '''
     opcion = selccionar_elemento_publicaciones(posteos, id_post)
 
     if opcion == 1:   #Actualizar cantidad de likes
@@ -155,6 +158,7 @@ def actualizar_publicacion(nombre_archivo):
     guardar_publicaciones(posteos, nombre_archivo)
     print("Publicación actualizada exitosamente.")
 
+#Función leer publicación
 def leer_publicaciones(nombre_archivo):
     posteos = cargar_publicaciones(nombre_archivo)
     
@@ -179,6 +183,7 @@ def leer_publicaciones(nombre_archivo):
     else:
         print("Opción no válida.")
         
+#Función imprimir publicaciones
 def imprimir_posteos(posteos):
     '''Muestra los valores de la matriz en forma de tabla'''
     print("Publicaciones disponibles:")

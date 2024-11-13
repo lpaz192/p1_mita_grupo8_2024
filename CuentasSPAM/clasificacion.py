@@ -3,6 +3,7 @@ from crud import cargar_hashtags, guardar_hashtags
 import validez  
 import diseño 
 
+#Funcioes de carga de archivos
 def cargar_hashtags_spam(filename='hashtags_spam.txt'):
     try:
         with open(filename, 'r', encoding='UTF-8') as file:
@@ -22,6 +23,7 @@ def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
     with open(filename, 'w', encoding='UTF-8') as file:
         json.dump(hashtags_dict, file, indent=4)
 
+#Funciones de CuentasSPAM
 def contar_hashtags_spam(hashtags_dict, spam_set, index=0, count=0):
     hashtag_keys = list(hashtags_dict.keys())
     
@@ -63,5 +65,6 @@ def analizar_spam_hashtags():
     print(f"Total de hashtags clasificados como spam encontrados: {total_spam}")
     
     mostrar_hashtags_spam(hashtags, hashtags_spam)
+    input()
 
 

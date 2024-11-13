@@ -1,4 +1,5 @@
 import re
+
 #Patron
 patron_hashtag = r'^#[a-zA-Z0-9_.@!()/&%$]{1,15}$'
 

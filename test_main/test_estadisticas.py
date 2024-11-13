@@ -1,5 +1,6 @@
 from metricas import calcular_metricas_posts, calcular_metricas_usuarios
 
+#Diccionarios ejemplos
 usuarios_dict = {
         '001': {'Usuario': 'Martinn', 'Seguidores': 100, 'Seguidos': 150, 'Likes': 500},
         '002': {'Usuario': 'Diego.lopez', 'Seguidores': 200, 'Seguidos': 180, 'Likes': 800}
@@ -12,6 +13,7 @@ posteos = [["ID-Post", "Fecha-de-publicación", "Cantidad-de-likes", "Cantidad-d
         ['0004', '23-03-2019', '9000', '1100', '500', '0048', 'Ana.P', '#Moda']
     ]
 
+#Funciones para testear
 def test_mostrar_metricas_usuarios():
     assert calcular_metricas_usuarios(usuarios_dict) == {
             "total_usuarios"     : 2,
