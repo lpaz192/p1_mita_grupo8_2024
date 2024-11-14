@@ -339,7 +339,7 @@ def __main__():
         elif opcion_menu == 4:                       
             opcion = mostrar_ordenamiento()  
             if opcion == 1:
-                ordenamiento.ordenar_publicaciones(posteos) 
+                ordenamiento.ordenar_publicaciones('publicaciones.txt') 
         
         #----  Estadisticas     ----
         elif opcion_menu == 5:                       

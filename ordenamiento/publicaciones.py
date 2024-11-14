@@ -34,7 +34,7 @@ def ordenar_por_id(nombre_archivo):
  
     encabezado = posteos[0]  
     datos = posteos[1:] 
-
+    
     if opcion == 1:
         datos.sort(key=lambda x: int(x[0])) 
     elif opcion == 2:
