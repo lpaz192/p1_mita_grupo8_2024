@@ -99,8 +99,7 @@ def menu_estadisticas(usuarios_dict, posteos):
     print('4. Volver al Menú Principal')
     opciones=[1,2,3,4]
     opcion = obtener_opcion(opciones)
-    
-    opcion = int(input("Seleccione una opción: "))
+
     if opcion == 1:
         metricas = calcular_metricas_usuarios(usuarios_dict)
         mostar_metricas_usuarios(metricas)
