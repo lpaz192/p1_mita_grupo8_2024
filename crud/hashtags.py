@@ -9,6 +9,9 @@ def cargar_hashtags(filename='hashtags.json'):
             return json.load(file)
     except FileNotFoundError:
         return {}
+    except Exception as e:
+        print(f'Error inesperado: {e}')
+
 
 def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
     '''Recibe el nombre del archivo a cerrar

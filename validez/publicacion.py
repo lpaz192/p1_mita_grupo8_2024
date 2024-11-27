@@ -7,3 +7,5 @@ def validar_fecha(fecha):
         return True
     except ValueError:
         return False
+    except Exception as e:
+        print(f'Error inesperado: {e}')

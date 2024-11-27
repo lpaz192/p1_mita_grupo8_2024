@@ -11,6 +11,8 @@ def cargar_hashtags_spam(filename='hashtags_spam.txt'):
     except FileNotFoundError:
         print("Archivo de hashtags spam no encontrado.")
         return set()
+    except Exception as e:
+        print(f'Error inesperado: {e}')
 
 def cargar_hashtags(filename='hashtags.json'):
     try:
@@ -18,6 +20,8 @@ def cargar_hashtags(filename='hashtags.json'):
             return json.load(file)
     except FileNotFoundError:
         return {}
+    except Exception as e:
+        print(f'Error inesperado: {e}')
 
 def guardar_hashtags(hashtags_dict, filename='hashtags.json'):
     with open(filename, 'w', encoding='UTF-8') as file:

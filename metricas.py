@@ -1,7 +1,7 @@
 import json
 from CuentasSPAM import clasificacion
 from CuentasSPAM.clasificacion import analizar_spam_hashtags
-
+from validez import obtener_opcion
 def mostar_metricas_usuarios(metricas):
     print('\n--- Métricas de Usuarios ---')
     print(f'Total de usuarios:     {metricas['total_usuarios']}')
@@ -97,33 +97,24 @@ def menu_estadisticas(usuarios_dict, posteos):
     print('2. Métricas de Publicaciones')
     print('3. Análisis de Hashtags de Spam')  
     print('4. Volver al Menú Principal')
+    opciones=[1,2,3,4]
+    opcion = obtener_opcion(opciones)
     
-    try:
-        opcion = int(input("Seleccione una opción: "))
-        if opcion == 1:
-            metricas = calcular_metricas_usuarios(usuarios_dict)
-            mostar_metricas_usuarios(metricas)
-            menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
+    opcion = int(input("Seleccione una opción: "))
+    if opcion == 1:
+        metricas = calcular_metricas_usuarios(usuarios_dict)
+        mostar_metricas_usuarios(metricas)
 
-        elif opcion == 2:
-            metricas = calcular_metricas_posts(posteos)
-            mostrar_metricas_post(metricas)
-            menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
-        
-        elif opcion == 3:
-            print("\n** Análisis de Hashtags de Spam **")
-            analizar_spam_hashtags()  # Llamada a la función de análisis de spam
-            menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
-        
-        elif opcion == 4:
-            return  # Sale del menú de estadísticas
-        
-        else:
-            print("Opción no válida, por favor seleccione una opción válida.")
-            menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
-    except ValueError:
-        print("Entrada no válida, por favor ingrese un número.")
-        menu_estadisticas(usuarios_dict, posteos)  # Llamada recursiva
+    elif opcion == 2:
+        metricas = calcular_metricas_posts(posteos)
+        mostrar_metricas_post(metricas)
+
+    elif opcion == 3:
+        print("\n** Análisis de Hashtags de Spam **")
+        analizar_spam_hashtags()  # Llamada a la función de análisis de spam
+    
+    elif opcion == 4:
+        return  # Sale del menú de estadísticas # Llamada recursiva
 
 def main_metricas():
     usuarios_dict, posteos = cargar_datos()

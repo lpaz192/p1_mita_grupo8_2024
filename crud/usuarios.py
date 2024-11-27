@@ -9,13 +9,16 @@ def cargar_usuarios(filename='usuarios.json'):
             return json.load(file)
     except FileNotFoundError:
         return {}
+    except Exception as e:
+        print(f'Error inesperado: {e}')
+
 
 def guardar_usuarios(usuarios, filename='usuarios.json'):
     '''Recibe el nombre del archivo a cerrar
     en caso de no recibir nombre cierra el archivo "usuarios.json" '''
     with open(filename, 'w', encoding='UTF-8') as file:
         json.dump(usuarios, file, indent = 4)
-
+        
 nuevo_id = lambda claves: max(claves) + 1 if claves else 1
 
 #Funciones secundarias de usarios

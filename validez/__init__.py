@@ -34,3 +34,6 @@ def obtener_opcion(opciones_list):
             return opcion
         except ValueError:
             print('Entrada invalida, por favor selecione una opcion valida.')
+        except Exception as e:
+            print(f'Error inesperado: {e}')
+

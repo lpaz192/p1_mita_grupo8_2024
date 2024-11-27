@@ -210,6 +210,9 @@ def iniciar_archivo(nombre_archivo, diccionario):
     except (FileNotFoundError, json.JSONDecodeError):
         with open(nombre_archivo, 'w', encoding='UTF-8') as archivo:
             json.dump(diccionario, archivo, indent=4)
+    except Exception as e:
+        print(f'Error inesperado: {e}')
+
 
 def iniciar_publicaciones(nombre_archivo, matriz):
     '''Intenta abrir el archivo
@@ -219,11 +222,17 @@ def iniciar_publicaciones(nombre_archivo, matriz):
             contenido = arch.read().strip()
             if contenido:
                 return 
+    except Exception as e:
+        print(f'Error inesperado: {e}')
+
     except FileNotFoundError:
         with open(nombre_archivo, 'w', encoding='UTF-8') as arch:
             for fila in matriz:
                 linea = ''.join([str(dato).ljust(24, ' ') for dato in fila])
                 arch.write(linea + '\n')
+    except Exception as e:
+        print(f'Error inesperado: {e}')
+
 
 #Funcinoes de opciones
 def opcion_crud_usuarios():
